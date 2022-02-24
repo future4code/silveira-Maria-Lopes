@@ -168,8 +168,13 @@ const tiposPokemons = pokemons.filter((item, indice, array) => {
 
 })
 
+const tipos = pokemons.map(pokemon => pokemon.tipo); 
+const unicos = [...new Set(tipos)];
+console.log(unicos)
+
 
 ///obs: queria deixar registrado aqui que estou orgulhosa 
 // de mim mesma porque é o primeiro exercício completo que 
 // consigo fazer sem muita dificuldade, e é o primeiro
 // desafio que faço, e ainda por cima sozinha! Hoje foi nota 10 <3
+
