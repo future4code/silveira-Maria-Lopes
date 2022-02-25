@@ -173,8 +173,54 @@ const unicos = [...new Set(tipos)];
 console.log(unicos)
 
 
+
 ///obs: queria deixar registrado aqui que estou orgulhosa 
 // de mim mesma porque é o primeiro exercício completo que 
 // consigo fazer sem muita dificuldade, e é o primeiro
 // desafio que faço, e ainda por cima sozinha! Hoje foi nota 10 <3
 
+
+
+  
+  function VerificaPrimo(num) {
+    for(let i = 2; i <num; i++)
+      if(num % i === 0) {
+          return "É primo"
+      };
+    return "Não é primo"
+  }
+  console.log(VerificaPrimo(100));
+  //qualquer número que eu colocar entre parênteses no console.log
+  //vai imprimir a frase "é primo", caso seja, ou "não é primo", 
+  //caso não seja.
+
+
+
+  // somente alguns exemplos com while, for e for...of...
+
+  let numero = 5
+
+  while (numero < 10) {
+      console.log(numero)
+      numero++
+  }
+
+
+  let numero1 = 10
+
+  while(numero1<22) {
+      console.log(numero1)
+      numero1++
+  }
+
+
+  for (let i=1; i<=10; i++)  {
+	console.log(i);
+}
+
+  let letras = ['a', 'b', 'c'];
+  for (let letras1 of letras) {
+	console.log(letras1);
+}
+// for in diz o número de cada índice (nesse caso, 0, 1 e 2);
+// for of vai imprimir o que tem em casa item (nesse caso, a, b e c);
