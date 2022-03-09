@@ -95,7 +95,7 @@ console.log("Hello World!");
         for(let i of primeiroArray) {
             if(i < menorNumero)
                 menorNumero = i;
-            }
+            };
             
             if(i > maiorNumero) {
                 maiorNumero = i;
