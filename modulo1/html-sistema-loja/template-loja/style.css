@@ -37,7 +37,7 @@ img{
 
 
 body{
-    background-image: url(./img//na-cama-com-os_portugueses_thumb5.png);
+    background-image: url(./img/na-cama-com-os_portugueses_thumb5.png);
     background-size: 100%;
     margin-left: 300px;
     margin-right: 300px;
@@ -68,4 +68,4 @@ body{
 .funcionarios{
     color:black;
     font-weight: bold;
-}
+} 
