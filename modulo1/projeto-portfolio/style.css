@@ -1,0 +1,54 @@
+.cabecalho {
+border: 10px solid pink;
+
+}
+
+#logotipo {
+width: 150px;
+}
+
+.botao-header {
+position: relative;
+left: 100px;
+right: 20px;
+bottom: 70px;
+padding-left: 170px;
+border: 2px salmon;
+height: 50px;
+font-size: large;
+}
+
+div{
+    height: 1000;
+
+}
+
+
+.inicio-texto, .meio-texto{
+    display: inline-block;
+    margin-left: 600px;
+    font-size: 25px;
+    text-align: justify;
+    margin-right: 150px;
+    margin-top: 50px;
+    
+}
+
+#minha-foto {
+    position: relative;
+    margin-right: 1000px; 
+    bottom: 550px;
+    left: 100px;
+    width: 400px;
+
+}
+
+h2{
+    text-align: center;
+}
+
+
+.rodape{
+    text-align: center;
+}
+
