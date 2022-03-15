@@ -1,0 +1,99 @@
+#titulo{
+    color:black;
+}
+
+header{
+    background-color:orange;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between; 
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+button{
+    padding: 12px;
+    width: 150px;
+    text-align: left;
+}
+
+main{
+    display: grid;
+    min-height: 100vh;   
+}
+
+.container{
+    display: grid;
+    color: black;
+    grid-template-columns: auto auto auto auto;
+    justify-items: center;
+    column-gap: 5px;
+    row-gap: 5px;    
+}
+
+.item1, .item2, .item3, .item4, .item5, .item6, .item7, .item8{
+    padding: 20px;
+    box-shadow: 3px 3px 3px 3px;
+    line-height: 3.0;
+}
+
+.item1, .item2, .item3, .item4{
+    padding: 30px;
+    width: 250px;
+    margin-top: 15px;   
+    height: 200px; 
+}
+
+.item5, .item6, .item7, .item8{
+    width: 250px;
+    margin-bottom: 10px;
+    height: 220px;  
+}
+
+
+.item1, .item2, .item3, .item4 > img{
+    width: 230px;
+}
+
+.item4 > img{
+    height: 150px;
+    width: 220px;
+}
+
+.item8{
+    width: 270px;
+}
+
+footer{
+    text-align: center;
+    background-color: black;
+    color: white;
+    height: 25px;
+    padding: 10px
+}
+
+#link1{
+height: 455px;
+padding: 10px;
+}
+
+#link2{
+    height: 455px;
+    padding: 10px;
+}
+
+#link3{
+    height: 455px;
+    padding:10px;
+}
+
+#titulo1{
+    color:black;
+    padding: 0px;    
+}
+
+
