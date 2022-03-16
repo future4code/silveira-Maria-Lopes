@@ -73,7 +73,7 @@ footer{
     background-color: black;
     color: white;
     height: 25px;
-    padding: 10px
+    padding: 10px;
 }
 
 #link1{
@@ -97,3 +97,7 @@ padding: 10px;
 }
 
 
+@media screen and (max-device-width : 480px) {
+    /* celulares */
+    .container{grid-template-columns: auto;}
+    }
