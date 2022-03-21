@@ -1,0 +1,98 @@
+header{
+    margin: 0;
+    background-color: mediumvioletred;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+header > .container-titulo-bolo > img{
+    width: 20px;
+}
+
+.container-titulo-bolo{
+    display: flex;
+}
+
+.container-titulo-bolo > h3{
+    margin-left: 10px;
+}
+
+
+ button{
+    padding: 4px 16px;
+    
+} 
+
+#botoes{
+    color: black;
+    /* padding: 7vh; */
+    background-color: pink;
+    line-height: 2.2; 
+    width: 200px;
+    
+    
+}
+
+*{
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+.perfil, .carrinho, .produtos, .home{
+    width: 15px;
+}
+
+.seta1{
+    width: 15px;
+    padding: 2px;
+    height: 12px;
+}
+
+#div-pai{
+    display:flex;       
+    
+} 
+
+.imagembolo{
+    width: 230px;   
+    box-shadow: 2px 2px 2px 2px darkgray; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagembolo > img{
+    width: 100%;
+}
+
+footer{
+    background-color: mediumvioletred;
+    text-align: center;
+}
+
+#layout-produtos{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#texto{
+    text-align: center;
+}
+
+body{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+
+
+https://elated-grade.surge.sh/ 
+meu link do surge!

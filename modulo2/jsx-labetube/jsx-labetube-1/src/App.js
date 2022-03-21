@@ -23,6 +23,7 @@ function App() {
             <input type="text" placeholder="Busca" id="campoDeBusca" />
         </header>
 
+
         <main>
             <nav className="menu-vertical">
                 <ul>
