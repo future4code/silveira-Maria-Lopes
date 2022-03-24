@@ -42,11 +42,6 @@ const PostPhoto = styled.img`
   width: 100%;
 `
 
-// const OneClick = styled.onClickCurtida`
-
-//   background-color: red;
-
-// `
 
 class Post extends React.Component {
   state = {
