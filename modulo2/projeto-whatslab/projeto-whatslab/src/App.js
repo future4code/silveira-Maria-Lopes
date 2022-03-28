@@ -30,8 +30,7 @@ const Main = styled.main`
 const MessageAreaContainer = styled.div`
   width: 100wh;
   padding: 0 3%;
-  margin: 10p;
-  background-color: plum;
+  margin: 10px;
 
 `
 
@@ -51,6 +50,13 @@ width: 110px;
 
 const Mensagem = styled.input`
 width: 350px;
+`
+const DivMensagem = styled.div`
+margin: 5px;
+`
+const BotaoDeletar = styled.button`
+margin-left: 480px;
+
 `
 
 
@@ -88,15 +94,28 @@ export default class App extends React.Component{
         })
       }
 
+      // adicionandoBotaoEnter = (event) => {
+
+      //   if(this.enviandoMensagem === "enter"){
+      //     this.enviandoMensagem.click()
+      //   }
+      // }
+
+
+      // BotaoRemoverMensagem = (event) => {
+      //   this.BotaoRemoverMensagem(enviaNovaMensagem.valorInputMensagem)
+
+      // }
       
 
   render(){
 
     const mensagens = this.state.whatsapp.map((msg) => {
         return (
-            <div>
+            <DivMensagem>
               <p>{msg.Usuario}: {msg.Mensagem}</p>
-            </div>
+              <BotaoDeletar>X</BotaoDeletar>
+            </DivMensagem>
         );
       
     });
