@@ -5,11 +5,18 @@ import './styles.css'
 const TarefaList = styled.ul`
   padding: 0;
   width: 200px;
+  :nth-child( 1 ) {
+  list-style-type: none;
+}
+ 
 `
+
+
 
 const Tarefa = styled.li`
   text-align: left;
   text-decoration: ${({completa}) => (completa ? 'line-through' : 'none')};
+  
 `
 
 const InputsContainer = styled.div`
