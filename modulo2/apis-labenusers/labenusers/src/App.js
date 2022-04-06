@@ -1,85 +1,36 @@
 import React from "react";
 import styled from 'styled-components';
 import axios from "axios";
+import TelaDeCadastro from './components/TelaDeCadastro'
+import TelaDeUsuarios from './components/TelaDeUsuarios'
 
-
-const headers = {
-  headers: {
-    Authorization: "Maria-Eduarda-Lopes-Silveira"
-  }
-};
 
 
 export default class App extends React.Component {
 
   state = {
-
-    usuarios: [],
-    inputName: "",
-    inputEmail: "",
-    inputBusca: "",
-
+    telaAtual: "cadastro"
   }
 
-
-  componentDidMount() {
-    this.getAllUsers();
-  }
-
-
-  getAllUsers = () => {
-    const urlGet = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
-
-
-    axios
-      .get(urlGet, headers)
-      .then((res) => {
-        this.setState({
-          usuarios: res.data
-        })
-
-      }).catch((err) => {
-        console.log(err.res.data.message)
-      })
-  }
-
-
-
-  createAllUsers = () => {
-
-    const url = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
-    const body = {
-      name: this.state.inputName,
-      email: this.state.inputEmail
+  escolheTela = () => {
+    switch (this.state.telaAtual) {
+      case "cadastro":
+        return <TelaDeCadastro lista={this.lista}/>
+      case "lista":
+        return <TelaDeUsuarios cadastro={this.cadastro}/>
+      default:
+        return <div>ERRO! Página não encontrada, poxinha! </div>
     }
-
-    axios.post(url, headers, body)
-      .then((res) => {
-        this.GetAllUsers();
-        this.setState({
-          inputName: "", inputEmail: ""
-        });
-        // alert(`Usuário criado com sucesso!`)
-
-      }).catch((err) => {
-        alert(err.response.data.message);
-      })
-
-
-  };
-
-  onChangeBusca = (event) => {
-    this.setState({ inputBusca: event.target.value })
   }
 
-  onChangeName = (event) => {
-    this.setState({ inputName: event.target.value })
+  cadastro = () => {
+    this.setState({telaAtual: "cadastro"})
   }
 
-
-  onChangeEmail = (event) => {
-    this.setState({ inputEmail: event.target.value })
+  lista = () => {
+    this.setState({telaAtual: "lista"})    
   }
+
 
 
 
@@ -89,39 +40,11 @@ export default class App extends React.Component {
 
   render() {
 
-    const usuariosCriados = this.state.usuarios.map((usuario) => {
-      return <li key={usuario.id}>{usuario.name}</li>
-
-    })
-
-
     return (
-      <div >
 
-        <button>Troca de tela</button>
-
-
-        
-
-          <input
-            type="text"
-            placeholder="Nome"
-            value={this.state.inputName}
-            onchange={this.onChangeName}
-          />
-
-          <input
-            placeholder="E-mail"
-            value={this.state.inputEmail}
-            onchange={this.onChangeEmail}
-          />
-
-       
-
-        <button onClick={this.createAllUsers}>Criar Usuário</button>
-        <ul>{usuariosCriados}</ul>
-
+      <div>
+        {this.escolheTela()}
       </div>
-    );
+    )
   }
 }
