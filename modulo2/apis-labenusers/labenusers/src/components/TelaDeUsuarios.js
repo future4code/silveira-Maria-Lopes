@@ -126,12 +126,12 @@ export default class TelaDeUsuarios extends React.Component {
 
         return (
             <div>
-                {this.state.paginaAtual === 1 ? 
-                <div>
-                    <Botao onClick={this.props.cadastro}>Clique aqui para se cadastrar</Botao>
-                    <ListaDeUsuarios>Lista de usuários</ListaDeUsuarios>
-                    {listaUsuarios}
-                </div> : <TelaDetalheUsuario trocaDePagina={this.trocarDePagina} idDoUsuario={this.state.idUsuario}/> }
+                {this.state.paginaAtual === 1 ?
+                    <div>
+                        <Botao onClick={this.props.cadastro}>Clique aqui para se cadastrar</Botao>
+                        <ListaDeUsuarios>Lista de usuários</ListaDeUsuarios>
+                        {listaUsuarios}
+                    </div> : <TelaDetalheUsuario trocaDePagina={this.trocarDePagina} idDoUsuario={this.state.idUsuario} />}
 
             </div>
         )

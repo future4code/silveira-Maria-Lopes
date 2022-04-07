@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from "axios";
 import TelaDeCadastro from './components/TelaDeCadastro'
 import TelaDeUsuarios from './components/TelaDeUsuarios'
-
+import TelaDetalheUsuario from './components/TelaDetalheUsuario'
 
 
 export default class App extends React.Component {
