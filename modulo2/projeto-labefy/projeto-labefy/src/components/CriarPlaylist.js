@@ -12,10 +12,28 @@ width: 150px;
 margin-left: 12px;
 `
 
+
+const DivPaginaInicial = styled.div`
+display: grid;
+grid-template-rows: 25px 100px 40px;
+text-align: center;
+justify-content: center;
+margin-top: 50px;
+
+`
+const VisualizarPlaylists = styled.button`
+margin-top: -10px;
+
+
+`
+
+
+
 export default class CriarPlaylist extends React.Component {
     state = {
-        criandoPlaylist: ""
+        criandoPlaylist: "",
     }
+
 
 
     onChangeCriandoPlaylist = (event) => {
@@ -39,7 +57,8 @@ export default class CriarPlaylist extends React.Component {
             .then((res) => {
                 alert(`Playlist criada com sucesso!`)
                 this.setState({
-                    criandoPlaylist: ""
+                    criandoPlaylist: "",
+                    nome: ""
                 })
 
             })
@@ -60,7 +79,8 @@ export default class CriarPlaylist extends React.Component {
         return (
             <div>
 
-                <div onKeyDown={(event) => this.botaoEnter(event)}>
+                <DivPaginaInicial onKeyDown={(event) => this.botaoEnter(event)}>
+
                     <input
                         placeholder=""
                         value={this.state.criandoPlaylist}
@@ -68,9 +88,9 @@ export default class CriarPlaylist extends React.Component {
                     />
                     <Botao1 onClick={this.criarPlaylist}>Criar Playlist</Botao1>
 
-                    <button onClick={this.props.lista}>Visualizar playlists criadas</button>
+                    <VisualizarPlaylists onClick={this.props.lista}>Visualizar playlists criadas</VisualizarPlaylists>
 
-                </div>
+                </DivPaginaInicial>
             </div>
         )
     }
