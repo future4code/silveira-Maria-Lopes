@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "axios": "^0.26.1",
+    "styled-components": "^5.3.5"
+  }
+}

@@ -26,7 +26,7 @@ justify-content: center;
 
 `
 
-const PName = styled.p `
+const PName = styled.p`
 font-size: 25px;
 margin-top: 5px;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -36,7 +36,7 @@ justify-content: center;
 margin-bottom: 30px;
 `
 
-const PArtista = styled.p `
+const PArtista = styled.p`
 font-size: 40px;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 display: flex;
@@ -55,7 +55,7 @@ border: 0;
 
 
 
-export default class DetalhesPlaylists extends React.Component{
+export default class DetalhesPlaylists extends React.Component {
     state = {
         detalheDaPlaylist: [],
         nomeMusica: "",
@@ -63,7 +63,7 @@ export default class DetalhesPlaylists extends React.Component{
         url: ""
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.detalhesPlaylist();
     }
 
@@ -102,10 +102,18 @@ export default class DetalhesPlaylists extends React.Component{
             .then((res) => {
                 alert("Oba! Música adicionada com sucesso!")
                 this.detalhesPlaylist();
+
             })
             .catch((err) => {
                 alert("Puxa! Não foi possível adicionar a música na playlist!")
-            })         
+
+            })
+
+        this.setState({
+            nomeMusica: "",
+            artista: "",
+            url: ""
+        })
     }
 
 
@@ -118,42 +126,42 @@ export default class DetalhesPlaylists extends React.Component{
                 Authorization: "Maria-Eduarda-Lopes-Silveira"
             }
         })
-        .then((res) => {
-            this.setState({
-                detalheDaPlaylist: res.data.result.tracks
-            })
+            .then((res) => {
+                this.setState({
+                    detalheDaPlaylist: res.data.result.tracks
+                })
 
-        })
-        .catch((err) =>{
-            alert("Ops, um erro!")
-        })
+            })
+            .catch((err) => {
+                alert("Ops, um erro!")
+            })
     }
 
 
 
 
     render() {
-        
+
         const detalhes = this.state.detalheDaPlaylist.map((detalhe) => {
             return <div key={detalhe.id}>
-                          <PArtista>{detalhe.artist}</PArtista>
-                          <PName>{detalhe.name}</PName>
-                          <Video width="560" height="315" 
-                          src={detalhe.url}
-                          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></Video>
+                <PArtista>{detalhe.artist}</PArtista>
+                <PName>{detalhe.name}</PName>
+                <Video width="560" height="315"
+                    src={detalhe.url}
+                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></Video>
 
-                   </div>
+            </div>
         })
 
-console.log(this.state.detalheDaPlaylist)
-        return(
+        console.log(this.state.detalheDaPlaylist)
+        return (
 
             <Div>
                 <GlobalStyle />
 
                 {detalhes}
                 <button onClick={this.props.trocandoPagina}>Voltar</button>
-                
+
                 <input
                     placeholder="Nome da música"
                     value={this.state.nomeMusica}
