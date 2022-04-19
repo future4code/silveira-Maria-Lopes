@@ -22,7 +22,7 @@ height: 70px;
 width: 50px;
 cursor: pointer;
 overflow: hidden;
-margin-right: -15px;
+margin-right: -5px;
 -webkit-transition: -webkit-transform .5s ease;
    transition: transform .5s ease;
    :hover {
@@ -94,13 +94,15 @@ display: flex;
 align-items: center;
 justify-content: space-evenly;
 position: relative;
-height: 50px;
-border-bottom: 1px solid silver;
-padding: 0px 5px;
-img {
-    height: 100%;
-}
+height: 66px;
 margin-bottom: 60px;
+box-shadow: 2px 2px 1px 1px darkgray; 
+padding: 0px 5px;
+    img {
+        height: 95%;
+        border: 40px;
+        box-shadow: 2px 2px 2px 2px darkgray; 
+    }
 `
 
 const ImgMatch = styled.img`
