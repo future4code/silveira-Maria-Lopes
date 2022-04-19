@@ -10,6 +10,10 @@ import Logo from '../img/logo.png.png'
 import Heart from '../img/heart.png'
 import Close from '../img/close.png'
 import People from '../img/people.png'
+import {
+    DivMatches, DivCaixinha, DivContainer, Button, DivPai, DivIcones, LikeButton,
+    DeslikeButton, ImgMatch, ImgButton, ImgPeople, DivBio, DivTexto, ImgLogo, DivTextoFinal
+} from './stylesHome'
 
 
 const GlobalStyle = createGlobalStyle`
@@ -20,156 +24,6 @@ const GlobalStyle = createGlobalStyle`
 }
 `
 
-const DivMatches = styled.div`
- display: flex;
- flex-direction: column;
- padding: 20px 20px 0px;
- `
-
-const DivCaixinha = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-between;
-position: relative;
-height: 66px;
-box-shadow: 2px 2px 1px 1px darkgray; 
-padding: 0px 5px;
-    img {
-        height: 90%;
-        border: 40px;
-        box-shadow: 2px 2px 2px 2px darkgray; 
-    }
-`
-
-const DivContainer = styled.div`
-border: 2px ridge black;
-width: 403px;
-height: 635px;
-border-radius: 7px;
-box-shadow: 2px 2px 6px silver;
-background-color: ghostwhite;
-margin-bottom: 40px;
-margin-top: 10px;
-`
-
-const Button = styled.button`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-margin-bottom: 8px;
-`
-
-const DivPai = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
-background-color: silver;    
-`
-
-const DivIcones = styled.div`
-display: flex;
-align-items:center;
-justify-content: space-between;
-`
-
-const LikeButton = styled.img`
-height: 60px;
-width: 60px;
-cursor: pointer;
-padding: 5px;
-margin-bottom: -10px;
-
-:active {
-    position: relative;
-    top: 3px;
-}
--webkit-transition: -webkit-transform .5s ease;
-   transition: transform .5s ease;
-   :hover {
-   -webkit-transform: scale(1.1);
-   transform: scale(1.1);}
-
-`
-const DeslikeButton = styled.img`
-height: 50px;
-width: 50px;
-cursor: pointer;
-padding: 5px;
-margin-bottom: -10px;
-
-:active {
-    position: relative;
-    top: 2px;
-}
--webkit-transition: -webkit-transform .5s ease;
-   transition: transform .5s ease;
-   :hover {
-   -webkit-transform: scale(1.1);
-   transform: scale(1.1);}
-`
-
-const ImgMatch = styled.img`
-height: 400px;
-width: 380px;
-margin-top: 10px;
-margin-left: 8px;
-box-shadow: 2px 2px 1px 3px darkgray;
-transition: transform .5s ease;
-   :hover {
-   -webkit-transform: scale(1.1);
-   transform: scale(1.1);}
-`
-
-const ImgButton = styled.div`
-display: flex;
-justify-content: space-evenly;
-align-items: center;
-margin: 5px;
-margin-bottom: 15px;
-`
-
-const ImgPeople = styled.img`
-height: 60px;
-width: 60px;
-cursor: pointer;
-overflow: hidden;
--webkit-transition: -webkit-transform .5s ease;
-   transition: transform .5s ease;
-   :hover {
-   -webkit-transform: scale(1.1);
-   transform: scale(1.1);}
-`
-
-const DivTexto = styled.div`
-display: flex;
-justify-content: space-evenly;
-align-items: center;
-margin-top: 10px;
-font-size: 23px;
-`
-const DivBio = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-margin-top: 5px;
-border-top: 2px solid #000;
-`
-
-const ImgLogo = styled.img`
-width: 320px;
-`
-
-const DivTextoFinal = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 20px;
-font-family: Georgia, 'Times New Roman', Times, serif;
-margin-top: 120px;
-margin-left: 12px;
-`
 
 const url = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/Maria-Eduarda-Lopes-Silveira/person"
 const url2 = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/Maria-Eduarda-Lopes-Silveira/choose-person"

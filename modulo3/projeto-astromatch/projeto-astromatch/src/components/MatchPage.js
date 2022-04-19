@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,10 @@ import { createGlobalStyle } from 'styled-components';
 import Logo from '../img/logo.png.png'
 import Home from '../img/home.png.png'
 import BrokenHeart from '../img/broken-heart.png.png'
+import {
+    ImgHome, ImgLogo, DivPai, Button, DivContainer, DivCaixinha,
+    DivImg, ImgMatch, PersonMatch, ImgBrokenHeart
+} from './stylesMatch'
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -16,130 +20,18 @@ const GlobalStyle = createGlobalStyle`
   padding: 0;
   margin: 0px;
 }
-`
-const ImgHome = styled.img`
-height: 70px;
-width: 50px;
-cursor: pointer;
-overflow: hidden;
-margin-right: -5px;
--webkit-transition: -webkit-transform .5s ease;
-   transition: transform .5s ease;
-   :hover {
-   -webkit-transform: scale(1.1);
-   transform: scale(1.1);}
-`
 
-const ImgLogo = styled.img`
-    padding: 5px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    width: 320px;
-    margin-bottom: 10px;
-    margin-left: -20px;
-    display: flex;
-    justify-content: space-evenly;
+// const ImgBrokenHeart = styled.img`
+// height: 100px;
+// width: 100px;
+// display: flex;
+// justify-content:center;
+// align-items: center;
+// margin-top: 200px;
+// margin-left: 150px;
+// margin-bottom: 20px;
 
-`
-
-const DivPai = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
-background-color: silver;  
-`
-const Button = styled.button`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-`
-
-const DivContainer = styled.div`
-/* display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-margin-top: 45px; */
-border: 2px ridge black;
-width: 403px;
-height: 700px;
-border-radius: 7px;
-box-shadow: 2px 2px 6px silver;
-background-color: ghostwhite;
-margin-bottom: 30px;
-margin-top: 10px;
-`
-
-const DivCaixinha = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-height: 10px;
-width: 400px;
-margin-top: 60px;
-box-shadow: 2px 2px 1px 1px darkgray; 
-padding: 0px 5px;
-    img {
-        height: 90%;
-        border: 40px;
-        box-shadow: 2px 2px 2px 2px darkgray; 
-    }
-`
-
-const DivImg = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-evenly;
-position: relative;
-height: 66px;
-margin-bottom: 60px;
-box-shadow: 2px 2px 1px 1px darkgray; 
-padding: 0px 5px;
-    img {
-        height: 95%;
-        border: 40px;
-        box-shadow: 2px 2px 2px 2px darkgray; 
-    }
-`
-
-const ImgMatch = styled.img`
-height: 100%;
-width: 50px;
-margin-right: 10px;
-border-radius: 50%;
-`
-
-const PersonMatch = styled.li `
-display: flex;
-position: relative;
-height: 50px;
-display: flex;
-list-style: none;
-width: 100%;
-cursor: pointer;
-margin-top: 10px;
-margin-left: 5px;
--webkit-transition: -webkit-transform .5s ease;
-   transition: transform .5s ease;
-   :hover {
-   -webkit-transform: scale(1.1);
-   transform: scale(1.1);}
-`
-
-const ImgBrokenHeart = styled.img`
-height: 100px;
-width: 100px;
-display: flex;
-justify-content:center;
-align-items: center;
-margin-top: 200px;
-margin-left: 150px;
-margin-bottom: 20px;
-
-`
+// `
 
 const url = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/Maria-Eduarda-Lopes-Silveira/matches"
 
@@ -150,7 +42,7 @@ function MatchPage(props) {
     useEffect(() => {
         getMatches()
     }, [matches])
-    
+
 
     const getMatches = () => {
         axios
