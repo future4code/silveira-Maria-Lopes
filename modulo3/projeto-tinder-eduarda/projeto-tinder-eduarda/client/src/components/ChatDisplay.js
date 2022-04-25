@@ -3,11 +3,11 @@ import ChatInput from './ChatInput';
 
 
 const ChatDisplay = () => {
+
     return (
-        <>
-        <Chat />
-        <ChatInput /> 
-        </>
+      <div>
+
+      </div>
     )
 }
 

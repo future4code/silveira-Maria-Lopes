@@ -1,36 +1,50 @@
 import { useState } from 'react'
 import Nav from './Nav';
+import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 
 const Onboarding = () => {
-    const [ formData, setFormaData ] = useState({
-        user_id: '',
+    const [cookies, setCookie, removeCookie] = useCookies(['user'])
+    const [formData, setFormaData] = useState({
+        user_id: cookies.UserId,
         first_name: '',
         dob_day: '',
         dob_month: '',
         dob_year: '',
         show_gender: false,
-        gender_identity: 'man', 
+        gender_identity: 'man',
         gender_interest: 'woman',
-        email: '',
         url: '',
         about: '',
         matches: []
     })
 
-    const handleSubmit = () => {
+    let navigate = useNavigate()
+
+    const handleSubmit = async (e) => {
         console.log('submitted')
+        e.preventDefault()
+        try {
+            const response = await axios.put('http://localhost:8000/user', {formData})
+            console.log(response)
+            const success = response.status === 200
+            if (success) navigate('/dashboard')
+        } catch (err) {
+            console.log(err)
+        }
+
     }
 
     const handleChange = (e) => {
-        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
         const name = e.target.name
-        
+
         setFormaData((prevState) => ({
             ...prevState,
-            [name] : value
+            [name]: value
         }))
-
     }
 
 
@@ -134,7 +148,7 @@ const Onboarding = () => {
                         <input
                             id="show-gender"
                             type="checkbox"
-                            name="show-gender"
+                            name="show_gender"
                             onChange={handleChange}
                             checked={formData.show_gender}
                         />
@@ -173,7 +187,7 @@ const Onboarding = () => {
                                 onChange={handleChange}
                                 checked={formData.gender_interest === 'everyone'}
                             />
-                            <label htmlFor="more-gender-interest">Everyone</label>
+                            <label htmlFor="everyone-gender-interest">Everyone</label>
                         </div>
 
                         <label htmlFor="about">About me</label>
@@ -193,7 +207,7 @@ const Onboarding = () => {
 
                     <section>
                         <label htmlFor="about">Profile Profile</label>
-                        <input 
+                        <input
                             type="url"
                             name="url"
                             id="url"
@@ -201,7 +215,7 @@ const Onboarding = () => {
                             required={true}
                         />
                         <div className='photo-container'>
-                            <img src={formData.url} alt="profile pic preview"/>
+                            {formData.url && <img src={formData.url} alt="profile pic preview" />}
                         </div>
 
                     </section>
