@@ -23,7 +23,7 @@ export function Router() {
           <Route path="/" element={<HomePage />} />
           <Route path="/tripspage" element={<TripsPage />} />
           <Route path="/loginpage" element={<LoginPage />} />
-          <Route path="/tripsdetailspage" element={<TripsDetailsPage />} />
+          <Route path="/tripsdetailspage/:id" element={<TripsDetailsPage />} />
           <Route path="/createtrippage" element={<CreateTripPage />} />
           <Route path="/applicationpage" element={<ApplicationPage />} />
           <Route path="/adminpage" element={<AdminPage />} />

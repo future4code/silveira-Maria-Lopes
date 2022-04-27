@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
+import { useState, useEffect } from 'react'
+import axios from "axios";
 
 
 const Button = styled.button`
@@ -15,6 +17,7 @@ const Button = styled.button`
     display: inline;    
     margin-left: 550px;
     margin-top: 50px;
+    cursor: pointer;
 `
 const Button2 = styled.button`
     color: #fff;
@@ -26,6 +29,7 @@ const Button2 = styled.button`
     border: none;
     font-weight: bold;
     margin-left: 40px;
+    cursor: pointer;
 `
 
 const Input = styled.input`
@@ -48,7 +52,19 @@ margin-bottom: 40px;
 
 
 
-function AdminPage() {
+function LoginPage() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const onChangeEmail = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const onChangePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+
 
     let navigate = useNavigate()
 
@@ -56,21 +72,48 @@ function AdminPage() {
         navigate('/')
     }
 
-    const sucess = () => {
-        alert('Application sent successfully!')
+
+    const onSubmitLogin = () => {
+
+        navigate('/adminPage')
+
+        const body = {
+            email: email,
+            password: password
+        }
+        axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/login', body)
+            .then((response) => {
+                console.log('Deu certo aqui hein!', response.data)
+                localStorage.setItem('token', response.data.token)
+            }).catch((error) => {
+                console.log('Deu errado aqui hein', error)
+            })
     }
 
-    return( 
+
+
+    return (
         <div>
             <H1>Login</H1>
 
-            <Input />
-            <Input />
+            <Input
+                placeholder="email"
+                type="email"
+                value={email}
+                onChange={onChangeEmail}
+            />
 
-           <Button onClick={goToHome}>Return</Button>
-           <Button2>Login</Button2>
+            <Input
+                placeholder="password"
+                type="password"
+                value={password}
+                onChange={onChangePassword}
+            />
+
+            <Button onClick={goToHome}>Return</Button>
+            <Button2 onClick={onSubmitLogin}>Login</Button2>
         </div>
     )
 }
 
-export default AdminPage;
+export default LoginPage;
