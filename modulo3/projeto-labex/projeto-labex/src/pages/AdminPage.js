@@ -1,60 +1,96 @@
 import React from "react";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
+import { createGlobalStyle } from "styled-components";
+import axios from "axios";
+
+const GlobalStyle = createGlobalStyle`
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+`
 
 
+const Div1 = styled.div`
+background-color: silver;
+height: 200vh;
+width: 98,5vw;
+display: flex;
+justify-content: center;
 
+`
+const Div2 = styled.div`
+width: 700px;
+height: 100%;
+display:flex;
+flex-direction: column;
+background-color: white;
+align-items: center;
+gap: 20px;
+border: 10px solid black;
+margin-top: 90px;
+border-radius: 30px;
+margin-left: 100px;
+background-color: pink;
+`
 
 const Div = styled.div`
 box-sizing: 1px solid black;
-border-radius:30px;
+border-radius:20px;
 display: flex;
 justify-content: space-between;
-border: 3px solid silver;
-padding: 10px;
+border: 3px solid black;
+padding: 20px;
 cursor: pointer;
-width: 50vw;
+width: 40vw;
 font-family: Verdana, Geneva, Tahoma, sans-serif;
+`
+
+// const Button = styled.button`
+// display:flex;
+// /* justify-content: flex-end; */
+// border-radius: 15px;
+// align-self:center;
+// padding: 5px;
+// font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+// `
+
+const H1 = styled.h1`
+display: flex;
+justify-content: center;
+margin-top: 60px;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+margin: 30px;
 `
 
 const Button = styled.button`
-display:flex;
-/* justify-content: flex-end; */
-border-radius: 15px;
-align-self:center;
-padding: 5px;
-font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-`
-
-const H1 = styled.h1`
-/* display: flex;
-justify-content: center; */
-margin-left: 175px;
-margin-top: 50px;
-font-family: Verdana, Geneva, Tahoma, sans-serif;
-`
-
-const Button2 = styled.button`
     color: #fff;
     text-transform: uppercase;
     font-size: 15px;
-    background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
+    background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 139));
     padding: 12px 30px;
     border-radius: 30px;
     border: none;
     font-weight: bold;
-    cursor: pointer;
-    margin-left: 70px;
-    margin-top: 20px;
-    
+    cursor: pointer;    
 `
 const P = styled.p`
     padding: 10px;
 `
+const DivButton = styled.button`
+display:flex;
+justify-content: space-between;
+gap: 20px;
+padding: 20px 0 20px 0;
+width: 680px;
+background-color: brown;
 
+`
 
 function AdminPage() {
     const [tripsPage, setTripsPage] = useState([])
@@ -78,7 +114,7 @@ function AdminPage() {
                 auth: localStorage.getItem('token')
             }
         }).then((response) => {
-            // alert('Viagem deletada com sucesso!')
+            alert('Viagem deletada com sucesso!')
             setTripsPage(response.data.trips)
         }).catch((error) => {
             alert('Não foi possível deletar sua viagem!')
@@ -93,6 +129,11 @@ function AdminPage() {
     const goToCreateTrip = () => {
         navigate('/createtrippage')
     }
+
+    const goBacktToLogin = () => {
+        navigate('/loginpage')
+    }
+
 
     const tripsList = tripsPage && tripsPage.map((trip) => {
         return (
@@ -113,13 +154,21 @@ function AdminPage() {
 
     return (
 
-        <div>
+        <Div1>
+            <GlobalStyle />
+
+            <Div2>
             <H1>Painel Administrativo</H1>
             {tripsList}
-            <Button2>Voltar</Button2>
-            <Button2 onClick={goToCreateTrip}>Criar viagens</Button2>
-            <Button2 onClick={goBackHome}>Logout</Button2>
-        </div>
+
+            <DivButton>
+            <Button onClick={goBacktToLogin}>Voltar</Button>
+            <Button onClick={goToCreateTrip}>Criar viagens</Button>
+            <Button onClick={goBackHome}>Logout</Button>
+            </DivButton>
+
+            </Div2>
+        </Div1>
 
     )
 }

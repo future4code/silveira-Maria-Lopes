@@ -23,22 +23,22 @@ const Button = styled.button`
     border: none;
     font-weight: bold;
     display: inline;    
-    margin-left: 525px;
-    margin-top: 100px;
     cursor: pointer;
 `
-const Button2 = styled.button`
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 15px;
-    background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-    font-weight: bold;
-    margin-left: 30px;
-    cursor: pointer;
-`
+
+
+// const Button2 = styled.button`
+//     color: #fff;
+//     text-transform: uppercase;
+//     font-size: 15px;
+//     background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
+//     padding: 12px 30px;
+//     border-radius: 30px;
+//     border: none;
+//     font-weight: bold;
+//     margin-left: 30px;
+//     cursor: pointer;
+// `
 
 const H1 = styled.h1`
 display:flex;
@@ -49,19 +49,52 @@ margin-top: 30px;
 
 const Div = styled.div`
 background-color: silver;
-height: 100vh;
+height: 100%;
+width: 98,5vw;
+display: flex;
+justify-content: center;
 `
-const DivTrips = styled.div `
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-    width: 80%;
-    margin-bottom: 10px;
+
+// const DivTrips = styled.div `
+//     /* display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center; */
+//     display: grid;
+//     grid-template-columns: 1fr 1fr 1fr;
+//     gap: 20px;
+//     width: 80%;
+//     margin-bottom: 10px;
+// `
+
+const Li = styled.li`
+    list-style-type: none;
+    width: 550px;
+    height: 150px;
+    box-shadow: rgb(0 0 0 / 30%) 0px 4px 8px 0px;
+    padding: 8px 20px;
+    
 `
+
+const Div2 = styled.div`
+width: 600px;
+display:flex;
+flex-direction: column;
+background-color: papayawhip;
+align-items: center;
+gap: 30px;
+
+`
+const DivButton = styled.button`
+display:flex;
+justify-content: center;
+gap: 50px;
+padding: 50px 0 20px 0;
+background-color: black;
+width: 600px;
+
+`
+
 
 function TripsPage () {
     const [tripsPage, setTripsPage] = useState([])
@@ -77,14 +110,15 @@ function TripsPage () {
     }, [])
 
     const tripsList = tripsPage && tripsPage.map((trip) => {
-        return (
-            <DivTrips key={trip.id}>
+        return ( <ul key={trip.id}>
+            <Li> 
                 <p>Nome: {trip.name}</p>
                 <p>Descrição: {trip.description}</p>
                 <p>Planeta: {trip.planet}</p>
                 <p>Duração em dias: {trip.durationInDays}</p>
                 <p>Data: {trip.date}</p>
-            </DivTrips>
+            </Li>
+            </ul>
         )
     })
 
@@ -100,11 +134,17 @@ function TripsPage () {
 
     return( 
         <Div>
-            {tripsList}
+            <Div2>
             <GlobalStyle />
+
+        <DivButton>
            <Button onClick={goToHome}>Return</Button>
-           <Button2 onClick={goToApplicationPage}>Sign Up</Button2>
+           <Button onClick={goToApplicationPage}>Sign Up</Button>
+        </DivButton>
+
            <H1>Travel List</H1>
+           {tripsList}
+           </Div2>
         </Div>
     )
 }

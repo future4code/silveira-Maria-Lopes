@@ -2,7 +2,8 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { createGlobalStyle } from "styled-components";
-import { countries } from "../countries";
+import  Countries  from "../countries";
+import { useState } from 'react'
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -10,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
   padding: 0;
   margin: 0;
 }
-
 `
 
 const Button = styled.button`
@@ -78,6 +78,7 @@ const Div = styled.div`
 
 
 function ApplicationPage() {
+    const [countries, setCountries] = useState([])
 
     let navigate = useNavigate()
 

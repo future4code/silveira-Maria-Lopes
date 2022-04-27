@@ -6,6 +6,10 @@ import TripsPage from "./TripsPage";
 
 
 
+
+
+
+
 const useProtectedPage = () => {
     let navigate = useNavigate()
 
@@ -53,10 +57,13 @@ function TripDetailsPage() {
 
     return (
         <div>
+            <div>
+
             Hello! I'm Trip Details page!
             
             <button onClick={goToAdminPage}>Voltar</button>
             {/* Esse botão vai voltar pra tela de admin page que é dentro de login  */}
+            </div>
         </div>
     )
 }
