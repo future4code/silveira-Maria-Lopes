@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { createGlobalStyle } from "styled-components";
 import  Countries  from "../countries";
 import { useState } from 'react'
+import useForm from "../hooks/useForm";
+import axios from "axios";
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -79,6 +81,14 @@ const Div = styled.div`
 
 function ApplicationPage() {
     const [countries, setCountries] = useState([])
+    const [form, Input, cleanInputs] = useForm({
+        name:"",
+        age: "",
+        applicationText: "",
+        profession: "",
+        country: "",
+        tripId: ""
+    })
 
     let navigate = useNavigate()
 
@@ -89,6 +99,28 @@ function ApplicationPage() {
     const sucess = () => {
         alert('Application sent successfully!')
     }
+
+
+    const applyToTrip = (event) => {
+        event.preventDefault()
+        const body = {
+            name: form.name,
+            age: form.age,
+            applicationText: form.applicationText,
+            profession: form.profession,
+            country: form.country
+        }
+
+        axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips/${form.tripId}/apply`, body)
+        .then((res) => {
+            alert("Inscrição realizada com sucesso!")
+            cleanInputs();
+        })
+        .catch((err) => {
+            alert("Não foi possível realizar a sua inscrição!", err.response.message)
+        })
+
+
 
     const select = countries.map(c => {
         return (
@@ -103,31 +135,53 @@ function ApplicationPage() {
             <GlobalStyle />
 
             <H1>Sign up for a trip</H1>
-            <Form>
 
-                <Select>
-                <option value="" disabled selected>Selecione...</option>
+            <Form onSubmit={applyToTrip}>
+
+                <Select name={"tripId"} onChange={Input}>
+                    <option value="" disabled>Escolha uma viagem</option>                
                 </Select>
 
                 <Input
-                    value=''
-                    placeholder="Nome" />
+                    name="name"
+                    type="text"
+                    value={form.name}
+                    placeholder="Nome" 
+                    onChange={Input}
+                    />
                 <Input
-                    placeholder="Idade" />
+                    name="age"
+                    type="number"
+                    value={form.age}
+                    placeholder="Idade"
+                    onChange={Input} 
+                    />
                 <Input
-                    placeholder="Texto de candidatura" />
+                    name="Texto de candidatura"
+                    type="text"
+                    value={form.applicationText}
+                    placeholder="Texto de candidatura" 
+                    onChange={Input}
+                    />
                 <Input
-                    placeholder="Profissão" />
+                    name="Profissão"
+                    type="text"
+                    value={form.profession}
+                    placeholder="Profissão" 
+                    onChange={Input}
+                    />
 
                 <Select>
                     {select}
                 </Select>
 
-            </Form>
             <Button onClick={goToTripsPage}>Return</Button>
             <Button2 onClick={sucess}>Send</Button2>
+
+            </Form>
         </Div>
     )
+  }
 }
 
 export default ApplicationPage;
