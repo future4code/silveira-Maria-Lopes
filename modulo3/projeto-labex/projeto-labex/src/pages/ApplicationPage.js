@@ -2,10 +2,11 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { createGlobalStyle } from "styled-components";
-import  Countries  from "../countries";
-import { useState } from 'react'
+import { countries } from "../countries";
+import { useState, useEffect } from 'react'
 import useForm from "../hooks/useForm";
 import axios from "axios";
+import TripsPage from "./TripsPage";
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -24,9 +25,8 @@ const Button = styled.button`
     border-radius: 30px;
     border: none;
     font-weight: bold;
-    display: inline;    
-    margin-left: 520px;
-    margin-top: 50px;
+    display: inline;  
+    margin-top: 10px;  
 `
 const Button2 = styled.button`
     color: #fff;
@@ -37,7 +37,7 @@ const Button2 = styled.button`
     border-radius: 30px;
     border: none;
     font-weight: bold;
-    margin-left: 70px;
+
 `
 
 const H1 = styled.h1`
@@ -57,7 +57,7 @@ const Form = styled.form`
     margin-top: -10px; 
 `
 
-const Input = styled.input`
+const InputEstilizado = styled.input`
     width: 399px;
     height: 35px;
     border-radius: 10px;
@@ -66,10 +66,13 @@ const Input = styled.input`
 `
 
 const Select = styled.select`
+    /* width: 400px;
+    height: 30px;
+    border-radius: 10px;
+    padding: 20px; */
     width: 400px;
     height: 30px;
     border-radius: 10px;
-    padding: 20px;
 `
 const Div = styled.div`
     background-color: silver;
@@ -80,7 +83,7 @@ const Div = styled.div`
 
 
 function ApplicationPage() {
-    const [countries, setCountries] = useState([])
+    const [tripsList, setTripsPage] = useState([])
     const [form, Input, cleanInputs] = useForm({
         name:"",
         age: "",
@@ -89,6 +92,17 @@ function ApplicationPage() {
         country: "",
         tripId: ""
     })
+
+    useEffect(() => {
+        axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips')
+            .then((response) => {
+                setTripsPage(response.data.trips)
+                console.log(response.data)
+            }).catch((error) => {
+                console.log(error.response)
+            })
+    }, [])
+
 
     let navigate = useNavigate()
 
@@ -119,7 +133,7 @@ function ApplicationPage() {
         .catch((err) => {
             alert("Não foi possível realizar a sua inscrição!", err.response.message)
         })
-
+    }
 
 
     const select = countries.map(c => {
@@ -130,6 +144,7 @@ function ApplicationPage() {
     )
 
 
+    console.log(form.country)
     return (
         <Div>
             <GlobalStyle />
@@ -138,41 +153,68 @@ function ApplicationPage() {
 
             <Form onSubmit={applyToTrip}>
 
-                <Select name={"tripId"} onChange={Input}>
-                    <option value="" disabled>Escolha uma viagem</option>                
+                <Select name={"tripId"}
+                        onChange={Input} required>
+                    <option value="" disabled>Escolha uma viagem</option> 
+                  {tripsList.map((trip) => {
+                      return (
+                          <option key={trip.id}>{trip.name}</option>
+                      )
+                  })
+                  }
                 </Select>
 
-                <Input
-                    name="name"
+                <InputEstilizado
+                    name={"name"}
                     type="text"
                     value={form.name}
                     placeholder="Nome" 
                     onChange={Input}
-                    />
-                <Input
-                    name="age"
+                    pattern={'^.{4,}$'}
+                    title='O nome tem que ter no minimo 4 letras'  
+                    required
+                />
+
+                <InputEstilizado
+                    name={"age"}
                     type="number"
                     value={form.age}
                     placeholder="Idade"
                     onChange={Input} 
+                    min={18} 
+                    max={80}     
+                    title="Idade entre 18 e 80 anos"           
+                    required
                     />
-                <Input
-                    name="Texto de candidatura"
+
+                <InputEstilizado
+                    name={"applicationText"}
                     type="text"
                     value={form.applicationText}
                     placeholder="Texto de candidatura" 
                     onChange={Input}
+                    pattern={"^.{30,}$"}
+                    title='Sua descrição precisa no minimo 30 caracteres.'
+                    required
                     />
-                <Input
-                    name="Profissão"
+
+                <InputEstilizado
+                    name={"profession"}
                     type="text"
                     value={form.profession}
                     placeholder="Profissão" 
                     onChange={Input}
+                    pattern={'^.{4,}$'}
+                    title='Sua profissao tem que ter no minimo 4 caracteres'
+                    required
                     />
 
-                <Select>
-                    {select}
+                <Select name={"country"} 
+                    value={form.country}
+                    onChange={Input}>
+                    <option value=""
+                    disabled>Escolha um país</option>  
+                    {select}              
                 </Select>
 
             <Button onClick={goToTripsPage}>Return</Button>
@@ -182,6 +224,7 @@ function ApplicationPage() {
         </Div>
     )
   }
-}
+
+
 
 export default ApplicationPage;

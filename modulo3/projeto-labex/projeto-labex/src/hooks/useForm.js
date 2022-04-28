@@ -12,7 +12,9 @@ const useForm = (initialState) => {
         setForm(initialState)
     }
 
-    return [ form, Input, cleanInputs ]
+    return { form, Input, cleanInputs }
 }
 
-export default useForm
+export default useForm;
+
+

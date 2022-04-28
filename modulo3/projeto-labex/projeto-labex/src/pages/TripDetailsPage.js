@@ -3,7 +3,58 @@ import axios from "axios";
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TripsPage from "./TripsPage";
+import styled from "styled-components";
+import { createGlobalStyle } from "styled-components"
 
+
+const GlobalStyle = createGlobalStyle`
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+`
+
+// const H1 = styled.h1`
+// display:flex;
+// justify-content: center;
+// align-items: center;
+// margin-top: 0px;
+// margin-bottom: 5px;
+// padding: 10px;
+// font-family: Verdana, Geneva, Tahoma, sans-serif;
+// background-color: blue;
+// height: 50px;
+// `
+const Div = styled.div`
+    background-color: silver;
+    height: 100vh; 
+`
+const DivDetails = styled.div`
+display: flex;
+justify-content: center;
+flex-direction: column;
+background-color: pink;
+height: 50vh;
+width: 400px;
+`
+const DivDetailsContainer = styled.div`
+display: flex;
+justify-content: center;
+
+`
+
+const DivCandidates = styled.div`
+display: flex;
+justify-content: center;
+flex-direction: column;
+`
+
+const DivCandidatesApproved = styled.div`
+display: flex;
+justify-content: center;
+flex-direction: column;
+`
 
 
 
@@ -28,17 +79,16 @@ function TripDetailsPage() {
     const [tripDetails, setTripDetails] = useState({})
     const [candidatesL, setCandidatesL] = useState([])
 
-    const { id } = useParams();
+    const params = useParams();
 
     useProtectedPage();
     
     let navigate = useNavigate()
 
-    
     useEffect(() => {
         const token = localStorage.getItem('token')
         axios
-        .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trip/{params.id}`, {
+        .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trip/${params.id}`, {
             headers: {
                 auth: token
             }
@@ -50,10 +100,10 @@ function TripDetailsPage() {
             }).catch((error) => {
                 console.log('Deu erro!', error)
             })
-    }, [candidatesL.id, tripDetails.id])
+    }, [candidatesL.id])
 
 
-    const candidates = (id, choice) => {
+    const candidates = (id, boolean) => {
         const headers = {
             headers: {
                 auth: localStorage.getItem("token")
@@ -61,13 +111,13 @@ function TripDetailsPage() {
         }
 
         const body = {
-            approve: choice
+            approve: boolean
         }
 
         axios
         .put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips/${tripDetails.id}/candidates/${id}/decide`, body, headers)
         .then((res) => {
-            if (choice === true) {
+            if (boolean === true) {
                 alert("Candidato aprovado!")
             } else {
                 alert("Candidato reprovado")
@@ -79,16 +129,16 @@ function TripDetailsPage() {
     }
 
     const details = 
-        <>
+        <DivDetails>
             <p>Nome: {tripDetails.name}</p>
             <p>Planeta: {tripDetails.planet}</p>
             <p>Descrição: {tripDetails.description}</p>
             <p>Data: {tripDetails.date}</p>
             <p>Duração em dias: {tripDetails.durationInDays}</p>
-        </>
+        </DivDetails>
 
 
-    const candidatesList = candidates.id && candidates.map((candidate) => {
+    const candidatesList = candidatesL && candidatesL.map((candidate) => {
         return (
             <div>
             <div>
@@ -111,7 +161,7 @@ function TripDetailsPage() {
 
     const approvedCandidates = tripDetails.approved && tripDetails.approved.map((candidate) => {
         return (
-            <div key={candidate.id}>{candidate.name}</div>
+            <DivCandidatesApproved key={candidate.id}>{candidate.name}</DivCandidatesApproved>
         )
     })
 
@@ -121,33 +171,35 @@ function TripDetailsPage() {
 
 
     return (
-        <div>
+        <Div>
+            <GlobalStyle />
+
             <div>
             
             <button onClick={goToAdminPage}>Voltar</button>
             {/* Esse botão vai voltar pra tela de admin page que é dentro de login  */}
 
-            <div>
+            <DivDetailsContainer>
                 <h1>Detalhes da viagem</h1>
                        {details}
-            </div>
+            </DivDetailsContainer>
 
 
-            <div>
+            <DivCandidatesApproved>
                 <h1>Candidatos aprovados</h1>
                 {approvedCandidates && approvedCandidates.length > 0 ? approvedCandidates : "Não há candidatos aprovados"}
-            </div>
+            </DivCandidatesApproved>
 
 
-            <div>
+            <DivCandidates>
                 <h1>Candidatos pendentes</h1>
-                {candidates.length === 0? "Não há candidatos" : candidatesList}
-                {/* {candidatesList.length === 0? "Não há candidatos" : candidatesList} */}
-            </div>
+                {/* {candidatesList} */}
+                {candidatesList.length === 0? "Não há candidatos" : candidatesList}
+            </DivCandidates>
  
 
             </div>
-        </div>
+        </Div>
     )
 }
 

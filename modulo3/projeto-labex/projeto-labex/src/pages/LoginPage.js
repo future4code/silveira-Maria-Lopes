@@ -109,10 +109,20 @@ function LoginPage() {
         navigate('/')
     }
 
+    const admin = () => {
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            navigate('/adminpage')
+        }
+    }
+
+
+
+
 
     const onSubmitLogin = () => {
 
-        navigate('/adminPage')
 
         const body = {
             email: email,
@@ -125,34 +135,38 @@ function LoginPage() {
             }).catch((error) => {
                 console.log('Deu errado aqui hein', error)
             })
+
+        navigate('/adminPage')
     }
 
-
+    useEffect(() => {
+        admin()
+    }, [])
 
     return (
         <Div1>
             <GlobalStyle />
             <Div2>
-            <H1>Login</H1>
+                <H1>Login</H1>
 
-            <Input
-                placeholder="email"
-                type="email"
-                value={email}
-                onChange={onChangeEmail}
-            />
+                <Input
+                    placeholder="email"
+                    type="email"
+                    value={email}
+                    onChange={onChangeEmail}
+                />
 
-            <Input
-                placeholder="password"
-                type="password"
-                value={password}
-                onChange={onChangePassword}
-            />
+                <Input
+                    placeholder="password"
+                    type="password"
+                    value={password}
+                    onChange={onChangePassword}
+                />
 
-        <DivButton>
-            <Button onClick={goToHome}>Return</Button>
-            <Button onClick={onSubmitLogin}>Login</Button>
-        </DivButton>
+                <DivButton>
+                    <Button onClick={goToHome}>Return</Button>
+                    <Button onClick={onSubmitLogin}>Login</Button>
+                </DivButton>
 
             </Div2>
         </Div1>

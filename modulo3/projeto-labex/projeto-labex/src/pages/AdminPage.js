@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
 
 const Div1 = styled.div`
 background-color: silver;
-height: 200vh;
+height: 100%;
 width: 98,5vw;
 display: flex;
 justify-content: center;
@@ -97,14 +97,18 @@ function AdminPage() {
 
 
     useEffect(() => {
+        getTrip();
+    }, [])
+
+    const getTrip = () => {
         axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips')
-            .then((response) => {
-                setTripsPage(response.data.trips)
-                console.log(response.data)
-            }).catch((error) => {
-                console.log(error.response)
-            })
-    }, [tripsPage])
+        .then((response) => {
+            setTripsPage(response.data.trips)
+            console.log(response.data)
+        }).catch((error) => {
+            console.log(error.response)
+        })
+    }        
 
 
 
@@ -115,7 +119,7 @@ function AdminPage() {
             }
         }).then((response) => {
             alert('Viagem deletada com sucesso!')
-            setTripsPage(response.data.trips)
+            getTrip();
         }).catch((error) => {
             alert('Não foi possível deletar sua viagem!')
         })
