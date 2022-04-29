@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
   padding: 0;
   margin: 0;
 }
-
 `
 
 const Button = styled.button`
@@ -49,7 +48,7 @@ margin-top: 30px;
 
 const Div = styled.div`
 background-color: silver;
-height: 100%;
+height: 100vh;
 width: 98,5vw;
 display: flex;
 justify-content: center;

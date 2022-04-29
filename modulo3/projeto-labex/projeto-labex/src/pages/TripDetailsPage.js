@@ -14,53 +14,57 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
 }
 `
-
-// const H1 = styled.h1`
-// display:flex;
-// justify-content: center;
-// align-items: center;
-// margin-top: 0px;
-// margin-bottom: 5px;
-// padding: 10px;
-// font-family: Verdana, Geneva, Tahoma, sans-serif;
-// background-color: blue;
-// height: 50px;
-// `
-const Div = styled.div`
-    background-color: silver;
-    height: 100vh; 
+const DivTelaToda = styled.div`
+background-color: silver;
+height: 100vh;
 `
-const DivDetails = styled.div`
+
+const H1 = styled.div`
+display: flex;
+justify-content: center;
+font-size: 35px;
+font-weight: bold;
+`
+
+const DivDetailsTrip = styled.div`
 display: flex;
 justify-content: center;
 flex-direction: column;
+align-items: center;
 background-color: pink;
-height: 50vh;
-width: 400px;
-`
-const DivDetailsContainer = styled.div`
-display: flex;
-justify-content: center;
+height: 150px;
+font-size: 17px;
 
-`
+p {
 
-const DivCandidates = styled.div`
-display: flex;
-justify-content: center;
-flex-direction: column;
+}
 `
 
 const DivCandidatesApproved = styled.div`
 display: flex;
 justify-content: center;
 flex-direction: column;
+background-color: yellow;
+height: 100px;
+align-items: center;
+`
+
+const DivCandidates = styled.div`
+display: flex;
+justify-content: center;
+flex-direction: column;
+background-color: green;
+height: 100px;
+align-items: center;
+
 `
 
 
 
 
+
 const useProtectedPage = () => {
-    
+
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -69,7 +73,6 @@ const useProtectedPage = () => {
         if (token === null) {
             navigate("/loginpage")
         }
-
     }, [])
 }
 
@@ -83,17 +86,17 @@ function TripDetailsPage() {
     const params = useParams();
 
     useProtectedPage();
-    
+
     let navigate = useNavigate()
 
     const getTripDetails = () => {
         const token = localStorage.getItem('token')
         axios
-        .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trip/${params.id}`, {
-            headers: {
-                auth: token
-            }
-        })
+            .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trip/${params.id}`, {
+                headers: {
+                    auth: token
+                }
+            })
             .then((response) => {
                 console.log(response.data.trip.approved)
                 setTripDetails(response.data.trip)
@@ -121,50 +124,48 @@ function TripDetailsPage() {
         }
 
         axios
-        .put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips/${params.id}/candidates/${id}/decide`, body, headers)
-        .then((res) => {
-            console.log(res)
-            getTripDetails();
-        })
-        .catch((error) => {
-            console.log(error)
-        })    
+            .put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips/${params.id}/candidates/${id}/decide`, body, headers)
+            .then((res) => {
+                console.log(res)
+                getTripDetails();
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
-    const details = 
-        <DivDetails>
-            <p>Nome: {tripDetails.name}</p>
-            <p>Planeta: {tripDetails.planet}</p>
-            <p>Descrição: {tripDetails.description}</p>
-            <p>Data: {tripDetails.date}</p>
-            <p>Duração em dias: {tripDetails.durationInDays}</p>
-        </DivDetails>
+    const details =
+        <DivDetailsTrip>
+            <p><strong>Nome:</strong> {tripDetails.name}</p>
+            <p><strong>Planeta:</strong> {tripDetails.planet}</p>
+            <p><strong>Descrição:</strong> {tripDetails.description}</p>
+            <p><strong>Data</strong> {tripDetails.date}</p>
+            <p><strong>Duração em dias:</strong> {tripDetails.durationInDays}</p>
+        </DivDetailsTrip>
 
-    console.log(candidatesL)
     const candidatesList = candidatesL && candidatesL.map((candidate) => {
         return (
-            <div>
             <div>
                 <p>Nome: {candidate.name}</p>
                 <p>Idade: {candidate.age}</p>
                 <p>País: {candidate.country}</p>
                 <p>Profissão: {candidate.profession}</p>
                 <p>Texto de candidatura: {candidate.applicationText}</p>
-            </div>
-                    <button onClick={() => candidates(candidate.id, true)}>
-                        Approved
-                    </button>
 
-                    <button onClick={() => candidates(candidate.id, false)}>
-                        Disapproved
-                    </button>
-                    </div>
+                <button onClick={() => candidates(candidate.id, true)}>
+                    Approved
+                </button>
+
+                <button onClick={() => candidates(candidate.id, false)}>
+                    Disapproved
+                </button>
+            </div>
         )
     })
 
     const approvedCandidates = candidatesApproved && candidatesApproved.map((candidate) => {
         return (
-            <DivCandidatesApproved key={candidate.id}>{candidate.name}</DivCandidatesApproved>
+            <div key={candidate.id}>{candidate.name}</div>
         )
     })
 
@@ -174,33 +175,35 @@ function TripDetailsPage() {
 
 
     return (
-        <Div>
+        
+        <DivTelaToda>
             <GlobalStyle />
-
-            <div>
-            
             <button onClick={goToAdminPage}>Voltar</button>
-            {/* Esse botão vai voltar pra tela de admin page que é dentro de login  */}
+            <H1>Detalhes da viagem</H1>
+            
+                <div>
+                    {details}
+                </div>
 
-            <DivDetailsContainer>
-                <h1>Detalhes da viagem</h1>
-                       {details}
-            </DivDetailsContainer>
+                <DivCandidates>
+                    <h2>Candidatos pendentes</h2>
+                    <div>
+                    {/* {candidatesList} */}
+                    {candidatesList.length === 0 ? <p>"Não há candidatos" </p> : candidatesList}
+                    </div>
+                </DivCandidates>
 
-            <DivCandidates>
-                <h1>Candidatos pendentes</h1>
-                {/* {candidatesList} */}
-                {candidatesList.length === 0? "Não há candidatos" : candidatesList}
-            </DivCandidates>
+                <DivCandidatesApproved>
+                    <h2>Candidatos aprovados</h2>
 
-            <DivCandidatesApproved>
-                <h1>Candidatos aprovados</h1>
-                {approvedCandidates && approvedCandidates.length > 0 ? approvedCandidates : "Não há candidatos aprovados"}
-            </DivCandidatesApproved>
- 
+                    <div>
+                    {approvedCandidates && approvedCandidates.length > 0 ? approvedCandidates : <p> "Não há candidatos aprovados" </p>}
+                    </div>
 
-            </div>
-        </Div>
+                </DivCandidatesApproved>
+            
+
+        </DivTelaToda>
     )
 }
 
