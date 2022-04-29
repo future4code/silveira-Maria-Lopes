@@ -37,6 +37,7 @@ const Button2 = styled.button`
     border-radius: 30px;
     border: none;
     font-weight: bold;
+    cursor: pointer;
 
 `
 
@@ -84,13 +85,14 @@ const Div = styled.div`
 
 function ApplicationPage() {
     const [tripsList, setTripsPage] = useState([])
-    const [form, Input, cleanInputs] = useForm({
+    const [idTrip, setIdTrip] = useState("")
+    const { form, Input, cleanInputs } = useForm({
         name:"",
         age: "",
         applicationText: "",
         profession: "",
         country: "",
-        tripId: ""
+        // tripId: ""
     })
 
     useEffect(() => {
@@ -103,32 +105,21 @@ function ApplicationPage() {
             })
     }, [])
 
-
     let navigate = useNavigate()
 
     const goToTripsPage = () => {
         navigate('/tripspage')
     }
 
-    const sucess = () => {
-        alert('Application sent successfully!')
-    }
-
-
     const applyToTrip = (event) => {
         event.preventDefault()
-        const body = {
-            name: form.name,
-            age: form.age,
-            applicationText: form.applicationText,
-            profession: form.profession,
-            country: form.country
-        }
-
-        axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips/${form.tripId}/apply`, body)
+        const body = form
+        console.log(body)
+        axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips/${idTrip}/apply`, body)
         .then((res) => {
             alert("Inscrição realizada com sucesso!")
             cleanInputs();
+            // console.log(form.tripsList)
         })
         .catch((err) => {
             alert("Não foi possível realizar a sua inscrição!", err.response.message)
@@ -143,6 +134,9 @@ function ApplicationPage() {
     }
     )
 
+    const onChangeSelect = (e) => {
+        setIdTrip(e.target.value)
+    }
 
     console.log(form.country)
     return (
@@ -154,11 +148,11 @@ function ApplicationPage() {
             <Form onSubmit={applyToTrip}>
 
                 <Select name={"tripId"}
-                        onChange={Input} required>
+                        onChange={onChangeSelect} value ={idTrip}required>
                     <option value="" disabled>Escolha uma viagem</option> 
                   {tripsList.map((trip) => {
                       return (
-                          <option key={trip.id}>{trip.name}</option>
+                          <option key={trip.id} value={trip.id}>{trip.name}</option>
                       )
                   })
                   }
@@ -218,7 +212,7 @@ function ApplicationPage() {
                 </Select>
 
             <Button onClick={goToTripsPage}>Return</Button>
-            <Button2 onClick={sucess}>Send</Button2>
+            <Button2 onClick={applyToTrip}>Send</Button2>
 
             </Form>
         </Div>

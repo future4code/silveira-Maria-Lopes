@@ -136,15 +136,15 @@ function CreateTripPage() {
         e.preventDefault()
         const headers = {
             headers: {
-                "Content-Type": "application/json",
-                "auth": localStorage.getItem("token")
+                // "Content-Type": "application/json",
+                auth: localStorage.getItem("token")
             }
         }
 
         const body = form
 
         axios
-        .post('https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips', headers, body)
+        .post('https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips', body, headers)
         .then((response) => {
             console.log(response)
             alert("Viagem criada com sucesso!")
@@ -165,7 +165,7 @@ function CreateTripPage() {
             <Form onSubmit={createTrip}>
 
                 <InputEstilizado 
-                    name="name"
+                    name={'name'}
                     type="text"
                     placeholder="Título da viagem"
                     value={form.name}
@@ -184,7 +184,8 @@ function CreateTripPage() {
                 </Select>
 
                 <InputEstilizado
-                    name="date"
+                    name={"date"}
+                    placeholder="Data"
                     type="date" min={new Date().toISOString().slice(0, 10)} 
                     value={form.date}
                     onChange={Input}
@@ -195,6 +196,7 @@ function CreateTripPage() {
                     type="text"
                     placeholder="Descrição"
                     value={form.description}
+                    onChange={Input}
                     required pattern={"^.{30,}"} 
                     title={"A descrição deve ter no mínimo 30 caracteres."}
                 />
@@ -207,12 +209,13 @@ function CreateTripPage() {
                     onChange={Input}
                     required min={50}
                 />
-            </Form>
 
             <DivButton>
             <Button onClick={goToAdminPage}>Voltar</Button>
             <Button onClick={createTrip}>Criar</Button>
             </DivButton>
+
+            </Form>
 
             </Div2>
         </Div1>

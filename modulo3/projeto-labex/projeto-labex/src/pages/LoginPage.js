@@ -132,11 +132,12 @@ function LoginPage() {
             .then((response) => {
                 console.log('Deu certo aqui hein!', response.data)
                 localStorage.setItem('token', response.data.token)
+                navigate('/adminPage')
             }).catch((error) => {
                 console.log('Deu errado aqui hein', error)
             })
 
-        navigate('/adminPage')
+       
     }
 
     useEffect(() => {

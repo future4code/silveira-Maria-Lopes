@@ -78,6 +78,7 @@ const useProtectedPage = () => {
 function TripDetailsPage() {
     const [tripDetails, setTripDetails] = useState({})
     const [candidatesL, setCandidatesL] = useState([])
+    const [candidatesApproved, setCandidatesApproved] = useState([])
 
     const params = useParams();
 
@@ -85,7 +86,7 @@ function TripDetailsPage() {
     
     let navigate = useNavigate()
 
-    useEffect(() => {
+    const getTripDetails = () => {
         const token = localStorage.getItem('token')
         axios
         .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trip/${params.id}`, {
@@ -94,13 +95,18 @@ function TripDetailsPage() {
             }
         })
             .then((response) => {
-                console.log(response.data)
+                console.log(response.data.trip.approved)
                 setTripDetails(response.data.trip)
                 setCandidatesL(response.data.trip.candidates)
+                setCandidatesApproved(response.data.trip.approved)
             }).catch((error) => {
                 console.log('Deu erro!', error)
             })
-    }, [candidatesL.id])
+    }
+
+    useEffect(() => {
+        getTripDetails();
+    }, [])
 
 
     const candidates = (id, boolean) => {
@@ -115,13 +121,10 @@ function TripDetailsPage() {
         }
 
         axios
-        .put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips/${tripDetails.id}/candidates/${id}/decide`, body, headers)
+        .put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Maria-Eduarda-Lopes-Silveira/trips/${params.id}/candidates/${id}/decide`, body, headers)
         .then((res) => {
-            if (boolean === true) {
-                alert("Candidato aprovado!")
-            } else {
-                alert("Candidato reprovado")
-            }
+            console.log(res)
+            getTripDetails();
         })
         .catch((error) => {
             console.log(error)
@@ -137,7 +140,7 @@ function TripDetailsPage() {
             <p>Duração em dias: {tripDetails.durationInDays}</p>
         </DivDetails>
 
-
+    console.log(candidatesL)
     const candidatesList = candidatesL && candidatesL.map((candidate) => {
         return (
             <div>
@@ -159,7 +162,7 @@ function TripDetailsPage() {
         )
     })
 
-    const approvedCandidates = tripDetails.approved && tripDetails.approved.map((candidate) => {
+    const approvedCandidates = candidatesApproved && candidatesApproved.map((candidate) => {
         return (
             <DivCandidatesApproved key={candidate.id}>{candidate.name}</DivCandidatesApproved>
         )
@@ -184,18 +187,16 @@ function TripDetailsPage() {
                        {details}
             </DivDetailsContainer>
 
-
-            <DivCandidatesApproved>
-                <h1>Candidatos aprovados</h1>
-                {approvedCandidates && approvedCandidates.length > 0 ? approvedCandidates : "Não há candidatos aprovados"}
-            </DivCandidatesApproved>
-
-
             <DivCandidates>
                 <h1>Candidatos pendentes</h1>
                 {/* {candidatesList} */}
                 {candidatesList.length === 0? "Não há candidatos" : candidatesList}
             </DivCandidates>
+
+            <DivCandidatesApproved>
+                <h1>Candidatos aprovados</h1>
+                {approvedCandidates && approvedCandidates.length > 0 ? approvedCandidates : "Não há candidatos aprovados"}
+            </DivCandidatesApproved>
  
 
             </div>

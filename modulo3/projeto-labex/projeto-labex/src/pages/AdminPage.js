@@ -89,11 +89,29 @@ gap: 20px;
 padding: 20px 0 20px 0;
 width: 680px;
 background-color: brown;
-
 `
+
+
+
 
 function AdminPage() {
     const [tripsPage, setTripsPage] = useState([])
+
+    const useProtectedPage = () => {
+    
+        let navigate = useNavigate()
+    
+        useEffect(() => {
+            const token = localStorage.getItem('token')
+    
+            if (token === null) {
+                navigate("/loginpage")
+            }
+    
+        }, [])
+    }
+   
+    useProtectedPage();
 
 
     useEffect(() => {
@@ -155,6 +173,10 @@ function AdminPage() {
         navigate('/')
     }
 
+    const logout = () => {
+        localStorage.clear("token")
+        goBacktToLogin();
+    }
 
     return (
 
@@ -168,7 +190,7 @@ function AdminPage() {
             <DivButton>
             <Button onClick={goBacktToLogin}>Voltar</Button>
             <Button onClick={goToCreateTrip}>Criar viagens</Button>
-            <Button onClick={goBackHome}>Logout</Button>
+            <Button onClick={logout}>Logout</Button>
             </DivButton>
 
             </Div2>
