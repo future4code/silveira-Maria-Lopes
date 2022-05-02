@@ -12,82 +12,59 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
 }
 `
-
-
-
-
 const Button = styled.button`
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 15px;
-    background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-    font-weight: bold;
-    display: inline;       
-    cursor: pointer;
-    margin-bottom: 20px;
+color: #fff;
+text-transform: uppercase;
+font-size: 15px;
+background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
+padding: 12px 30px;
+border-radius: 30px;
+border: none;
+font-weight: bold;
+display: inline;       
+cursor: pointer;
+margin-bottom: 20px;
 `
 
-// const Button2 = styled.button`
-//     color: #fff;
-//     text-transform: uppercase;
-//     font-size: 15px;
-//     background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
-//     padding: 12px 30px;
-//     border-radius: 30px;
-//     border: none;
-//     font-weight: bold;
-//     margin-left: 40px;
-//     cursor: pointer;
-// `
-
 const Input = styled.input`
-    width: 400px;
-    height: 40px;
-    border-radius: 10px;
-    margin: -10px;
-    display: flex;
-    justify-content: columns;
+width: 400px;
+height: 40px;
+border-radius: 10px;
+margin: -10px;
+display: flex;
+justify-content: columns;
 `
 const H1 = styled.h1`
 display:flex;
 justify-content: center;
 align-items: center;
-margin-top: 30px;
-margin-bottom: 40px;
+padding: 30px;
 `
-
 const Div1 = styled.div`
-background-color: silver;
-height: 100vh;
+height: 100%;
 width: 98,5vw;
 display: flex;
 justify-content: center;
 `
 const Div2 = styled.div`
 width: 600px;
-height: 400px;
+height: 360px;
 display:flex;
 flex-direction: column;
-background-color: pink;
+background-color: whitesmoke;
 align-items: center;
 gap: 30px;
-border: 10px solid black;
+border: 3px solid black;
 margin-top: 110px;
 border-radius: 50px;
 `
-
 const DivButton = styled.div`
 display:flex;
 justify-content: center;
 gap: 50px;
 padding: 50px 0 20px 0;
-/* background-color: black; */
 width: 600px;
 `
-
 
 function LoginPage() {
     const [email, setEmail] = useState("");

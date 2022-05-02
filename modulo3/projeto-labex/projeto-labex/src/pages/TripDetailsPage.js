@@ -16,52 +16,41 @@ const GlobalStyle = createGlobalStyle`
 `
 const DivTelaToda = styled.div`
 background-color: silver;
-height: 100vh;
+height: 100%;
 `
-
 const H1 = styled.div`
 display: flex;
 justify-content: center;
 font-size: 35px;
 font-weight: bold;
+padding: 20px;
 `
-
 const DivDetailsTrip = styled.div`
 display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-background-color: pink;
-height: 150px;
+background-color: whitesmoke;
+height: 100%;
 font-size: 17px;
-
-p {
-
-}
+padding: 30px;
 `
-
 const DivCandidatesApproved = styled.div`
 display: flex;
 justify-content: center;
 flex-direction: column;
-background-color: yellow;
-height: 100px;
+background-color: whitesmoke;
+height: 200px;
 align-items: center;
 `
-
 const DivCandidates = styled.div`
 display: flex;
 justify-content: center;
 flex-direction: column;
-background-color: green;
-height: 100px;
+background-color: whitesmoke;
+height: 150px;
 align-items: center;
-
 `
-
-
-
-
 
 const useProtectedPage = () => {
 
@@ -75,7 +64,6 @@ const useProtectedPage = () => {
         }
     }, [])
 }
-
 
 
 function TripDetailsPage() {
@@ -175,33 +163,32 @@ function TripDetailsPage() {
 
 
     return (
-        
+
         <DivTelaToda>
             <GlobalStyle />
             <button onClick={goToAdminPage}>Voltar</button>
             <H1>Detalhes da viagem</H1>
-            
+
+            <div>
+                {details}
+            </div>
+
+            <DivCandidates>
+                <h2>Candidatos pendentes</h2>
                 <div>
-                    {details}
+                    {candidatesList.length === 0 ? <p>"Não há candidatos" </p> : candidatesList}
+                </div>
+            </DivCandidates>
+
+            <DivCandidatesApproved>
+                <h2>Candidatos aprovados</h2>
+
+                <div>
+                    {approvedCandidates && approvedCandidates.length > 0 ? approvedCandidates : <p> "Não há candidatos aprovados" </p>}
                 </div>
 
-                <DivCandidates>
-                    <h2>Candidatos pendentes</h2>
-                    <div>
-                    {/* {candidatesList} */}
-                    {candidatesList.length === 0 ? <p>"Não há candidatos" </p> : candidatesList}
-                    </div>
-                </DivCandidates>
+            </DivCandidatesApproved>
 
-                <DivCandidatesApproved>
-                    <h2>Candidatos aprovados</h2>
-
-                    <div>
-                    {approvedCandidates && approvedCandidates.length > 0 ? approvedCandidates : <p> "Não há candidatos aprovados" </p>}
-                    </div>
-
-                </DivCandidatesApproved>
-            
 
         </DivTelaToda>
     )

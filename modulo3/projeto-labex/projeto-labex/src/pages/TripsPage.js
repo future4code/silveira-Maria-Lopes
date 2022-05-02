@@ -13,85 +13,59 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const Button = styled.button`
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 15px;
-    background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-    font-weight: bold;
-    display: inline;    
-    cursor: pointer;
+color: #fff;
+text-transform: uppercase;
+font-size: 15px;
+background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
+padding: 12px 30px;
+border-radius: 30px;
+border: none;
+font-weight: bold;
+display: inline;    
+cursor: pointer;
 `
-
-
-// const Button2 = styled.button`
-//     color: #fff;
-//     text-transform: uppercase;
-//     font-size: 15px;
-//     background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
-//     padding: 12px 30px;
-//     border-radius: 30px;
-//     border: none;
-//     font-weight: bold;
-//     margin-left: 30px;
-//     cursor: pointer;
-// `
 
 const H1 = styled.h1`
 display:flex;
 justify-content: center;
 align-items: center;
-margin-top: 30px;
+padding: 20px;
 `
 
 const Div = styled.div`
-background-color: silver;
-height: 100vh;
+/* background-color: silver; */
+height: 100%;
 width: 98,5vw;
 display: flex;
 justify-content: center;
 `
 
-// const DivTrips = styled.div `
-//     /* display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center; */
-//     display: grid;
-//     grid-template-columns: 1fr 1fr 1fr;
-//     gap: 20px;
-//     width: 80%;
-//     margin-bottom: 10px;
-// `
-
 const Li = styled.li`
-    list-style-type: none;
-    width: 550px;
-    height: 150px;
-    box-shadow: rgb(0 0 0 / 30%) 0px 4px 8px 0px;
-    padding: 8px 20px;
-    
+list-style-type: none;
+width: 550px;
+height: 150px;
+box-shadow: rgb(0 0 0 / 30%) 0px 4px 8px 0px;
+padding: 8px 20px;
+display: flex;
+justify-content: center;
+flex-direction: column; 
 `
 
 const Div2 = styled.div`
 width: 600px;
 display:flex;
 flex-direction: column;
-background-color: papayawhip;
 align-items: center;
 gap: 30px;
-
+background-color: whitesmoke;
 `
 const DivButton = styled.button`
 display:flex;
 justify-content: center;
 gap: 50px;
-padding: 50px 0 20px 0;
+padding: 40px 0 20px 0;
 background-color: black;
 width: 600px;
-
 `
 
 
@@ -111,11 +85,11 @@ function TripsPage () {
     const tripsList = tripsPage && tripsPage.map((trip) => {
         return ( <ul key={trip.id}>
             <Li> 
-                <p>Nome: {trip.name}</p>
-                <p>Descrição: {trip.description}</p>
-                <p>Planeta: {trip.planet}</p>
-                <p>Duração em dias: {trip.durationInDays}</p>
-                <p>Data: {trip.date}</p>
+                <p><strong>Nome:</strong> {trip.name}</p>
+                <p><strong>Descrição:</strong> {trip.description}</p>
+                <p><strong>Planeta:</strong> {trip.planet}</p>
+                <p><strong>Duração em dias:</strong> {trip.durationInDays}</p>
+                <p><strong>Data:</strong> {trip.date}</p>
             </Li>
             </ul>
         )
@@ -137,11 +111,11 @@ function TripsPage () {
             <GlobalStyle />
 
         <DivButton>
-           <Button onClick={goToHome}>Return</Button>
-           <Button onClick={goToApplicationPage}>Sign Up</Button>
+           <Button onClick={goToHome}>Voltar</Button>
+           <Button onClick={goToApplicationPage}>Inscreva-se</Button>
         </DivButton>
 
-           <H1>Travel List</H1>
+           <H1>Lista de viagens</H1>
            {tripsList}
            </Div2>
         </Div>

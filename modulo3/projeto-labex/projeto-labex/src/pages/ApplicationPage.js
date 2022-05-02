@@ -15,32 +15,31 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
 }
 `
-
 const Button = styled.button`
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 15px;
-    background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-    font-weight: bold;
-    display: inline;  
-    margin-top: 10px;  
+color: #fff;
+text-transform: uppercase;
+font-size: 15px;
+background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
+padding: 12px 30px;
+border-radius: 30px;
+border: none;
+font-weight: bold;
+display: inline;  
+margin-top: 10px;  
+cursor: pointer;
 `
 const Button2 = styled.button`
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 15px;
-    background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-
+color: #fff;
+text-transform: uppercase;
+font-size: 15px;
+background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
+padding: 12px 30px;
+border-radius: 30px;
+border: none;
+font-weight: bold;
+cursor: pointer;
+margin-top: 10px;
 `
-
 const H1 = styled.h1`
 display:flex;
 justify-content: center;
@@ -50,43 +49,43 @@ margin-bottom: 5px;
 padding: 50px;
 font-family: Verdana, Geneva, Tahoma, sans-serif;
 `
-
 const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: -10px; 
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: -10px; 
 `
-
 const InputEstilizado = styled.input`
-    width: 399px;
-    height: 35px;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 20px;
+width: 399px;
+height: 35px;
+border-radius: 10px;
+margin: 10px;
+padding: 20px;
 `
-
 const Select = styled.select`
-    /* width: 400px;
-    height: 30px;
-    border-radius: 10px;
-    padding: 20px; */
-    width: 400px;
-    height: 30px;
-    border-radius: 10px;
+width: 400px;
+height: 30px;
+border-radius: 10px;
 `
 const Div = styled.div`
-    background-color: silver;
-    height: 100vh; 
+background-color: whitesmoke;
+height: 100vh; 
+`
+const DivButton = styled.button`
+display:flex;
+justify-content: center;
+gap: 70px;
+padding: 20px 10 20px 0;
+background-color: black;
+width: 400px;
+margin-top: 5px;
+height: 65px;
 `
 
-
-
-
 function ApplicationPage() {
-    const [tripsList, setTripsPage] = useState([])
-    const [idTrip, setIdTrip] = useState("")
-    const { form, Input, cleanInputs } = useForm({
+  const [tripsList, setTripsPage] = useState([])
+  const [idTrip, setIdTrip] = useState("")
+  const { form, Input, cleanInputs } = useForm({
         name:"",
         age: "",
         applicationText: "",
@@ -119,7 +118,6 @@ function ApplicationPage() {
         .then((res) => {
             alert("Inscrição realizada com sucesso!")
             cleanInputs();
-            // console.log(form.tripsList)
         })
         .catch((err) => {
             alert("Não foi possível realizar a sua inscrição!", err.response.message)
@@ -138,12 +136,11 @@ function ApplicationPage() {
         setIdTrip(e.target.value)
     }
 
-    console.log(form.country)
     return (
         <Div>
             <GlobalStyle />
 
-            <H1>Sign up for a trip</H1>
+            <H1>Inscreva-se para uma viagem</H1>
 
             <Form onSubmit={applyToTrip}>
 
@@ -211,8 +208,10 @@ function ApplicationPage() {
                     {select}              
                 </Select>
 
-            <Button onClick={goToTripsPage}>Return</Button>
-            <Button2 onClick={applyToTrip}>Send</Button2>
+            <DivButton>
+            <Button onClick={goToTripsPage}>Voltar</Button>
+            <Button2 onClick={applyToTrip}>Enviar</Button2>
+            </DivButton>
 
             </Form>
         </Div>

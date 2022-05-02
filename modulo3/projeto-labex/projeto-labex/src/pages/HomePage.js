@@ -25,7 +25,6 @@ const Ola = keyframes`
   }
 `
 
-
 const PlanoDeFundo = styled.div`
 display: flex;
 position: absolute;
@@ -60,33 +59,33 @@ overflow-x: none;
 `
 
 const Button = styled.button`
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 15px;
-    background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-    margin-left: 900px;
-    margin-top: 180px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1;
+color: #fff;
+text-transform: uppercase;
+font-size: 15px;
+background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
+padding: 12px 30px;
+border-radius: 30px;
+border: none;
+margin-left: 900px;
+margin-top: 180px;
+font-weight: bold;
+cursor: pointer;
+z-index: 1;
 `
 
 const Button2 = styled.button`
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 15px;
-    background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-    margin-left: 880px;
-    margin-top: 80px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1;
+color: #fff;
+text-transform: uppercase;
+font-size: 15px;
+background: linear-gradient(45deg, rgb(255, 255, 111), rgb(0, 0, 128));
+padding: 12px 30px;
+border-radius: 30px;
+border: none;
+margin-left: 880px;
+margin-top: 80px;
+font-weight: bold;
+cursor: pointer;
+z-index: 1;
 `
 
 const H1 = styled.h1`
@@ -125,12 +124,12 @@ function HomePage() {
                 <img src={"https://miro.medium.com/max/1080/1*633qaEEB_0BgSt4XESLJ1g.jpeg"} />
                 <img src={"https://static.nationalgeographicbrasil.com/files/styles/image_3200/public/possoexplicar_03marte.jpg?w=1600"} />
                 <img src={"https://tm.ibxk.com.br/2019/03/12/12113740155096.jpg?ims=1120x420"} />
-                <img src={Space} />
+                <img src={"https://thumbs.dreamstime.com/b/fundo-espacial-infinito-com-nebulosas-e-estrelas-artes-ilustrativas-de-212380221.jpg"} />
                 </div>
             </PlanoDeFundo>
             <GlobalStyle />
 
-            <Button onClick={goToTripsPage}>Trips</Button>
+            <Button onClick={goToTripsPage}>Viagens</Button>
             <Button2 onClick={goToLoginPage}>Admin area</Button2>
 
         </BackGround>
