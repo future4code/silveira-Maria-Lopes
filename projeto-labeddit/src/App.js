@@ -12,17 +12,15 @@ justify-content: center;
 align-self: center;
 align-items: center;
 height: 100vh;
-width: 40%;
-margin-left: 410px;
+width: 100%;
 background-color: silver;
 `
-
 
 
 function App() {
   return (
     <DivMain>
-
+ 
       <Router />
       
     </DivMain>

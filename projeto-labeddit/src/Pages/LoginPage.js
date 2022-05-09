@@ -57,7 +57,7 @@ function LoginPage () {
                 />
             
             <button type="submit">Entrar</button>
-            <button onClick={goToSignInPage}>Sign In!</button>
+            <button onClick={goToSignInPage}>Cadastrar-se</button>
            
                 </form>
 
