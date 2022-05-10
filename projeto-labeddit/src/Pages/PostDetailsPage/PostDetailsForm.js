@@ -6,6 +6,10 @@ import useForm from "../../Hooks/useForm"
 import { BASE_URL } from "../../constants";
 import { useParams } from "react-router-dom";
 
+
+
+
+
 function CommentForm() {
     const [form, InputChange, clear] = useForm({
         body: ""
@@ -44,7 +48,13 @@ function CommentForm() {
                     onChange={InputChange}
                     type={"text"}
                     required
-                />
+                    />
+
+                <input 
+                    placeholder="Comentário"
+                    />
+                
+
             </form>
         </div>
     )

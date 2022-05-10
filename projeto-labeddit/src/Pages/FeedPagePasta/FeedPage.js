@@ -8,6 +8,14 @@ import PostForm from "./PostForm";
 import useForm from "../../Hooks/useForm";
 import PostCard from "../../Components/PostCard"
 import PostDetails from "../PostDetailsPage/PostDetails";
+import Like from "../../img/like.png"
+import Deslike from "../../img/deslike.png"
+
+
+const IMG = styled.img`
+height: 40px;
+`
+
 
 
 function FeedPage () {
@@ -67,26 +75,33 @@ function FeedPage () {
             axios
             .post(`${BASE_URL}posts/${postId}/votes`, body, headers)
             .then((res) => {
+                getPosts();
                 console.log(res)
+                alert("Post curtido com sucesso!")
             })
             .catch((error) => {
                 console.log(error.res)
+              
             })
         }
         else if (direction === -1) {
             axios
             .put(`${BASE_URL}posts/${postId}/votes`, body, headers)
             .then((res) => {
+                getPosts();
                 console.log(res)
+                alert("Descurtido com sucesso!")
             })
             .catch((error) => {
                 console.log(error.res)
+              
             })
         }
         else {
             axios
-            .delete(`${BASE_URL}posts/${postId}/votes`, body, headers)
+            .delete(`${BASE_URL}posts/${postId}/votes`, headers)
             .then((res) => {
+                getPosts();
                 console.log(res)
             })
             .catch((error) => {
@@ -99,8 +114,8 @@ function FeedPage () {
 
     // Função para assim que clicar em um post, ver os detalhes.
 
-        const cardDetails = (post) => {
-            navigate(`/postdetails/${post.id}`)
+        const cardDetails = (id) => {
+            navigate(`/postdetails/${id}`)
         }
 
     // Map para aparecer os posts da requisição na tela
@@ -118,9 +133,6 @@ function FeedPage () {
                  commentCount={post.commentCount}
                  postVote={postVote} 
                  />
-                <button onClick={() => postVote}>Curtir</button>
-                <button onClick={() => postVote}>Descurtir</button>
-                <input placeholder="Comentário"/>
             </div>
         )
     })
