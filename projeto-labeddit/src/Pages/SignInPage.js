@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import useForm from "../Hooks/useForm";
 import useUnprotectedPage from "../Hooks/useUnprotectedPage";
 import { BASE_URL } from "../constants"
+import { signinpage } from "../services/users";
 
 
 
@@ -26,20 +27,7 @@ function SignInPage () {
 
     const submitForm = (event) => {
         event.preventDefault();
-
-        const url = "https://labeddit.herokuapp.com/"
-        const body = form
-    
-        axios
-        .post(`${BASE_URL}/users/signup`, body)
-        .then((res) => {
-            localStorage.setItem("token", res.data.token)
-            clear();
-            goToFeedPage();
-        })
-        .catch((error) => {
-            alert(error.res.data)
-        })
+        signinpage(form, clear, goToFeedPage);
     }
 
 
@@ -73,12 +61,13 @@ function SignInPage () {
                 onChange={InputChange}
                 placeholder="Password"
                 type={"password"}
+                pattern={"^.{8,30}"}
+                title={"A senha deve possuir no mínimo 8 e no máximo 30 caracteres."}
                 required
             />
             
-            {/* <button onClick={goToFeedPage} type={"submit"}>Submit</button> */}
+            <button type="submit">Submit</button>
             </form>
-            <button onClick={goToFeedPage} type={"submit"}>Submit</button>
 
             </div>  
         </div>

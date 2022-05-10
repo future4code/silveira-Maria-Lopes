@@ -1,10 +1,17 @@
 import React from "react";
 import axios from "axios";
-import styledComponents from "styled-components";
+import styled from "styled-components";
 import useUnprotectedPage from "../Hooks/useUnprotectedPage";
 import useForm from "../Hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/users";
+
+
+const H1 = styled.h1`
+display: flex;
+justify-content: center;
+
+`
 
 
 
@@ -36,6 +43,7 @@ function LoginPage () {
         <div>
 
             <div>
+                <H1>LABEDDIT</H1>
                 <form onSubmit={submitLogin}>
 
                 <input 

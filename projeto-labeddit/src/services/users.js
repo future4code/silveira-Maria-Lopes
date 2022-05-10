@@ -18,3 +18,23 @@ export const login = (body, clear, goToFeedPage) => {
     alert(error.res.data)
     })
 }
+
+
+
+
+export const signinpage = (form, clear, goToFeedPage) => {
+
+    const url = "https://labeddit.herokuapp.com/"
+    const body = form
+
+    axios
+    .post(`${BASE_URL}users/signup`, body)
+    .then((res) => {
+        localStorage.setItem("token", res.data.token)
+        clear();
+        goToFeedPage();
+    })
+    .catch((error) => {
+        alert(error.res.data)
+    })
+}
