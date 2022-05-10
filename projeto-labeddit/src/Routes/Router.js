@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import React from "react";
 import LoginPage from '../Pages/LoginPage';
 import SignInPage from '../Pages/SignInPage'
-import FeedPage from '../Pages/FeedPage';
-import PostDetails from '../Pages/PostDetails';
+import FeedPage from '../Pages/FeedPagePasta/FeedPage';
+import PostDetails from '../Pages/PostDetailsPage/PostDetails';
 
 function Router() {
     return (

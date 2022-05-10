@@ -19,9 +19,9 @@ display: flex;
 justify-content: center;
 align-self: center;
 align-items: center;
-height: 100vh;
+height: 100%;
 width: 100%;
-background-color: skyblue;
+background-color: salmon;
 `
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import FeedPage from "../Pages/FeedPage";
+import FeedPage from "../Pages/FeedPagePasta/FeedPage";
 import { useNavigate } from "react-router-dom";
 
 
@@ -18,6 +18,6 @@ const useUnprotectedPage = () => {
     }, [])
 }
 
-// useProtectedPage();
+// useUnprotectedPage();
 
 export default useUnprotectedPage;
