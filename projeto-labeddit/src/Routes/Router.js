@@ -13,19 +13,18 @@ function Router() {
 
                 <Routes>
 
-                    <Route path="/error" element={<ErrorPage />} />
+                    <Route path="/" element={<LoginPage />} />
                     <Route path="/loginpage" element={<LoginPage />} />
                     <Route path="/feedpage" element={<FeedPage />} />
                     <Route path="/postdetails/:id" element={<PostDetails/>} />
                     <Route path="/signinpage" element={<SignInPage />} />
+                    <Route path="*" element={<ErrorPage />} />
                     
                 </Routes>
 
             </BrowserRouter>
-
-
         </>
-    );
+    ); 
 }
 
 export default Router;
