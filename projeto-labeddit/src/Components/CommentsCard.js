@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import PostDetailsForm from "../Pages/PostDetailsPage/PostDetailsForm";
 
 const CommentsCards = styled.div`
-  box-shadow: rgb(255, 255, 255) 0px 0px 0px 6px, rgb(255, 91, 19) 0px 0px 0px 9px;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 6px, rgb(0,  0, 0) 0px 0px 0px 9px;
   border-radius: 5px;
   min-height:20vh;
   width: 30vw;

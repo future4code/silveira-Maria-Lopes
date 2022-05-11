@@ -7,17 +7,15 @@ import Like from "../img/like.png"
 import Deslike from "../img/deslike.png";
 
 const DivCards = styled.div`
-  box-shadow: rgb(255, 255, 255) 0px 0px 0px 3px, rgb(12, 193, 27) 0px 0px 0px 6px, rgb(255, 91, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 3px, rgb(240,128,128) 0px 0px 0px 6px;
   border-radius: 5px;
   min-height:40vh;
   width: 37vw;
-  /* display: flex;
-  justify-items: center;
-  flex-direction: column; */
+  margin: 15px;
 `
 
 const IMG = styled.img`
-height: 40px;
+height: 50px;
 `
 
 

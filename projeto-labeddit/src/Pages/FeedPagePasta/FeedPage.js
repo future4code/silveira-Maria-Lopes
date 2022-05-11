@@ -13,14 +13,19 @@ const IMG = styled.img`
 height: 40px;
 `
 const ImgLoading = styled.img`
-height: 100px;
+height: 150px;
 `
 const DivLoading = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
 `
-
+const DivFeedPage = styled.div`
+display: flex;
+justify-items: center;
+align-items: center;
+flex-direction: column;
+`
 
 function FeedPage () {
     const [posts, setPosts] = useState([])
@@ -144,14 +149,15 @@ function FeedPage () {
     })
 
     return (
-        <div>
+        <DivFeedPage>
             <button onClick={logout}>Logout</button>
             <PostForm />
             {posts && postsCards}
+
             <DivLoading>
             {isLoading && <ImgLoading src={Loading} />}
             </DivLoading>
-        </div>
+        </DivFeedPage>
     )
 }
 

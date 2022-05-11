@@ -12,8 +12,17 @@ const H1 = styled.h1`
 display: flex;
 justify-content: center;
 `
+const DivHeader = styled.div`
+display: flex;
+justify-content: center;
+align-self: center;
+align-items: center;
+height: 100%;
+width: 100%;
+background-color: #e9967a;
+`
 
-function LoginPage () {
+function LoginPage() {
     const [form, InputChange, clear] = useForm({
         email: "",
         password: ""
@@ -36,35 +45,38 @@ function LoginPage () {
         login(form, clear, goToFeedPage);
     }
 
-  
+
     return (
         <div>
+            <DivHeader>
+                <H1>LABEDDIT</H1>
+            </DivHeader>
 
             <div>
-                <H1>LABEDDIT</H1>
+
                 <form onSubmit={submitLogin}>
 
-                <input 
-                name={"email"}
-                value={form.email}
-                onChange={InputChange}
-                type={"email"}
-                placeholder="Email"
-                required
-                />
-            
-                <input
-                name={"password"}
-                value={form.password}
-                onChange={InputChange}
-                type={"password"}
-                placeholder="Password"
-                required
-                />
-            
-            <Button type="submit">Entrar</Button>
-            <Button onClick={goToSignInPage}>Cadastrar-se</Button>
-           
+                    <input
+                        name={"email"}
+                        value={form.email}
+                        onChange={InputChange}
+                        type={"email"}
+                        placeholder="Email"
+                        required
+                    />
+
+                    <input
+                        name={"password"}
+                        value={form.password}
+                        onChange={InputChange}
+                        type={"password"}
+                        placeholder="Password"
+                        required
+                    />
+
+                    <Button type="submit">Entrar</Button>
+                    <Button onClick={goToSignInPage}>Cadastrar-se</Button>
+
                 </form>
             </div>
         </div>

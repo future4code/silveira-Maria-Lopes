@@ -13,7 +13,7 @@ function Router() {
 
                 <Routes>
 
-                    <Route path="/" element={<ErrorPage />} />
+                    <Route path="*" element={<ErrorPage />} />
                     <Route path="/loginpage" element={<LoginPage />} />
                     <Route path="/feedpage" element={<FeedPage />} />
                     <Route path="/postdetails/:id" element={<PostDetails/>} />

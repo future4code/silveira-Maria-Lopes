@@ -12,6 +12,12 @@ import CommentsCard from "../../Components/CommentsCard";
 import Loading from "../../img/loading.gif";
 
 
+const DivDetailsPage = styled.div`
+display: flex;
+justify-items: center;
+align-items: center;
+flex-direction: column;
+`
 
 const ImgLoading = styled.img`
 height: 100px;
@@ -158,13 +164,13 @@ function PostDetails () {
      })
 
     return (
-        <div>
+        <DivDetailsPage>
         <button onClick={goToFeedPage}>Voltar</button>
         {postsMap}
         {commentsMap}
         <PostDetailsForm />
         {isLoading && <ImgLoading src={Loading} />}
-        </div>
+        </DivDetailsPage>
     )
 }
 
