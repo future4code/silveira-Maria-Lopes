@@ -2,24 +2,29 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import useProtectedPage from "../../Hooks/useProtectedPage"
-import { BASE_URL } from "../../constants"
+import { BASE_URL } from "../constants/constants"
 import { useNavigate } from "react-router-dom";
 import PostForm from "./PostForm";
-import useForm from "../../Hooks/useForm";
 import PostCard from "../../Components/PostCard"
-import PostDetails from "../PostDetailsPage/PostDetails";
-import Like from "../../img/like.png"
-import Deslike from "../../img/deslike.png"
+import Loading from "../../img/loading.gif";
 
 
 const IMG = styled.img`
 height: 40px;
 `
-
+const ImgLoading = styled.img`
+height: 100px;
+`
+const DivLoading = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`
 
 
 function FeedPage () {
     const [posts, setPosts] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     let navigate = useNavigate();
 
@@ -38,8 +43,7 @@ function FeedPage () {
     // Para pegar os posts e fazer o map para serem renderizados na tela 
    
     const getPosts = () => {
-
-        const header = token
+        setIsLoading(true)
 
         axios
         .get(`${BASE_URL}posts`, { 
@@ -48,11 +52,13 @@ function FeedPage () {
             }
         })
         .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
+            setIsLoading(false)
             setPosts(res.data)
         })
         .catch((err) => {
             console.log(err)
+            setIsLoading(false)
         })
     }
 
@@ -136,13 +142,15 @@ function FeedPage () {
             </div>
         )
     })
-  
-    console.log(posts)
+
     return (
         <div>
             <button onClick={logout}>Logout</button>
             <PostForm />
             {posts && postsCards}
+            <DivLoading>
+            {isLoading && <ImgLoading src={Loading} />}
+            </DivLoading>
         </div>
     )
 }

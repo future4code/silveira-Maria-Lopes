@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useForm from "../../Hooks/useForm";
 import axios from "axios";
-import { BASE_URL } from "../../constants"
+import { BASE_URL } from "../constants/constants"
 
 
 

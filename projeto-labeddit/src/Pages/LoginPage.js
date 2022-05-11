@@ -5,15 +5,13 @@ import useUnprotectedPage from "../Hooks/useUnprotectedPage";
 import useForm from "../Hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/users";
+import { Button } from "@material-ui/core";
 
 
 const H1 = styled.h1`
 display: flex;
 justify-content: center;
-
 `
-
-
 
 function LoginPage () {
     const [form, InputChange, clear] = useForm({
@@ -64,13 +62,10 @@ function LoginPage () {
                 required
                 />
             
-            <button type="submit">Entrar</button>
-            <button onClick={goToSignInPage}>Cadastrar-se</button>
+            <Button type="submit">Entrar</Button>
+            <Button onClick={goToSignInPage}>Cadastrar-se</Button>
            
                 </form>
-
-                {/* <button onClick={goToFeedPage} type="submit">Entrar</button>
-                <button onClick={goToSignInPage}>Cadastrar-se</button> */}
             </div>
         </div>
     )

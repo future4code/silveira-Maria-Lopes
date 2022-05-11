@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import useProtectedPage from "../../Hooks/useProtectedPage";
 import useForm from "../../Hooks/useForm"
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "../constants/constants";
 import { useParams } from "react-router-dom";
 
 
 
+// Dos comentários!
 
-
-function CommentForm() {
-    const [form, InputChange, clear] = useForm({
+function PostDetailsForm() {
+    const  [form, InputChange, clear] = useForm({
         body: ""
     })
 
@@ -24,19 +24,20 @@ function CommentForm() {
             }
         }
         axios
-            .post(`${BASE_URL}posts${id}/comments`, body, headers)
+            .post(`${BASE_URL}posts/${id}/comments`, body, headers)
             .then((res) => {
                 alert(res.data)
                 clear()
             })
-            .catch((error) => {
+            .catch((err) => {
                 alert(err.res.data)
             })
     }
 
+
     const submitForm = (event) => {
         event.preventDefault()
-        createComments(form, clear, params.id)
+        createComments(params.id, form, clear)
     }
 
     return (
@@ -47,15 +48,13 @@ function CommentForm() {
                     value={form.body}
                     onChange={InputChange}
                     type={"text"}
+                    placeholder="Comentários"
                     required
                     />
-
-                <input 
-                    placeholder="Comentário"
-                    />
-                
-
+                <button type="submit">Enviar</button>
             </form>
         </div>
     )
 }
+
+export default PostDetailsForm;

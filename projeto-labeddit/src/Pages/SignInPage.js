@@ -1,10 +1,10 @@
 import React from "react";
 import axios from "axios";
-import styledComponents from "styled-components";
+import styled from "styled-components";
 import { useNavigate } from 'react-router-dom'
 import useForm from "../Hooks/useForm";
 import useUnprotectedPage from "../Hooks/useUnprotectedPage";
-import { BASE_URL } from "../constants"
+import { BASE_URL } from "../Pages/constants/constants";
 import { signinpage } from "../services/users";
 
 

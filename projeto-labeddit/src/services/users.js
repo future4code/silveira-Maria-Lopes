@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../constants";
+import { BASE_URL } from "../Pages/constants/constants";
 
 
 export const login = (body, clear, goToFeedPage) => {
@@ -33,6 +33,7 @@ export const signinpage = (form, clear, goToFeedPage) => {
         localStorage.setItem("token", res.data.token)
         clear();
         goToFeedPage();
+        alert("Cadastro realizado com sucesso!")
     })
     .catch((error) => {
         alert(error.res.data)
