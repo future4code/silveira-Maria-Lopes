@@ -13,14 +13,14 @@ const GifDiv = styled.div`
 const Error = () => {
     const navigate = useNavigate()
 
-    const goToFeedPage = () => {
-        navigate('/feedpage')
+    const goToLoginPage = () => {
+        navigate('/loginpage')
     }
 
     return (
         <GifDiv>
             <img src={Gif} alt='gif' width='497px' />
-            <button onClick={(goToFeedPage)}>FeedPage</button>
+            <button onClick={(goToLoginPage)}>FeedPage</button>
         </GifDiv>
     );
 }

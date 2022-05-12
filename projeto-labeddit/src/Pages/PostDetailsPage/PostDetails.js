@@ -20,11 +20,58 @@ flex-direction: column;
 `
 
 const ImgLoading = styled.img`
-height: 100px;
+height: 200px;
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    margin-right: 50px;
+    margin-top: -50px;
+}
+`
+const ButtonVoltar = styled.button`
+margin-top: 5px;
+font: 15px arial, sans-serif;
+height: 30px;
+text-shadow: none;
+border-style: outset;
+border-color: pink;
+border-radius: 10px;
+cursor: pointer;
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    margin-right: 40px;
+}
+`
+const DivHeader = styled.div`
+display: flex;
+justify-content: center;
+align-self: center;
+align-items: center;
+height: 60px;
+width: 99.1%;
+background-color: rgb(205,92,92);
+padding: 5px;
+background-image: url("");
+`
+const H1 = styled.h1`
+display: flex;
+justify-content: center;
+color: white;
+font-family: Georgia, 'Times New Roman', Times, serif;
+:hover 
+
+{ background-color: #000000; 
+
+transition: 0.8s;
+
+opacity: 0.8;
+
+}
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    margin-right: 36px;
+}
 `
 
-function PostDetails () {
-    
+
+function PostDetails() {
+
     useProtectedPage();
     let navigate = useNavigate()
     const params = useParams()
@@ -33,7 +80,7 @@ function PostDetails () {
     const [posts, setPosts] = useState([])
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(false)
- 
+
     const goToFeedPage = () => {
         navigate('/feedpage')
     }
@@ -42,19 +89,19 @@ function PostDetails () {
         setIsLoading(true)
 
         axios
-        .get(`${BASE_URL}posts/${params.id}/comments`, { 
-            headers: {
-                Authorization: token
-            }
-        })
-        .then((res) => {
-            setComments(res.data)
-            setIsLoading(false)
-        })
-        .catch((err) => {
-            console.log(err)
-            setIsLoading(false)
-        })
+            .get(`${BASE_URL}posts/${params.id}/comments`, {
+                headers: {
+                    Authorization: token
+                }
+            })
+            .then((res) => {
+                setComments(res.data)
+                setIsLoading(false)
+            })
+            .catch((err) => {
+                console.log(err)
+                setIsLoading(false)
+            })
     }
 
     const getPost = () => {
@@ -62,17 +109,17 @@ function PostDetails () {
         const header = token
 
         axios
-        .get(`${BASE_URL}posts`, { 
-            headers: {
-                Authorization: token
-            }
-        })
-        .then((res) => {
-            setPosts(res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            .get(`${BASE_URL}posts`, {
+                headers: {
+                    Authorization: token
+                }
+            })
+            .then((res) => {
+                setPosts(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     useEffect(() => {
@@ -82,19 +129,19 @@ function PostDetails () {
 
     // Função para pegar os comentários dos posts 
 
-        const commentsVote = (commentId, direction) => {
-            const headers = {
-                headers: {
-                    Authorization: localStorage.getItem("token")
-                }
+    const commentsVote = (commentId, direction) => {
+        const headers = {
+            headers: {
+                Authorization: localStorage.getItem("token")
             }
+        }
 
-            const body = {
-                direction: direction
-            }
+        const body = {
+            direction: direction
+        }
 
-            if (direction === 1) {
-                axios
+        if (direction === 1) {
+            axios
                 .post(`${BASE_URL}comments/${commentId}/votes`, body, headers)
                 .then((res) => {
                     console.log(res)
@@ -103,8 +150,8 @@ function PostDetails () {
                 .catch((error) => {
                     console.log(error.res)
                 })
-            } else if (direction === -1) {
-                axios
+        } else if (direction === -1) {
+            axios
                 .put(`${BASE_URL}comments/${commentId}/votes`, body, headers)
                 .then((res) => {
                     console.log(res)
@@ -113,63 +160,66 @@ function PostDetails () {
                 .catch((error) => {
                     console.log(error.res)
                 })
-            } else {
-                axios
+        } else {
+            axios
                 .delete(`${BASE_URL}comments/${commentId}/votes`, headers)
                 .then((res) => {
                     console.log(res)
                     getComentarios();
                 })
                 .catch((error) => {
-                    console.log({error}, "delete")
+                    console.log({ error }, "delete")
 
                 })
-            }
         }
+    }
 
-       // Map para aparecer o id do post que eu clicar
+    // Map para aparecer o id do post que eu clicar
 
-       const postsMap = posts && posts.map((post) => {
-           if (post.id === params.id)
-        return(
-            <PostCards
-                key={post.id}
-                username={post.username}
-                title={post.title}
-                body={post.body}
-                voteSum={post.voteSum}
-                userVote={post.userVote}
-                id={post.id}
-                commentCount={post.commentCount}
-           />
+    const postsMap = posts && posts.map((post) => {
+        if (post.id === params.id)
+            return (
+                <PostCards
+                    key={post.id}
+                    username={post.username}
+                    title={post.title}
+                    body={post.body}
+                    voteSum={post.voteSum}
+                    userVote={post.userVote}
+                    id={post.id}
+                    commentCount={post.commentCount}
+                />
+            )
+    })
+
+    // Map dos comentários
+
+    const commentsMap = comments && comments.map((comment) => {
+        return (
+            <div>
+                <CommentsCard
+                    id={comment.id}
+                    key={comment.id}
+                    username={comment.username}
+                    body={comment.body}
+                    userVote={comment.userVote}
+                    commentsVote={commentsVote}
+                    voteSum={comment.voteSum}
+                />
+            </div>
         )
     })
 
-     // Map dos comentários
-
-     const commentsMap = comments && comments.map((comment) => {
-         return(
-             <div>
-                <CommentsCard
-                id={comment.id}
-                key={comment.id}
-                username={comment.username}
-                body={comment.body}
-                userVote={comment.userVote}
-                commentsVote={commentsVote}
-                voteSum={comment.voteSum}
-                />
-             </div>
-         )
-     })
-
     return (
         <DivDetailsPage>
-        <button onClick={goToFeedPage}>Voltar</button>
-        {postsMap}
-        {commentsMap}
-        <PostDetailsForm />
-        {isLoading && <ImgLoading src={Loading} />}
+            <DivHeader>
+                <H1>LABEDDIT</H1>
+            </DivHeader>
+            <ButtonVoltar onClick={goToFeedPage}>Voltar</ButtonVoltar>
+            {postsMap}
+            {commentsMap}
+            <PostDetailsForm />
+            {isLoading && <ImgLoading src={Loading} />}
         </DivDetailsPage>
     )
 }

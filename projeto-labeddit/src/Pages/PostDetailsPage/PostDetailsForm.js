@@ -6,12 +6,44 @@ import useForm from "../../Hooks/useForm"
 import { BASE_URL } from "../constants/constants";
 import { useParams } from "react-router-dom";
 
+const DivButton = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 50px;
+padding: 10px;
+`
 
+const ButtonEnviar = styled.button`
+font: 15px arial, sans-serif;
+height: 30px;
+text-shadow: none;
+border-style: outset;
+border-color: pink;
+border-radius: 10px;
+cursor: pointer;
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    margin-right: 50px;
+}
+`
+const Inputs = styled.input`
+width: 320px;
+height: 30px;
+display: flex;
+flex-wrap: wrap;
+padding: 10px;
+margin-top: 15px;
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    margin-right: 45px;
+    width: 290px;
+}
+
+`
 
 // Dos comentários!
 
 function PostDetailsForm() {
-    const  [form, InputChange, clear] = useForm({
+    const [form, InputChange, clear] = useForm({
         body: ""
     })
 
@@ -43,15 +75,17 @@ function PostDetailsForm() {
     return (
         <div>
             <form onSubmit={submitForm}>
-                <input
+                <Inputs
                     name={"body"}
                     value={form.body}
                     onChange={InputChange}
                     type={"text"}
                     placeholder="Comentários"
                     required
-                    />
-                <button type="submit">Enviar</button>
+                />
+                <DivButton>
+                    <ButtonEnviar type="submit">Enviar</ButtonEnviar>
+                </DivButton>
             </form>
         </div>
     )
