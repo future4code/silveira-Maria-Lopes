@@ -1,0 +1,71 @@
+h1{
+    color: rgb(214, 51, 151);
+    text-align: center;
+    font-weight: bold;
+    background-color: pink;
+}
+
+h2{
+    color:rgb(214, 51, 151);
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+h4{
+    color: pink;
+    text-align: center;    
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+div{
+    color:black;
+    text-align: center;
+}
+
+
+footer{
+    text-align: center;
+    font-weight: bold;
+}
+
+img{
+    width: 50%; 
+}
+
+
+body{
+    background-image: url(./img/na-cama-com-os_portugueses_thumb5.png);
+    background-size: 100%;
+    margin-left: 300px;
+    margin-right: 300px;
+
+}
+
+#primeiro-vibrador, #preco1, #pe1{
+   font-weight: bold;
+}
+
+#segundo-vibrador, #preco2, #pe2{
+    font-weight: bold;
+}
+
+#terceiro-vibrador, #preco3, #pe3{
+    font-weight: bold;
+}
+
+#quarto-vibrador, #preco4, #pe4{
+    font-weight: bold;
+}
+
+#quinto-vibrador, #preco5, #pe5{
+    font-weight: bold;
+}
+
+
+.funcionarios{
+    color:black;
+    font-weight: bold;
+} 
