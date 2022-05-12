@@ -15,9 +15,9 @@ font-family: Georgia, 'Times New Roman', Times, serif;
 
 { background-color: #000000; 
 
-transition: 0.8s;
+transition: 0.9s;
 
-opacity: 0.8;
+opacity: 0.9;
 
 }
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
