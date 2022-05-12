@@ -53,7 +53,7 @@ border-radius: 10px;
 display: flex;
 flex-wrap: wrap;
 padding: 5px;
-margin-top: 8px;
+margin-top: 10px;
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     width: 250px;
     margin-right: 45px;
