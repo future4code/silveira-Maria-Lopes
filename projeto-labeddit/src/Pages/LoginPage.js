@@ -32,7 +32,7 @@ align-items: center;
 height: 60px;
 /* width: 100%; */
 background-color: rgb(205,92,92);
-padding: 5px;
+padding: 7px;
 background-image: url("");
 `
 const DivInputs = styled.div`
