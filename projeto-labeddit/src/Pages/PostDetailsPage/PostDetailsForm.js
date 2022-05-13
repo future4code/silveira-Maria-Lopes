@@ -13,7 +13,6 @@ justify-content: center;
 gap: 50px;
 padding: 10px;
 `
-
 const ButtonEnviar = styled.button`
 font: 15px arial, sans-serif;
 height: 30px;

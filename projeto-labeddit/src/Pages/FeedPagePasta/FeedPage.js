@@ -7,10 +7,30 @@ import { useNavigate } from "react-router-dom";
 import PostForm from "./PostForm";
 import PostCard from "../../Components/PostCard"
 import Loading from "../../img/loading.gif";
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    WhatsappShareButton,
+    WhatsappIcon,
+    TwitterShareButton,
+    TwitterIcon,
+    TelegramShareButton,
+    TelegramIcon,
+    EmailShareButton,
+    EmailIcon
+} from "react-share";
 
-
+const DivShare = styled.div`
+display: flex;
+justify-content: flex-end;
+align-items: center;
+gap: 5px;
+margin-top: 15px;
+margin-right: 10px;
+`
 const ImgLoading = styled.img`
-height: 150px;
+height: 160px;
+margin-top: 10px;
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     margin-top: -40px;
     margin-right: 40px;
@@ -25,7 +45,12 @@ const DivFeedPage = styled.div`
 display: flex;
 justify-items: center;
 align-items: center;
+align-self: center;
 flex-direction: column;
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    min-width: 200px;
+    position: relative;
+  }
 `
 const ButtonLogout = styled.button`
 margin-top: 5px;
@@ -35,6 +60,7 @@ text-shadow: none;
 border-style: outset;
 border-color: pink;
 border-radius: 10px;
+margin-top: -50px;
 cursor: pointer;
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     width: 100px;
@@ -43,10 +69,15 @@ cursor: pointer;
 `
 const DivFiltros = styled.div`
 display: flex;
-align-items: row;
+align-items: columns;
+flex-direction: row;
 justify-content: space-between;
+margin-left: 850px;
+padding: 5px;
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    margin-right: 40px;
+    margin-right: 880px;
+    margin-bottom: 20px;
+    position: relative;
   }
 `
 const InputFiltro = styled.input`
@@ -91,6 +122,18 @@ opacity: 0.8;
 }
 `
 
+const DivCardsFeed = styled.div`
+display: grid;
+grid-template-columns: 300px 300px 340px;
+column-gap: 25px;
+row-gap: 5px;
+margin-top: -5px;
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`
 
 function FeedPage() {
     const [posts, setPosts] = useState([])
@@ -109,8 +152,7 @@ function FeedPage() {
     useProtectedPage();
 
     const token = localStorage.getItem('token')
-
-
+  
     // Para pegar os posts e fazer o map para serem renderizados na tela 
 
     const getPosts = () => {
@@ -213,30 +255,78 @@ function FeedPage() {
             )
         })
 
+    const shareUrl = "projeto-labeddit-eduarda.surge.sh";
+
     return (
 
-        <DivFeedPage>
+        <div
+            style={{
+                background: '#0000',
+            }
+            }>
+
             <DivHeader>
                 <H1>LABEDDIT</H1>
             </DivHeader>
-            <ButtonLogout onClick={logout}>Logout</ButtonLogout>
 
-            <DivFiltros>
-                <P>Busca:</P>
-                <InputFiltro
-                    type="text"
-                    value={filterPostTitulo}
-                    onChange={(ev) => setFilterPostTitulo(ev.target.value)}
+            <DivShare>
+
+                <FacebookShareButton url={shareUrl}>
+                    <FacebookIcon size={40} round={true} />
+                </FacebookShareButton>
+
+                <WhatsappShareButton url={shareUrl}>
+                    <WhatsappIcon size={40} round={true} />
+                </WhatsappShareButton>
+
+                <TwitterShareButton url={shareUrl}>
+                    <TwitterIcon size={40} round={true} />
+                </TwitterShareButton>
+
+                <TelegramShareButton url={shareUrl}>
+                    <TelegramIcon size={40} round={true} />
+                </TelegramShareButton>
+
+                <EmailShareButton url={shareUrl}>
+                    <EmailIcon size={40} round={true} />
+                </EmailShareButton>
+
+            </DivShare>
+
+
+            <DivFeedPage>
+                <ButtonLogout onClick={logout}>Logout</ButtonLogout>
+
+                <DivFiltros>
+                    <P>Busca:</P>
+                    <InputFiltro
+                        type="text"
+                        value={filterPostTitulo}
+                        onChange={(ev) => setFilterPostTitulo(ev.target.value)}
+                    />
+                </DivFiltros>
+
+                <PostForm />
+
+                <DivCardsFeed>
+                    {posts && postsCards}
+                </DivCardsFeed>
+
+                <DivLoading>
+                    {isLoading && <ImgLoading src={Loading} />}
+                </DivLoading>
+
+                {/* {posts.array && (
+                <Pagination
+                    limit={LIMIT}
+                    total={posts.array.length}
+                    offset={offset}
+                    setOffset={setOffset}
                 />
-            </DivFiltros>
+            )} */}
 
-            <PostForm />
-            {posts && postsCards}
-
-            <DivLoading>
-                {isLoading && <ImgLoading src={Loading} />}
-            </DivLoading>
-        </DivFeedPage>
+            </DivFeedPage>
+        </div>
 
     )
 }

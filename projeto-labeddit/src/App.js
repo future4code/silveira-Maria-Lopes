@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Router from './Routes/Router'
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-// import Header from "./Components/Header";
 
 export const GlobalStyle = createGlobalStyle`
     * {

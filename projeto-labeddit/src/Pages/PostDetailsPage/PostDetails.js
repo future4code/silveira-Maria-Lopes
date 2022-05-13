@@ -105,9 +105,6 @@ function PostDetails() {
     }
 
     const getPost = () => {
-
-        const header = token
-
         axios
             .get(`${BASE_URL}posts`, {
                 headers: {
@@ -169,7 +166,6 @@ function PostDetails() {
                 })
                 .catch((error) => {
                     console.log({ error }, "delete")
-
                 })
         }
     }

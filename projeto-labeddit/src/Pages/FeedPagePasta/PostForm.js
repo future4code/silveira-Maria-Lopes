@@ -3,48 +3,45 @@ import useForm from "../../Hooks/useForm";
 import axios from "axios";
 import { BASE_URL } from "../constants/constants";
 import styled from "styled-components";
-import { Button } from "@material-ui/core";
 
 const DivInputs = styled.div`
 display:flex;
-justify-content: center;
-align-items: center;
-height: 30vh;
+flex-direction: column;
+height: 40vh;
 padding: 15px;
-
 `
 const InputTitle = styled.input`
-width: 250px;
-height: 20px;
+width: 180px;
+height: 25px;
 border-radius: 5px;
 display: flex;
 flex-wrap: wrap;
 padding: 5px;
-margin-top: 8px;
-margin-left: 56px;
+margin-top: -10px;
+margin-left: 60px;
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     width: 180px;
 }
 `
-const InputBody = styled.input`
-width: 320px;
-height: 30px;
+const InputBody = styled.textarea`
+width: 260px;
+height: 60px;
 border-radius: 5px;
 display: flex;
 flex-wrap: wrap;
-padding: 25px;
+padding: 30px;
 margin-top: 5px;
+resize: none;
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     margin-right: 50px;
     width: 250px;
 }
 `
-
 const ButtonPostar = styled.button`
-margin-left: 150px;
-margin-top: 5px;
+margin-left: 120px;
 font: 15px arial, sans-serif;
 height: 30px;
+margin-top: 8px;
 text-shadow: none;
 border-style: outset;
 border-color: pink;
@@ -54,20 +51,18 @@ cursor: pointer;
     margin-left: 120px;
 }
 `
-
 const DivH3 = styled.div`
 display: flex;
 justify-content: center;
+margin-top: -70px;
 `
 const H3 = styled.h3`
-margin-bottom: -5px;
-margin-right: 10px;
+margin-bottom: 13px;
 font: arial, sans-serif;
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     margin-right: 50px;
 }
 `
-
 
 function PostForm() {
     const [form, InputChange, clear] = useForm({
@@ -82,7 +77,6 @@ function PostForm() {
     const createPost = (event) => {
         event.preventDefault();
 
-        
         axios
         .post(`${BASE_URL}posts`, form, {
             headers: {
