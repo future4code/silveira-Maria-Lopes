@@ -26,7 +26,7 @@ display: flex;
 justify-content: center;
 align-self: center;
 align-items: center;
-height: 60px;
+height: 70px;
 /* width: 100%; */
 background-color: rgb(205,92,92);
 padding: 5px;

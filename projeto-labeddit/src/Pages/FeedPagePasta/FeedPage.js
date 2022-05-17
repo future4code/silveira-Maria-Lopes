@@ -126,7 +126,7 @@ const DivCardsFeed = styled.div`
 display: grid;
 grid-template-columns: 300px 300px 340px;
 column-gap: 25px;
-row-gap: 5px;
+row-gap: 10px;
 margin-top: -5px;
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     display: flex;
