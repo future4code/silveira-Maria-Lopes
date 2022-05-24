@@ -6,20 +6,15 @@
 // Etapa 2: execute o arquivo index.js usando o comando abaixo: node index.js.
 
 // b)
-const myName = 'Maria Eduarda'
-const myAge = Number("22")
+const myName = process.argv[2]
+const myAge = Number(process.argv[3]);
 
-console.log(`Olá, ${myName}! Você tem ${myAge} anos.`)
-//consegui imprimir no console com o seguinte comando: npm run start!
+console.log((myName && myAge ? `Olá, ${myName}! Você tem ${myAge} anos` : "Faltou preencher!"))
+
 
 // c)
-const ageInSevenYears = Number(myAge + 7)
-console.log(`Olá, ${myName}! Você tem ${myAge} anos. Em sete anos você terá ${ageInSevenYears}.`)
-
-
-
-
-
+// const ageInSevenYears = Number(myAge + 7)
+// console.log(`Olá, ${myName}! Você tem ${myAge} anos. Em sete anos você terá ${ageInSevenYears}.`)
 
 
 
