@@ -1,15 +1,20 @@
 //EXERCÍCIO 2:
 
-const soma = Number(process.argv[2])
-console.log("aqui é a soma:", soma + soma)
-//aqui o resultado no console será 30, pois rodei o comando: npm run start 30 30.
+const num1 = Number(process.argv[3])
+const num2 = Number(process.argv[4])
+const operacao = process.argv[2];
 
-const subtraindo = Number(process.argv[2]);
-console.log("aqui é a subtração:", subtraindo - 10)
-//aqui o resultado no console será 20, pois eu rodei o comando: npm run start 30 30.
-
-const multiplicando = Number(process.argv[2]);
-console.log("aqui é a multiplicação:", multiplicando * multiplicando)
-//o resultado no console dessa operação foi 900, pois rodei o comando npm run start 30 30.
-
-
+switch(operacao) {
+    case "soma":
+        console.log(num1+num2);
+        break;
+    case "subt":
+        console.log(num1-num2);
+        break;
+    case "mult": 
+    console.log(num1*num2);
+        break;
+    default:
+        console.log(num1/num2);
+        break;
+}
