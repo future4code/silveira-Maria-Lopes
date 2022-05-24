@@ -16,6 +16,12 @@ console.log((myName && myAge ? `Olá, ${myName}! Você tem ${myAge} anos` : "Fal
 // const ageInSevenYears = Number(myAge + 7)
 // console.log(`Olá, ${myName}! Você tem ${myAge} anos. Em sete anos você terá ${ageInSevenYears}.`)
 
+// Retorna o texto em vermelho
+console.log("\033[31m Aqui esta o texto em vermelho.")
+
+// Retorna o texto em roxo
+console.log("\033[34m Aqui esta o texto em roxo.")
+
 
 
 
