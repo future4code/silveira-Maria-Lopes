@@ -22,6 +22,13 @@ console.log("\033[31m Aqui esta o texto em vermelho.")
 // Retorna o texto em roxo
 console.log("\033[34m Aqui esta o texto em roxo.")
 
+// Criando variavel para deixar um pouco mais simples
+var red, blue, reset;
+red   = '\u001b[31m';
+blue  = '\u001b[34m';
+reset = '\u001b[0m';
+
+console.log(red +"Aqui esta o texto em vermelho. "+ purple +"Aqui esta o texto em roxo. "+ reset +"Aqui estamos dando reset nas cores do bash.")
 
 
 
