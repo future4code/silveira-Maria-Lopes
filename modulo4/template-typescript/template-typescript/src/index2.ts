@@ -93,6 +93,33 @@ transcreveRNA("ATTGCTGCGCATTAACGACGCGTA")
 //O método join() junta todos os elementos de um array em uma string e retorna
 //essa string.
 
+function transcreveRNA2(string:string): void {
+    // var teste = "ATTGCTGCGCATTAACGACGCGTA"
+    let nomeDaVariavel = ""
+   
+    for (let i = 0; i < string.length; i++) {
+        switch(string[i]) {
+            case "A":
+                nomeDaVariavel+="U"
+                break;
+            case "T":
+                nomeDaVariavel+="A"
+                break;
+            case "C":
+                nomeDaVariavel+="G"
+                break;
+            case "G":
+                nomeDaVariavel+="C"
+                break;
+        }
+    }
+    console.log(nomeDaVariavel)
+}
+transcreveRNA2("ATTGCTGCGCATTAACGACGCGTA")
+//Fiz de duas formas diferentes para testar.
+//No início deu erro pois eu estava percorrendo o switch(string) e não o switch(string[i]) na posição i,
+//que eu defini na linha acima, no for.
+
 //Exercício 8:
 
 function reverseString(teste: string): any {
