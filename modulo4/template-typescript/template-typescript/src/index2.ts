@@ -94,26 +94,25 @@ transcreveRNA("ATTGCTGCGCATTAACGACGCGTA")
 //essa string.
 
 function transcreveRNA2(string:string): void {
-    // var teste = "ATTGCTGCGCATTAACGACGCGTA"
-    let nomeDaVariavel = ""
+    let rna = ""
    
     for (let i = 0; i < string.length; i++) {
         switch(string[i]) {
             case "A":
-                nomeDaVariavel+="U"
+                rna+="U"
                 break;
             case "T":
-                nomeDaVariavel+="A"
+                rna+="A"
                 break;
             case "C":
-                nomeDaVariavel+="G"
+                rna+="G"
                 break;
             case "G":
-                nomeDaVariavel+="C"
+                rna+="C"
                 break;
         }
     }
-    console.log(nomeDaVariavel)
+    console.log(rna)
 }
 transcreveRNA2("ATTGCTGCGCATTAACGACGCGTA")
 //Fiz de duas formas diferentes para testar.
