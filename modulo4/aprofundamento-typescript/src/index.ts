@@ -148,7 +148,7 @@ function buscarPostsPorAutor(posts, autorInformado) {
 }
 */
 
-function buscarPostsPorAutor(posts:any, autorInformado:string): any {
+function buscarPostsPorAutor(posts:any, autorInformado:string): boolean {
     return posts.filter(
       (post:any) => {
         return post.autor === autorInformado
