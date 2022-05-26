@@ -146,3 +146,25 @@ function produtos(arrayProdutos: Produto[]) {
 
 console.log(arrayProdutos)
 console.log(produtos(arrayProdutos))
+
+
+//EXERCÍCIO 8:
+//a)
+const pratosRestaurante: any = [
+    { nome: "Strogonoff", custo: 30, valorDeVenda: 60, arrayDeIngredientes: ["Frango"]},
+    { nome: "Espaguete", custo: 40, valorDeVenda: 80, arrayDeIngredientes: ["Macarrão"] },
+    { nome: "Nhoque de mandioquinha", custo: 50, valorDeVenda: 100, arrayDeIngredientes: ["Mandioquinha"]},
+    { nome: "Lula grelhada com arroz negro", custo: 60, valorDeVenda: 120, arrayDeIngredientes: ["Lula", "Arroz negro"] }
+]
+
+function addProducts() {
+    let pratos = pratosRestaurante.map(() => {
+        // if (prato.classificacao === Classe.VERAO) {
+        //     return {
+        //         ...produto, precoComDesconto: produto.preco - (produto.preco * 5 / 100)
+        //     }
+    })
+}
+console.log(addProducts())
+
+//b)
