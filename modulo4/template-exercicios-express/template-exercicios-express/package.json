@@ -1,0 +1,13 @@
+{
+  "name": "template-intro-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node build/index.js"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.10",
+    "typescript": "^4.5.5"
+  }
+}
