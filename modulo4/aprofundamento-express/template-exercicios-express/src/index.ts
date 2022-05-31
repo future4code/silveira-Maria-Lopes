@@ -37,14 +37,14 @@ const arrayTarefas: Tarefas[] = [
 
 //Exercício 4
 
-app.post('/tarefas', (request: Request, response: Response) => {
+app.get('/tarefas', (request: Request, response: Response) => {
 
     const concluidos = arrayTarefas.filter((concluido) => {
         if (concluido.completed === true) {
             return concluido;
         }
     })
-    response.status(201).send({ concluidos })
+    response.status(201).send({concluidos})
 })
 
 //Exercício 5
