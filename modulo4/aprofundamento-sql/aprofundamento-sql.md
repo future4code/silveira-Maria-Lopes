@@ -153,3 +153,20 @@ WHERE data_lancamento < curdate();
 -- d)
 SELECT * FROM filmes
 ORDER BY avaliacao DESC LIMIT 3;
+
+-- 8)
+-- a)
+SELECT * FROM filmes 
+ORDER BY titulo;
+
+-- b)
+SELECT * FROM filmes
+ORDER BY titulo DESC LIMIT 3;
+
+-- c)
+SELECT * FROM filmes
+ORDER BY data_lancamento DESC LIMIT 3; 
+
+-- d)
+SELECT * FROM filmes
+ORDER BY avaliacao DESC LIMIT 3;
