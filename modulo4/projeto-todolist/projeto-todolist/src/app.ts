@@ -30,7 +30,7 @@ app.post('/user', async (req: Request, res: Response) => {
   try {
     const { name, nickname, email } = req.body
 
-    if(!name && !nickname && !email) {
+    if (!name && !nickname && !email) {
       throw new Error("Please, fill in the fiels!")
     }
 
@@ -56,6 +56,7 @@ app.post('/user', async (req: Request, res: Response) => {
 app.get("/user/:id", async (req: Request, res: Response) => {
   try {
     const resultado = await connection("Users")
+      .select("name", "nickname")
       .where('id', req.params.id)
     res.status(200).send({ resultado })
   } catch (error: any) {
@@ -71,7 +72,7 @@ app.put("/user/:id", async (req: Request, res: Response) => {
 
     const { name, nickname } = req.body
 
-    if(!name || !nickname) {
+    if (!name || !nickname) {
       throw new Error("Fill in all fields!")
     }
 
@@ -117,12 +118,12 @@ app.post('/assignment', async (req: Request, res: Response) => {
     const { title, description, limitDate, creatorUserId, id, status } = req.body
     let dataAmericana = limitDate.split('/').reverse().join('-');
 
-    if(!title || !description || !limitDate || !creatorUserId || status) {
+    if (!title || !description || !limitDate || !creatorUserId || !status) {
       throw new Error("Please, fill in the fiels!")
     }
 
     await createAssignment(
-      Date.now()%10000,
+      Date.now() % 10000,
       req.body.title,
       req.body.description,
       req.body.status,
@@ -130,7 +131,7 @@ app.post('/assignment', async (req: Request, res: Response) => {
       req.body.creatorUserId
     )
     res.status(200).send({
-      message: "Assignment created successfully!"
+      message: "Sucessfully!"
     });
   } catch (error: any) {
     res.status(400).send({
@@ -169,7 +170,7 @@ app.get("/users", async (req: Request, res: Response) => {
 app.get("/userAssignment", async (req: Request, res: Response) => {
   try {
     const resultado = await connection
-      .select("*") 
+      .select("*")
       .from("Assignment")
       .innerJoin("Users", "Users.id", "Assignment.creatorUserId")
       .where('creatorUserId', Number(req.query.creatorUserId))
@@ -196,67 +197,127 @@ app.get("/searchuser", async (req: Request, res: Response) => {
 
 // 9- Atribuir um usuário responsável a uma tarefa
 
+const createAssignmentToUser = async (
+  tarefa_id: number,
+  usuario_id: number
+) => {
+  await connection
+    .insert({
+      tarefa_id: tarefa_id,
+      usuario_id: usuario_id
+    })
+    .into("TodoListResponsibleUserTaskRelation");
+};
 
+app.post("/assignment/responsible", async (req: Request, res: Response) => {
+  try {
+    await createAssignmentToUser(
+      req.body.tarefa_id,
+      req.body.usuario_id
+    );
 
-
+    res.status(200).send({
+      message: "Task assigned to user successfully!"
+    });
+  } catch (error: any) {
+    res.status(400).send({
+      message: error.message,
+    });
+  }
+});
 
 // 10- Pegar usuários responsáveis por uma tarefa
 
-app.get("/assignmentresponsible/:id", async (req: Request, res: Response) => {
+app.get("/task/:id/responsible", async (req: Request, res: Response) => {
   try {
     const resultado = await connection
-      .select("*") 
-      .from("Users")
-      .innerJoin("Assignment", "Assignment.creatorUserId", "Users.id")
+      .select("*")
+      .from("TodoListResponsibleUserTaskRelation")
+      .innerJoin("Users", "Users.id", "TodoListResponsibleUserTaskRelation.usuario_id")
       .where('id', req.params.id)
     res.status(200).send({ resultado })
   } catch (error: any) {
     res.status(500).send("Unexpected error")
   }
 })
-//pegar usuarios responsáveis por uma tarefa, entao tenho q acessar o id da tarefa e me retornar o usuario.
 
-// app.get("/assignmentresponsible/:id", async (req: Request, res: Response) => {
-//   try {
-//     const resultado = await connection
-//       .select("title") 
-//       .from("Users")
-//       .innerJoin("Assignment", "Assignment.creatorUserId", "Users.id")
-//       .where('id', Number(req.query.id))
-//     res.status(200).send({ resultado })
-//     console.log(resultado)
-//   } catch (error: any) {
-//     res.status(500).send("Unexpected error")
-//   }
-// })
+// 11- Pegar tarefa pelo id e os responsáveis por ela 
 
-app.get("/assignmentresponsible", async (req: Request, res: Response) => {
+app.get("/task/:id/responsiblesTask", async (req: Request, res: Response) => {
   try {
     const resultado = await connection
-      .select("*") 
-      .from("Assignment")
-      .innerJoin("Users", "Users.id", "Assignment.creatorUserId")
-      .where('id', Number(req.query.id))
+      .select("*")
+      .from("TodoListResponsibleUserTaskRelation")
+      .innerJoin("Users", "Users.id", "TodoListResponsibleUserTaskRelation.usuario_id")
+      .where("TodoListResponsibleUserTaskRelation.tarefa_id", Number(req.params.id))
     res.status(200).send({ resultado })
-    console.log(resultado)
   } catch (error: any) {
     res.status(500).send("Unexpected error")
   }
 })
 
+// 12- Atualizar o status da tarefa pelo id
 
-// app.get("/assignmentresponsible/:id", async (req: Request, res: Response) => {
+app.put("/taskstatus/:id", async (req: Request, res: Response) => {
+  try {
+    const { status } = req.body
+
+    if (!status) {
+      throw new Error("Please, update status!")
+    }
+
+    await connection("Assignment")
+      .update({
+        status: req.body.status
+      })
+      .where({ id: req.params.id })
+    res.status(200).send("Sucess!")
+  } catch (error: any) {
+    res.status(400).send({
+      message: error.message,
+    });
+  }
+});
+
+// 13- Pegar todas as tarefas por status 
+
+app.get("/tasksearch", async (req: Request, res: Response) => {
+  try {
+    const { status } = req.query
+
+    if (!status) {
+      throw new Error("Please, fill in the fiel!")
+    }
+
+    const resultado = await connection("Assignment")
+      .where({ status: req.query.status })
+    res.status(200).send({ resultado })
+  } catch (error: any) {
+    res.status(500).send("Unexpected error")
+  }
+})
+
+// 14- Pegar todas as tarefas atrasadas
+
+// app.get("/tasklate", async (req: Request, res: Response) => {
 //   try {
-//     const resultado = await connection
-//       .select("*") 
-//       .from("Assignment")
-//       .innerJoin("Users", "Assignment.creatorUserId", "Assignment.creatorUserId")
-//       .where('creatorUserId', Number(req.query.creatorUserId))
-//     res.status(200).send({ resultado })
+//     const resultado = await connection("Users")
+//       .select("*")
+//       .where("Users", < "curdate()")
 //   } catch (error: any) {
 //     res.status(500).send("Unexpected error")
 //   }
 // })
+
+
+
+
+
+
+
+
+
+
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
