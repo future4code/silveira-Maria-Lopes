@@ -299,15 +299,16 @@ app.get("/tasksearch", async (req: Request, res: Response) => {
 
 // 14- Pegar todas as tarefas atrasadas
 
-// app.get("/tasklate", async (req: Request, res: Response) => {
-//   try {
-//     const resultado = await connection("Users")
-//       .select("*")
-//       .where("Users", < "curdate()")
-//   } catch (error: any) {
-//     res.status(500).send("Unexpected error")
-//   }
-// })
+app.get("/tasklate", async (req: Request, res: Response) => {
+  try {
+    const resultado = await connection("Assignment")
+      .select("*")
+      .whereRaw("LimitDate < curdate()")
+      res.status(200).send({ resultado })
+  } catch (error: any) {
+    res.status(500).send({error})
+  }
+})
 
 
 
