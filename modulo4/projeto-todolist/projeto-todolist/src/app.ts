@@ -389,6 +389,29 @@ app.get("/buscandotarefa", async (req: Request, res: Response) => {
 
 // 18- Atualizar o status de várias tarefas
 
+app.put("/updatetasks", async (req: Request, res: Response) => {
+  try {
+    const { status } = req.body
+
+    if (!status) {
+      throw new Error("Please, update status!")
+    }
+
+    await connection("Assignment")
+      .update({
+        id: req.body.id,
+        status: req.body.status
+      })
+      .where({ "id": req.body.id, "status": req.body.status })
+    res.status(200).send("Sucess!")
+  } catch (error: any) {
+    res.status(400).send({
+      message: error.message,
+    });
+  }
+});
+
+
 
 
 
