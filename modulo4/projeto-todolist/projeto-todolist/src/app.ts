@@ -310,8 +310,84 @@ app.get("/tasklate", async (req: Request, res: Response) => {
   }
 })
 
+// 15- Remover a tarefa da lista de tarefas de um usuário
+
+// app.delete("/task/:taskId/responsible/:responsibleUserId", async (req: Request, res: Response) => {
+//   try {
+//     const resultado = await connection("TodoListResponsibleUserTaskRelation").delete()
+//       .where({ id: req.params.id })
+//     res.status(200).send({ resultado })
+//   } catch (error: any) {
+//     console.log(error.message)
+//     res.status(500).send("Unexpected error")
+//   }
+// })
 
 
+// app.get("/task/:taskId/responsible/:responsibleUserId", async (req: Request, res: Response) => {
+//   try {
+//     const resultado = await connection
+//       .delete("tarefa_id")
+//       .where("TodoListResponsibleUserTaskRelation.tarefa_id = TodoListResponsibleUserTaskRelation.usuario_id", Number(req.params.id))
+//     res.status(200).send({ resultado })
+//   } catch (error: any) {
+//     res.status(500).send({error})
+//   }
+// })
+
+
+// 16- Atribuir mais de um responsável a uma tarefa
+
+const createAnotherAssignmentToUser = async (
+  tarefa_id: number,
+  usuario_id: Array<number>
+) => {
+  await connection
+    .insert({
+      tarefa_id: tarefa_id,
+      usuario_id: usuario_id
+    })
+    .into("TodoListResponsibleUserTaskRelation");
+};
+
+app.post("/assignment/another", async (req: Request, res: Response) => {
+  try {
+    await createAnotherAssignmentToUser(
+      req.body.tarefa_id,
+      req.body.usuario_id
+    );
+
+    res.status(200).send({
+      message: "Task assigned to user successfully!"
+    });
+  } catch (error: any) {
+    res.status(400).send({
+      message: error.message,
+    });
+  }
+});
+
+// 17- Procurar tarefa por termos
+
+const getTasks = async (title: string, description: string) => {
+  const resultado = await connection.raw(`
+    SELECT * FROM Assignment
+    where title LIKE "${title}" OR description LIKE "${description}"
+  `)
+  return resultado[0]
+}
+
+app.get("/buscandotarefa", async (req: Request, res: Response) => {
+  try {
+    const tasks = await getTasks(req.query.query as string, req.query.query as string)
+    res.status(200).send({ tasks })
+
+  } catch (error: any) {
+    res.status(500).send({ message: error.message })
+  }
+})
+
+// 18- Atualizar o status de várias tarefas
 
 
 
