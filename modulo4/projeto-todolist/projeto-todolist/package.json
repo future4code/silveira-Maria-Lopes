@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node ./build/app.js",
-    "dev-start": "ts-node-dev ./src/index.ts"
+    "dev-start": "ts-node-dev ./src/app.ts"
   },
   "author": "Labenu",
   "license": "ISC",

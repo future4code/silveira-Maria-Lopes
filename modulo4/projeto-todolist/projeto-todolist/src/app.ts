@@ -304,37 +304,25 @@ app.get("/tasklate", async (req: Request, res: Response) => {
     const resultado = await connection("Assignment")
       .select("*")
       .whereRaw("LimitDate < curdate()")
-      res.status(200).send({ resultado })
+    res.status(200).send({ resultado })
   } catch (error: any) {
-    res.status(500).send({error})
+    res.status(500).send({ error })
   }
 })
 
 // 15- Remover a tarefa da lista de tarefas de um usuário
 
-// app.delete("/task/:taskId/responsible/:responsibleUserId", async (req: Request, res: Response) => {
-//   try {
-//     const resultado = await connection("TodoListResponsibleUserTaskRelation").delete()
-//       .where({ id: req.params.id })
-//     res.status(200).send({ resultado })
-//   } catch (error: any) {
-//     console.log(error.message)
-//     res.status(500).send("Unexpected error")
-//   }
-// })
-
-
-// app.get("/task/:taskId/responsible/:responsibleUserId", async (req: Request, res: Response) => {
-//   try {
-//     const resultado = await connection
-//       .delete("tarefa_id")
-//       .where("TodoListResponsibleUserTaskRelation.tarefa_id = TodoListResponsibleUserTaskRelation.usuario_id", Number(req.params.id))
-//     res.status(200).send({ resultado })
-//   } catch (error: any) {
-//     res.status(500).send({error})
-//   }
-// })
-
+app.delete("/task/:taskId/responsible/:responsibleUserId", async (req: Request, res: Response) => {
+  try {
+    const resultado = await connection.raw
+      (`DELETE FROM TodoListResponsibleUserTaskRelation WHERE tarefa_id = ${req.params.tarefa_id} AND usuario_id = ${req.params.usuario_id};`)
+    console.log(resultado)
+    res.status(200).send({ resultado })
+  } catch (error: any) {
+    res.status(500).send({ error })
+  }
+})
+//TENTEI UM MILHÃO DE POSSIBILIDADES NESSA AQUI, SOCORRO! NÃO CONSEGUI ):
 
 // 16- Atribuir mais de um responsável a uma tarefa
 
@@ -389,20 +377,14 @@ app.get("/buscandotarefa", async (req: Request, res: Response) => {
 
 // 18- Atualizar o status de várias tarefas
 
-app.put("/updatetasks", async (req: Request, res: Response) => {
+app.put("/eddittasks/:id", async (req: Request, res: Response) => {
   try {
-    const { status } = req.body
-
-    if (!status) {
-      throw new Error("Please, update status!")
-    }
-
-    await connection("Assignment")
+      await connection("Assignment")
       .update({
-        id: req.body.id,
+        id: req.body.id as Array<number>,
         status: req.body.status
       })
-      .where({ "id": req.body.id, "status": req.body.status })
+      .where({ id: req.params.id})
     res.status(200).send("Sucess!")
   } catch (error: any) {
     res.status(400).send({
@@ -411,12 +393,32 @@ app.put("/updatetasks", async (req: Request, res: Response) => {
   }
 });
 
+// 19- Deletar tarefa
 
+app.delete("/deletetask/:id", async (req: Request, res: Response) => {
+  try {
+    const resultado = await connection.raw
+      (`DELETE FROM TodoListResponsibleUserTaskRelation WHERE  TodoListResponsibleUserTaskRelation.tarefa_id = ${req.params.tarefa_id};`)
+    res.status(200).send({ resultado })
+  } catch (error: any) {
+    res.status(500).send({ error })
+  }
+})
+//ESSA AQUI NÃO FUNCIONA.
 
+// 20- Deletar usuário
 
-
-
-
+app.delete("/deleteuser/:id", async (req: Request, res: Response) => {
+  try {
+    const resultado = await connection("TodoListResponsibleUserTaskRelation").delete()
+      .where({ usuario_id: req.params.usuario_id })
+    res.status(200).send({ resultado })
+  } catch (error: any) {
+    console.log(error.message)
+    res.status(500).send("Unexpected error")
+  }
+})
+//ESSA AQUI NÃO FUNCIONA.
 
 
 const server = app.listen(process.env.PORT || 3003, () => {
