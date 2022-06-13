@@ -420,40 +420,6 @@ app.put("/eddittasks/:id", async (req: Request, res: Response) => {
   }
 });
 
-// 19- Deletar tarefa
-
-const deleteTask = async (tarefa_id: number) => {
-  await connection("TodoListResponsibleUserTaskRelation")
-      .where("tarefa_id", tarefa_id)
-      .delete()
-}
-
-app.delete("/deletetask/:id", async (req: Request, res: Response) => {
-  try {
-    const { tarefa_id } = req.params
-
-    const responsible = await deleteTask(Number(tarefa_id))
-    res.status(200).send({ responsible })
-  } catch (error: any) {
-    res.status(500).send({ error })
-  }
-})
-//ESSA AQUI NÃO FUNCIONA.
-
-// 20- Deletar usuário
-
-app.delete("/deleteuser/:id", async (req: Request, res: Response) => {
-  try {
-    const resultado = await connection("TodoListResponsibleUserTaskRelation").delete()
-      .where({ usuario_id: req.params.usuario_id })
-    res.status(200).send({ resultado })
-  } catch (error: any) {
-    console.log(error.message)
-    res.status(500).send("Unexpected error")
-  }
-})
-//ESSA AQUI NÃO FUNCIONA.
-
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
