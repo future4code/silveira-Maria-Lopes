@@ -312,17 +312,44 @@ app.get("/tasklate", async (req: Request, res: Response) => {
 
 // 15- Remover a tarefa da lista de tarefas de um usuário
 
-app.delete("/task/:taskId/responsible/:responsibleUserId", async (req: Request, res: Response) => {
+const deleteResponsibleByTask = async (tarefa_id: number, usuario_id: number) => {
+
+  const result = await connection
+    .delete()
+    .from("TodoListResponsibleUserTaskRelation")
+    .where("tarefa_id", tarefa_id)
+    .andWhere("usuario_id", usuario_id)
+
+  return result
+}
+
+app.delete("/task/:tarefa_id/responsible/:usuario_id", async (req: Request, res: Response) => {
   try {
-    const resultado = await connection.raw
-      (`DELETE FROM TodoListResponsibleUserTaskRelation WHERE tarefa_id = ${req.params.tarefa_id} AND usuario_id = ${req.params.usuario_id};`)
-    console.log(resultado)
-    res.status(200).send({ resultado })
-  } catch (error: any) {
-    res.status(500).send({ error })
+    const { tarefa_id, usuario_id } = req.params
+
+    if (!tarefa_id || !usuario_id) {
+      res.statusCode = 400
+      throw new Error("Fill all fields")
+    }
+
+    const responsible = await deleteResponsibleByTask(Number(tarefa_id), Number(usuario_id))
+
+    if (!responsible) {
+      res.statusCode = 404
+      throw new Error("Task not found")
+    }
+
+    res.status(200).send("Task updated with success")
+  }
+  catch (error: any) {
+    if (res.statusCode == 200) {
+      res.status(500).send(error.message)
+    } else {
+      res.status(res.statusCode).send(error.message)
+    }
   }
 })
-//TENTEI UM MILHÃO DE POSSIBILIDADES NESSA AQUI, SOCORRO! NÃO CONSEGUI ):
+
 
 // 16- Atribuir mais de um responsável a uma tarefa
 
@@ -379,12 +406,12 @@ app.get("/buscandotarefa", async (req: Request, res: Response) => {
 
 app.put("/eddittasks/:id", async (req: Request, res: Response) => {
   try {
-      await connection("Assignment")
+    await connection("Assignment")
       .update({
         id: req.body.id as Array<number>,
         status: req.body.status
       })
-      .where({ id: req.params.id})
+      .where({ id: req.params.id })
     res.status(200).send("Sucess!")
   } catch (error: any) {
     res.status(400).send({
@@ -395,11 +422,18 @@ app.put("/eddittasks/:id", async (req: Request, res: Response) => {
 
 // 19- Deletar tarefa
 
+const deleteTask = async (tarefa_id: number) => {
+  await connection("TodoListResponsibleUserTaskRelation")
+      .where("tarefa_id", tarefa_id)
+      .delete()
+}
+
 app.delete("/deletetask/:id", async (req: Request, res: Response) => {
   try {
-    const resultado = await connection.raw
-      (`DELETE FROM TodoListResponsibleUserTaskRelation WHERE  TodoListResponsibleUserTaskRelation.tarefa_id = ${req.params.tarefa_id};`)
-    res.status(200).send({ resultado })
+    const { tarefa_id } = req.params
+
+    const responsible = await deleteTask(Number(tarefa_id))
+    res.status(200).send({ responsible })
   } catch (error: any) {
     res.status(500).send({ error })
   }
