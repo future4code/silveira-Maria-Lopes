@@ -8,7 +8,8 @@
     "ex3": "tsc && node build/ex3.js",
     "ex4": "tsc && node build/ex4.js",
     "ex5": "tsc && node build/ex5.js",
-    "ex6": "tsc && node build/ex6.js"
+    "ex6": "tsc && node build/ex6.js",
+    "ex7": "tsc && node build/ex7.js"
   },
   "author": "Labenu",
   "license": "ISC",
