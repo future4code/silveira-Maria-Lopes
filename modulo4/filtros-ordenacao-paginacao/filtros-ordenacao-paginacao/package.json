@@ -4,8 +4,8 @@
    "description": "",
    "main": "index.js",
    "scripts": {
-      "start": "tsc && node ./build/app.js",
-      "dev": "tsnd --transpile-only --ignore-watch node_modules ./src/app.ts",
+      "start": "tsc && node ./build/index.js",
+      "dev": "tsnd --transpile-only --ignore-watch node_modules ./src/index.ts",
       "build": "tsc",
       "migrations": "tsnd ./src/data/migrations.ts"
    },

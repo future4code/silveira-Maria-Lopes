@@ -1,2 +1,14 @@
-GET http://localhost:3003/resultMapOrder?name=name&sort=name&order=ASC&page=2
+GET http://localhost:3003/searchbyname?name=
+Content-Type: application/json
+### 
+GET http://localhost:3003/order?name=&sort=type&order=ASC
+Content-Type: application/json
+###
+GET http://localhost:3003/searching/CX
+Content-Type: application/json
+###
+GET http://localhost:3003/pagination?name=&sort=name&order=ASC&page=1
+Content-Type: application/json
+###
+GET http://localhost:3003/users?name=&sort=name&order=&page=
 Content-Type: application/json
