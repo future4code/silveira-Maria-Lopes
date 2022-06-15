@@ -109,7 +109,7 @@ const productToUser = async (
     user_id: number,
     product_id: number,
     quantity: number,
-    total_price: any,
+    total_price: number,
     id: number
 ) => {
     await connection
@@ -123,27 +123,31 @@ const productToUser = async (
         .into("labecommerce_purchases");
 };
 
+const getInfoProduct: any = async (product_id: string) => {
+    const resultado = await connection
+        .select("id", "name", "price")
+        .from("labecommerce_products")
+        .where("labecommerce_products.id", product_id)
+    return resultado[0]
+}
+
 app.post("/purchase", async (req: Request, res: Response) => {
     try {
-
         const { user_id, product_id, quantity, total_price, id } = req.body
-        // let sum: any = "labecommerce_purchases.total_price"
-        let sum = total_price
-
-        let getSumOfNumbers = sum.reduce((accumulator: any, number: any) => accumulator + number, 0)
-        // let getSumOfNumbers = sum => sum.reduce((accumulator: any, number: any) => accumulator + number, 0)
+        const resultadoProduct = await getInfoProduct(product_id)
+        const price = resultadoProduct.price
+        const quantidade = quantity
+        const sum = price * quantidade
 
         await productToUser(
             user_id,
             product_id,
             quantity,
-            total_price(getSumOfNumbers),
+            sum,
             id
         );
 
-        res.status(200).send({
-            message: "Product assigned to user successfully!"
-        });
+        res.status(200).send({ message: "Product assigned to user successfully!" });
     } catch (error: any) {
         res.status(400).send({
             message: error.message,
@@ -154,37 +158,31 @@ app.post("/purchase", async (req: Request, res: Response) => {
 // Exercício 6
 // Busca das compras de um usuário.
 
-app.get("/searchpurchases/:user_id"), async (req: Request, res: Response) => {
+app.get("/users/:user_id/purchases", async (req: Request, res: Response) => {
     try {
-        const resultado = await connection
-            .select("*")
-            .from("labecommerce_purchases")
-            .innerJoin("labecommerce_users", "labecommerce_users.id", "labecommerce_purchases.user_id")
-            .where('id', req.params.id)
-        res.status(200).send({ resultado })
-    } catch (error) {
+        const resultado = await connection.raw(`
+        SELECT * FROM labecommerce_purchases WHERE user_id = "${req.params.user_id}"
+      `)
+        res.status(200).send(resultado[0])
+    } catch (error: any) {
+        console.log(error.message)
+        res.status(500).send("Unexpected error")
     }
-}
-// - **parâmetro recebido** via `**path params**`:
-// - **`user_id`**
+})
 
 // DESAFIOS
 // Exercício 7
 // Busca por todos os produtos, ordenados por query params.
 
-app.get("/productsorder"), async (req: Request, res: Response): Promise<void> => {
+app.get("/productsbyorder"), async (req: Request, res: Response): Promise<void> => {
     try {
         const table = "labecommerce_products"
         let name = req.query.order
-        let sort = req.query.sort as string
         let order = req.query.order as string
 
-        if (!name) {
-            name = "%"
-        }
         const result = await connection(table)
             .where("name", "LIKE", `%${name}%`)
-            .orderBy(sort, order)
+            .orderBy(order)
 
         res.status(200).send(result)
     } catch (error: any) {
@@ -193,36 +191,49 @@ app.get("/productsorder"), async (req: Request, res: Response): Promise<void> =>
     }
 }
 
+
+const getOrderProducts = async (name: string) => {
+    const resultado = await connection.raw(`
+      SELECT * FROM labecommerce_products
+      where name LIKE "%${name}%" 
+      ORDER BY name DESC 
+    `)
+    return resultado[0]
+}
+
+app.get("/orderproducts", async (req: Request, res: Response) => {
+    try {
+        if (!req.query.search) {
+            throw new Error("Please, enter the name!")
+        }
+        const produtos = await getOrderProducts(req.query.search as string)
+        res.status(200).send({ produtos })
+
+    } catch (error: any) {
+        res.status(500).send({ message: error.message })
+    }
+})
+// Buscando o produto por nome!
+
 // Exercício 8
 // Busca por todos os usuários. Alterando o endpoint de busca por todos os usuários para que
-// ele retorne também as compras de cada usuário na propriedade purchases, na tabela intermediária.
+// ele retorne também as compras de cada usuário em uma propriedade purchases.
 
-app.get("/searchuserspurchases"), async (req: Request, res: Response) => {
+app.get("/searchuserspurchases", async (req: Request, res: Response) => {
     try {
         const resultado = await connection
-            .select("*")
+            .select("labecommerce_users.name", "labecommerce_products.name", "labecommerce_purchases.quantity", "labecommerce_purchases.total_price")
             .from("labecommerce_purchases")
-            .innerJoin("labecommerce_users", "labecommerce_users.id", "labecommerce_purchases.user_id")
-            // .on("labecommerce_purchases.user_id" = "labecommerce_users.id")
-            // .innerJoin("labecommerce_products")
-            // .on("product_id" = "labecommerce_products.id")
-            .where('id', req.params.id)
+            .join("labecommerce_users", "labecommerce_users.id", "labecommerce_purchases.user_id")
+            .join("labecommerce_products", "labecommerce_products.id", "labecommerce_purchases.product_id")
         res.status(200).send({ resultado })
-    } catch (error) {
+    } catch (error: any) {
+        res.send(error.message || error.sqlMessage)
     }
-}
-// Assim eu deveria ser capaz de juntar a tabela de produtos com a tabela intermediária de compras.
+})
 
-// FICARIA ASSIM NO WORKBENCH?
 
-// SELECT *
-// FROM labecommerce_purchases
-// JOIN labecommerce_users
-// ON labecommerce_purchases.user_id = labecommerce_users.id
-// JOIN labecommerce_products
-// ON product_id = labecommerce_products.id
-
-// AGORA EU PEGO SÓ A INFORMAÇÃO QUE ME INTERESSA:
+// WORKBENCH
 
 // SELECT labecommerce_users.name, labecommerce_products.name, labecommerce_purchases.quantity, labecommerce_purchases.total_price AS purchases
 // FROM labecommerce_purchases

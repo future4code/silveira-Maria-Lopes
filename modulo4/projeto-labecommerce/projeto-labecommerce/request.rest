@@ -1,0 +1,5 @@
+GET http://localhost:3003/orderproducts?name=
+Content-Type: application/json
+###
+GET http://localhost:3003/users/1/purchases
+Content-Type: application/json
