@@ -1,243 +1,173 @@
 import { app } from "./app";
 import { connection } from "./data/connection";
 import express, { Request, Response } from "express"
+import { cadastroUser } from "./endpoints/CreateUser"
+import { searchUsers } from "./endpoints/SearchUsers"
+import { criarProduct } from "./endpoints/CreateProduct"
+import { searchProducts } from "./endpoints/SearchProducts"
+import { purchaseRecord } from "./endpoints/PurchaseRecord"
+import { purchasesUsers } from "./endpoints/PurchasesFromUser"
+import { orderProduct } from "./endpoints/ProductsByOrder"
+import { searchUserByPurchases } from "./endpoints/SearchUserByPurchases"
 
 // Exercício 1 
 // Cadastro de usuário.
-
-const createUser = async (
-    id: number,
-    name: string,
-    email: string,
-    password: string
-) => {
-    await connection
-        .insert({
-            id: id,
-            name: name,
-            email: email,
-            password: password
-        })
-        .into("labecommerce_users");
-};
-
-app.post("/newuser", async (req: Request, res: Response) => {
-    try {
-        await createUser(
-            req.body.id,
-            req.body.name,
-            req.body.email,
-            req.body.password
-        );
-
-        res.status(200).send({
-            message: "Success"
-        });
-    } catch (error: any) {
-        res.status(400).send({
-            message: error.message,
-        });
-    }
-});
+app.post("/newuser", cadastroUser)
 
 // Exercício 2
 // Busca por todos os usuários.
-
-app.get("/users", async (req: Request, res: Response) => {
-    try {
-        const resultado = await connection("labecommerce_users")
-        res.status(200).send({ resultado })
-    } catch (error: any) {
-        res.status(500).send(error.message)
-    }
-})
+app.get("/users", searchUsers)
 
 // Exercício 3
 // Cadastro de produto.
-
-const createProduct = async (
-    id: number,
-    name: string,
-    price: number,
-    image_url: string
-) => {
-    await connection
-        .insert({
-            id: id,
-            name: name,
-            price: price,
-            image_url: image_url
-        })
-        .into("labecommerce_products");
-};
-
-app.post("/newproduct", async (req: Request, res: Response) => {
-    try {
-        await createProduct(
-            req.body.id,
-            req.body.name,
-            req.body.price,
-            req.body.image_url
-        );
-
-        res.status(200).send({
-            message: "Product registered successfully!"
-        });
-    } catch (error: any) {
-        res.status(400).send({
-            message: error.message,
-        });
-    }
-});
+app.post("/newproduct", criarProduct)
 
 // Exercício 4
 // Busca por todos os produtos.
-
-app.get("/products", async (req: Request, res: Response) => {
-    try {
-        const resultado = await connection("labecommerce_products")
-        res.status(200).send({ resultado })
-    } catch (error: any) {
-        res.status(500).send(error.message)
-    }
-})
+app.get("/products", searchProducts)
 
 // Exercício 5
 // Registro de compra.
-
-const productToUser = async (
-    user_id: number,
-    product_id: number,
-    quantity: number,
-    total_price: number,
-    id: number
-) => {
-    await connection
-        .insert({
-            user_id: user_id,
-            product_id: product_id,
-            quantity: quantity,
-            total_price: total_price,
-            id: id
-        })
-        .into("labecommerce_purchases");
-};
-
-const getInfoProduct: any = async (product_id: string) => {
-    const resultado = await connection
-        .select("id", "name", "price")
-        .from("labecommerce_products")
-        .where("labecommerce_products.id", product_id)
-    return resultado[0]
-}
-
-app.post("/purchase", async (req: Request, res: Response) => {
-    try {
-        const { user_id, product_id, quantity, total_price, id } = req.body
-        const resultadoProduct = await getInfoProduct(product_id)
-        const price = resultadoProduct.price
-        const quantidade = quantity
-        const sum = price * quantidade
-
-        await productToUser(
-            user_id,
-            product_id,
-            quantity,
-            sum,
-            id
-        );
-
-        res.status(200).send({ message: "Product assigned to user successfully!" });
-    } catch (error: any) {
-        res.status(400).send({
-            message: error.message,
-        });
-    }
-});
+app.post("/purchase", purchaseRecord)
 
 // Exercício 6
 // Busca das compras de um usuário.
-
-app.get("/users/:user_id/purchases", async (req: Request, res: Response) => {
-    try {
-        const resultado = await connection.raw(`
-        SELECT * FROM labecommerce_purchases WHERE user_id = "${req.params.user_id}"
-      `)
-        res.status(200).send(resultado[0])
-    } catch (error: any) {
-        console.log(error.message)
-        res.status(500).send("Unexpected error")
-    }
-})
+app.get("/users/:user_id/purchases", purchasesUsers)
 
 // DESAFIOS
 // Exercício 7
 // Busca por todos os produtos, ordenados por query params.
-
-app.get("/productsbyorder"), async (req: Request, res: Response): Promise<void> => {
-    try {
-        const table = "labecommerce_products"
-        let name = req.query.order
-        let order = req.query.order as string
-
-        const result = await connection(table)
-            .where("name", "LIKE", `%${name}%`)
-            .orderBy(order)
-
-        res.status(200).send(result)
-    } catch (error: any) {
-        console.log(error)
-        res.send(error.message || error.sqlMessage)
-    }
-}
-
-
-const getOrderProducts = async (name: string) => {
-    const resultado = await connection.raw(`
-      SELECT * FROM labecommerce_products
-      where name LIKE "%${name}%" 
-      ORDER BY name DESC 
-    `)
-    return resultado[0]
-}
-
-app.get("/orderproducts", async (req: Request, res: Response) => {
-    try {
-        if (!req.query.search) {
-            throw new Error("Please, enter the name!")
-        }
-        const produtos = await getOrderProducts(req.query.search as string)
-        res.status(200).send({ produtos })
-
-    } catch (error: any) {
-        res.status(500).send({ message: error.message })
-    }
-})
-// Buscando o produto por nome!
+app.get("/ordenando", orderProduct)
 
 // Exercício 8
 // Busca por todos os usuários. Alterando o endpoint de busca por todos os usuários para que
 // ele retorne também as compras de cada usuário em uma propriedade purchases.
-
-app.get("/searchuserspurchases", async (req: Request, res: Response) => {
-    try {
-        const resultado = await connection
-            .select("labecommerce_users.name", "labecommerce_products.name", "labecommerce_purchases.quantity", "labecommerce_purchases.total_price")
-            .from("labecommerce_purchases")
-            .join("labecommerce_users", "labecommerce_users.id", "labecommerce_purchases.user_id")
-            .join("labecommerce_products", "labecommerce_products.id", "labecommerce_purchases.product_id")
-        res.status(200).send({ resultado })
-    } catch (error: any) {
-        res.send(error.message || error.sqlMessage)
-    }
-})
+app.get("/searchuserspurchases", searchUserByPurchases)
 
 
 // WORKBENCH
-
 // SELECT labecommerce_users.name, labecommerce_products.name, labecommerce_purchases.quantity, labecommerce_purchases.total_price AS purchases
 // FROM labecommerce_purchases
 // JOIN labecommerce_users
 // ON labecommerce_purchases.user_id = labecommerce_users.id
 // JOIN labecommerce_products
 // ON product_id = labecommerce_products.id
+
+
+// EXTRA! DELETAR UM PRODUTO.
+
+const deleteProduct = async (id: number) => {
+    await connection("labecommerce_products")
+        .where("id", id)
+        .delete()
+}
+// Função para deletar o produto da tabela de produtos pelo id dele.
+
+const deleteProductByIdFromRelation = async (product_id: number) => {
+    await connection
+        .delete()
+        .from("labecommerce_purchases")
+        .where("product_id", product_id)
+}
+// Função para deletar o produto da tabela intermediária pelo product_id.
+
+const selectIdResponsiblesForProduct = async (product_id: number) => {
+    const result = await connection
+        .select("user_id")
+        .from("labecommerce_purchases")
+        .where("product_id", product_id)
+    return result
+}
+// Função para deletar o responsável pelo produto da tabela intermediária pelo product_id, pelo user_id.
+// Deletar a relação dele com algum usuário para só então removê-lo. 
+
+
+app.delete("/product/:id", async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params
+
+        if (!id) {
+            res.statusCode = 400
+            throw new Error("field id is required")
+        }
+
+        const responsible = await selectIdResponsiblesForProduct(Number(id))
+
+        if (responsible.length > 0) {
+            await deleteProductByIdFromRelation(Number(id))
+        }
+
+        await deleteProduct(Number(id))
+
+        res.status(200).send("Task deleted with success")
+    }
+    catch (error: any) {
+        if (res.statusCode == 200) {
+            res.status(500).send(error.message)
+        } else {
+            res.status(res.statusCode).send(error.message)
+        }
+    }
+})
+
+// EXTRA! DELETAR UM USUÁRIO.
+
+const deleteUser = async (id: number) => {
+    await connection("labecommerce_users")
+        .where("id", id)
+        .delete()
+}
+// Função para deletar um usuário da tabela de users pelo id dele.
+
+const deleteUserByIdFromRelation = async (user_id: number) => {
+    await connection
+        .delete()
+        .from("labecommerce_purchases")
+        .where("user_id", user_id)
+}
+// Função para deletar o user da tabela intermediária pelo user_id.
+
+const selectIdResponsiblesForUser = async (user_id: number) => {
+    const result = await connection
+        .select("product_id")
+        .from("labecommerce_purchases")
+        .where("user_id", user_id)
+    return result
+}
+// Função para deletar o user da tabela intermediária pelo user_id, buscando pelo id do produto que está relacionado à ele.
+// Deletar a relação dele com algum produto para só então removê-lo. 
+
+app.delete("/user/:id", async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params
+        //o id do usuário que eu quero deletar por params.
+
+        if (!id) {
+            res.statusCode = 400
+            throw new Error("field id is required")
+        }
+        //validação para saber se foi digitado algum número. Caso não, cairá nesse erro pedindo para digitar.
+
+        const responsible = await selectIdResponsiblesForUser(Number(id))
+        //variável que vai guardar o id do user_id que está na minha tabela intermediária.
+
+        if (responsible.length > 0) {
+            await deleteUserByIdFromRelation(Number(id))
+        }
+        //se o id do user_id que está na minha tabela intermediária for maior que 0, ou seja, se ele existir,
+        //eu vou usar minha função de deletar o usuário por id from relation, ou seja, deletá-lo da tabela intermediária.
+        await deleteUser(Number(id))
+        //depois de deletar todas as relações que esse usuário tinha com quaisquer produtos, enfim, o deleto.
+
+        res.status(200).send("User deleted with success")
+    }
+    catch (error: any) {
+        if (res.statusCode == 200) {
+            res.status(500).send(error.message)
+        } else {
+            res.status(res.statusCode).send(error.message)
+        }
+    }
+})
+
+//OBSERVAÇÃO: os de delete eu preferi deixar no mesmo arquivo para poder revisá-los com maior facilidade futuramente.
