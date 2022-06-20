@@ -15,21 +15,23 @@ class UserAccount {
     private name: string;
     private age: number;
     private balance: number = 0;
-    private transactions: Transaction[] = [];
+    private transactions: Transaction2[] = [];
 
     constructor(
         cpf: string,
         name: string,
         age: number,
+        transactions: Transaction2[]
     ) {
         console.log("Chamando o construtor da classe UserAccount")
         this.cpf = cpf;
         this.name = name;
         this.age = age;
+        this.transactions = transactions
     }
 }
 
-const maria = new UserAccount("11174352281", "Maria Eduarda", 23)
+const maria = new UserAccount("11174352281", "Maria Eduarda", 23, [])
 // A mensagem "Chamando o construtor da classe User" foi chamada no terminal somente uma vez.
 
 // letra c) Conseguimos ter acesso às propriedades privadas através do método Getters. 
@@ -47,7 +49,7 @@ class Transaction2 {
     private date: string
 
     constructor(description: string, value: number, date: string) {
-            this.description = description,
+        this.description = description,
             this.value = value,
             this.date = date
     }
@@ -63,16 +65,12 @@ class Transaction2 {
     public getDate() {
         return this.date
     }
-
-// adicionando instância à instância já criada de user Account
-    public juntandoInstancias() {
-        UserAccount: mariaTransaction;
-    }
 }
 
 // nova instância.
 const mariaTransaction = new Transaction2("Pix enviado", 200, "20/06/2022")
 
+const mariaUser = new UserAccount("11174352281", "Maria Eduarda", 23, [mariaTransaction])
 
 // EXERCÍCIO 3
 
