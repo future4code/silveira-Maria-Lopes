@@ -13,7 +13,7 @@ export const orderProduct = async (req: Request, res: Response): Promise<void> =
         }
 
         if (order.toUpperCase() !== "ASC" && order.toUpperCase() !== "DESC") {
-            order = "DESC"
+            order = "%"
         }
 
         const result = await connection("labecommerce_products")
