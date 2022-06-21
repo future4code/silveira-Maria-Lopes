@@ -271,3 +271,83 @@ class IndustrialClinet extends Industry implements Client {
 // a) industrialClient deve ser filha da classe Industry.
 // b) implementa o client.
 // c) somente o getters pois não utilizaremos/editaremos essas informações para nada mais. 
+
+
+// DESAFIOS - HERANÇA
+// 6)
+class Employee extends User {
+    protected admissionDate: string;
+    protected baseSalary: number;
+
+    constructor(
+        id: string,
+        email: string,
+        name: string,
+        password: string,
+        admissionDate: string,
+        baseSalary: number
+    ) {
+        super(id, email, name, password);
+        this.admissionDate = admissionDate;
+        this.baseSalary = baseSalary;
+    }
+
+    public getAdmissionDate(): string {
+        return this.admissionDate
+    }
+
+    public getBaseSalary(): number {
+        return this.baseSalary
+    }
+
+    public calculateTotalSalary(): number {
+        return this.baseSalary + 400
+    }
+}
+const instanciaEmployee = new Employee("2", "ale@hotmail.com", "Alessandra", "ale123", "1999-10-06", 5000)
+
+// a) a mensagem 'chamando o construtor da classe user' foi impressa no terminal uma vez,
+// que está na classe pai.
+// b) dei um exemplo abaixo de um dado que é possível ser impresso. A única propriedade que não é possível imprimir
+// no terminal é o password, que é privada e não foi feito nada para que possa ser acessada.
+console.log(instanciaEmployee.getEmail())
+
+// 7) Feito na linha 303.
+console.log(instanciaEmployee.calculateTotalSalary())
+
+// 8)
+class Seller extends Employee {
+    private salesQuantity: number = 0
+
+    public getSalesQuantity(): number {
+        return this.salesQuantity
+    }
+
+    public setSalesQuantity(quantity: number): void {
+        this.salesQuantity = quantity;
+    }
+    public calculateTotalSalary(): number {
+        return this.baseSalary + 400 + this.salesQuantity * 5;
+    }
+}
+// as propriedades protected que foram criadas na classe pai(Employee), podem ser acessadas na classe filha.
+// quando não colocamos construtor na classe filha, ela herda o construtor da classe Pai.
+const instanciaSeller = new Seller("2", "ale@hotmail.com", "Alessandra", "ale123", "1999-10-06", 5000)
+// a) Tive que passar 6 argumentos para esse construtor, pois ele herdou o construtor da classe Pai.
+// b) 
+console.log(instanciaSeller.calculateTotalSalary())
+console.log(instanciaSeller.getAdmissionDate())
+console.log(instanciaSeller.getBaseSalary())
+console.log(instanciaSeller.getEmail())
+console.log(instanciaSeller.getId())
+console.log(instanciaSeller.getName())
+console.log(instanciaSeller.introduceYourself())
+
+// 9) Foi criado na linha 319.
+// a) É possível imprimir no terminal pois a tornei pública.
+
+// 10) 
+const newSeller = new Seller("3", "luian@hotmail.com", "Luian", "luian123", "2001-10-06", 2000)
+console.log(newSeller.calculateTotalSalary())
+
+// 11) 
