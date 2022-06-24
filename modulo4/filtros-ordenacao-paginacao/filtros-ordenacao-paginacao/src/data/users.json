@@ -1,0 +1,140 @@
+[
+	{
+		"id" : "0a4147ad-30dd-4547-9e35-94e655d02f13",
+		"name" : "Jonas",
+		"email" : "Jonas@email.com",
+		"password" : "$2a$12$pcwQNPILKqJPtBOe4eHfeOc6L2kEs6n57IMiToJ6WJrIEj5zRz6wa"
+	},
+	{
+		"id" : "4d3bc362-f838-43d6-9e06-5f3883873f74",
+		"name" : "charles",
+		"email" : "charles@email.com",
+		"password" : "$2a$12$p5LXq11CjvbSB9XYfoGUn./nRGFiYR7Y.zEuw1i7JUUCXn.5S3Qxq"
+	},
+	{
+		"id" : "5a7e728a-3afa-47d6-850d-0fba7786e6a7",
+		"name" : "Bernardo",
+		"email" : "bernardo@gmail.com",
+		"password" : "$2a$12$sblz4a9FgJ6T59pWVaUL6uxHkjumzxuc0mlEVqF6HN54RyTYAosn6"
+	},
+	{
+		"id" : "62f8edd5-c522-44c3-92a7-bd3b6303465d",
+		"name" : "Michael Scott",
+		"email" : "michael@email.com",
+		"password" : "$2a$12$zeA2ptIrGbR5UYjbp.nbAuHgXDnDxV9EqL6TTnGHVcv/vYy3B0rEa"
+	},
+	{
+		"id" : "68a4897f-0126-4f8f-ad68-5ba3eaf4690d",
+		"name" : "Cintia",
+		"email" : "cintia@gmail.com",
+		"password" : "$2a$12$QDQI6tpQZCdHMWwoj6fni.oxX5tcy7yJY5phkuxz5Opkoa5ocAoOq"
+	},
+	{
+		"id" : "6a84572b-357b-495c-80ad-1f777ed1e7a1",
+		"name" : "Matt",
+		"email" : "matt@gmail.com",
+		"password" : "$2a$12$6gVd0B4PgxxVSuMmS6ueSueO/uwbWK43CxYzK4bhFszvz5cOJXXVe"
+	},
+	{
+		"id" : "6c0ce3a2-8343-4d1b-b00f-448246e963ba",
+		"name" : "bob",
+		"email" : "bob@email.com",
+		"password" : "$2a$12$ASVEGRDUlG8kSP6BLPbC4.4hCUMOl7mMg3r4kVeOMpDrqocwMAVY6"
+	},
+	{
+		"id" : "93fbbfc4-9bb5-4881-9ecb-ddd47b12de98",
+		"name" : "Darvas",
+		"email" : "darvas@gmail.com",
+		"password" : "$2a$12$U1eCdmqh7F6qckBRKjNbHOrbvlScYUIb7ziibJPV60iEM2IydbLBa"
+	},
+{
+		"id" : "c4eaac6c-584a-40d8-be06-3e2389ddbeda",
+		"name" : "Amanda",
+		"email" : "amandarangel@gmail.com",
+		"password" : "$2a$12$u3jpSN051rnXowYeEbBU4eIcEoY1wAnfTtAgDmxadCO31rq5qORay"
+	},
+	{
+		"id" : "f5037664-eefc-48db-ae20-9388373ca57c",
+		"name" : "Joaozinho",
+		"email" : "joaozinho@gmail.com",
+		"password" : "$2a$12$kSSnEeb28xaQmci.hohZGe/ZdxBoQa5GJZXmJ/X./7RLsOUiofICC"
+	},
+	{
+		"id" : "9a70a143-6a71-4701-b691-db96686adc47",
+		"name" : "Chijo",
+		"email" : "chijo@gmail.com",
+		"password" : "$2a$12$wru6.0NoN1SYPKxbD67AyOvK526mNMa/R6ZGLFMLb8Gm6ENkvkNDa"
+	},
+	{
+		"id" : "0c941b8e-0a4e-455e-9d8b-bb4ab69ca4ad",
+		"name" : "Amandinha",
+		"email" : "amanda@gmail",
+		"password" : "$2a$12$OEhAS.4EfrtBXlqP0Xt8UugT63NowrSknA4yBI/C2reb2DLm5GqMO"
+	},
+{
+		"id" : "2bdbb834-c494-49fd-8970-58f3edd903ca",
+		"name" : "daniel",
+		"email" : "daniellemesteste1@hotmail.com",
+		"password" : "$2a$12$BsuBsNB/V9LlY891rnJi3uDIQdndf3jahnL6G/KXyjDRzu/SDL4dO"
+	},
+	{
+		"id" : "c2e885f7-281a-4f49-89fe-9f6d50b8ea6e",
+		"name" : "Severo",
+		"email" : "severo@gmail.com",
+		"password" : "$2a$12$SFW2lh6mitErocrQ9H7ghuSoRUc3cyk./hQPvi8SF3gpd.kSUlKZe"
+	},
+{
+		"id" : "b73ba66c-d8e5-4b69-9870-e5a953b59381",
+		"name" : "Edmilson",
+		"email" : "Edmilsonf.o3@gmail.com",
+		"password" : "$2a$12$xgiRFWS.gHKyQ66qrXS2MeGIfSaBfCo7YScnxh9zYfmq3DmOEyWsS"
+	},
+	{
+		"id" : "2b33f12a-6478-4afb-8f12-483b44aa6eb9",
+		"name" : "mateus",
+		"email" : "mateus@gmail.com",
+		"password" : "$2a$12$Bb.Nfq7gfmgPMa56u5tZQem2ohpE1EZP17EeGF.6XfgO.fU2OoLhO"
+	},
+	{
+		"id" : "1b845778-e2c5-4f8c-8baf-c68557991db4",
+		"name" : "astrodev",
+		"email" : "astrodev@gmail.com.br",
+		"password" : "$2a$12$xdlmcH5yx06LVFyJX7hIWOWOOzrIc40cipJwa5VCWgEmHORE3Fhui"
+	},
+	{
+		"id" : "57bce8b9-b521-47f1-a3ff-01cbafa5988f",
+		"name" : "teste3",
+		"email" : "teste3@teste.com.br",
+		"password" : "$2a$12$zeDZhNJT6EpfcBm1xJTuEOS3I2gJaVqhotI1h7tbd76jw0Ci8SRNC"
+	},
+	{
+		"id" : "181eae92-1f08-4dc5-9cdf-040537f90752",
+		"name" : "dreko",
+		"email" : "dreko@email.com",
+		"password" : "$2a$12$UnXB5CGa1F4SEuXrRTLnnup0JPl1iezGwggdpx2kyMpZjsVBheQGW"
+	},
+	{
+		"id" : "baceb5f5-3914-45e4-a1f6-43964f3c8350",
+		"name" : "vivian",
+		"email" : "vivian@gmail.com",
+		"password" : "$2a$12$44HO5FZu7NCtpm4KA793X.VE7MtlHbEeD1ZND.JE2d8VNhe9FN6pO"
+	},
+	{
+		"id" : "07b03a14-3b8f-402d-9de0-ad8fd59b224d",
+		"name" : "dasjidahadu",
+		"email" : "dasdas@dasda.com",
+		"password" : "$2a$12$GZLMHpMBsle8kEy5bxfQ9eyZ/Rvdf/d.9aSe50ii.jVN3lL9Q/WG6"
+	},
+	{
+		"id" : "2eaea984-2d11-4a95-8ca3-e4da372db8eb",
+		"name" : "Maria",
+		"email" : "maria@gmail.com",
+		"password" : "$2a$12$86CNRiZaih/DG93cdcVA/OCcISYia/h05AJ1YEV93mTO5bzxq7eJm"
+	},
+	{
+		"id" : "5f43cfb5-f15d-4baf-a631-f92b32be3859",
+		"name" : "Ana",
+		"email" : "ana@gmail.com",
+		"password" : "$2a$12$wJ1D0EtT0m5CEzwSW4akYOVYoaC.kA8VOSutMMij1vrNhxfDVZxQq"
+	}
+]
