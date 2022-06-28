@@ -1,0 +1,25 @@
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+   "email": "mariane@hotmail.com" ,
+   "password": "mariane123",
+   "role": "ADMIN" 
+}
+
+###
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+   "email": "mariane@hotmail.com" ,
+   "password": "mariane123"
+}
+
+###
+
+GET http://localhost:3003/user/profile
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhjNWVkY2YxLTVjNzUtNDFjYi05ODk2LTg4MTI5YWUxMTA0MCIsImlhdCI6MTY1NjQ0MTQ4MCwiZXhwIjoxNjU2NDQxNjAwfQ.800upAgOQsdloGicJamTPch6-V3PjwfdDozWdYagEEY"
