@@ -85,7 +85,7 @@ O usuário tem a opção de deletar uma conta. Para isso, é necessário passar 
 ```
 DB_HOST = seu_endereço_host
 DB_USER = seu_usuário
-DB_PASSWORD = sua_sehna
+DB_PASSWORD = sua_senha
 DB_SCHEMA = seu_banco_de_dados
 JWT_KEY = chave_jwt
 ```
