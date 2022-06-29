@@ -86,8 +86,8 @@ O usuário tem a opção de deletar uma conta. Para isso, é necessário passar 
 DB_HOST = seu_endereço_host
 DB_USER = seu_usuário
 DB_PASSWORD = sua_sehna
-DB_DATABASE_NAME = seu_banco_de_dados
-JWT_KEY = chave_para_jwt
+DB_SCHEMA = seu_banco_de_dados
+JWT_KEY = chave_jwt
 ```
 - Por fim, execute a aplicação rodando o comando npm start, ou npm run start para deixar o projeto rodando o tempo todo.
 OBSERVAÇÃO: você pode testar os endpoints em um arquivo request.rest ou através de um cliente HTTP (ex: postman), utilizando o endereço localhost:3003 como URL padrão para as requisições. Para obter informações de cada endpoint, consulte a documentação.
