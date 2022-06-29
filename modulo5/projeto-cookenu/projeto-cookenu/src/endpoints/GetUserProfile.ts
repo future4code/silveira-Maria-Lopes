@@ -1,28 +1,25 @@
 import { Request, Response } from "express";
 import Authenticator from "../services/Authenticator";
-import { generateId } from "../services/IdGenerator";
-import connection from "../data/connection";
-import { authenticationData } from "../types";
-import { HashManager } from "../services/HashManager";
-import { getUserById } from "../data/getUserById";
+import { UserDataBase } from "../data/UserDataBase";
 
-export default async function getAnotherUserProfile(req: Request, res: Response): Promise<void> {
+
+export default async function getOwnProfile(req: Request, res: Response): Promise<void> {
     try {
-        const id = req.params.id
-        const token = req.headers.authorization as string;
-        
-        const authenticator = new Authenticator()
-        const authenticationData = authenticator.getData(token);
+        const token = new Authenticator().getData(req.headers.authorization as string);
+        // criando uma nova instância de Authenticator para acessar o método getData. 
+        // receber token por headers Authorization.
 
-        const [user] = await getUserById(authenticationData.id);
-        
+        const userData = await new UserDataBase().getProfile(token.id)
+        // criando uma nova instância de UserDataBase para acessar o método getProfile que está 
+        // dentro da instância. 
+
         res.status(200).send({
-            id: user.id,
-            name: user.name,
-            email: user.email
+            id: userData.id,
+            name: userData.name,
+            email: userData.email,
+            role: userData.role
         });
-
-
+        // formato que sairá a resposta da requisição.
     } catch (error: any) {
         res.status(400).send({
             message: error.message,

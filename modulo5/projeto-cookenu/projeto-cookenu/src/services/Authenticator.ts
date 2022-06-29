@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import { authenticationData } from "../types";
 
-const expiresIn = "10min"
+const expiresIn = "50min"
 
 export default class Authenticator {
     generateToken = (payload: authenticationData) => {
