@@ -6,6 +6,10 @@
 
 ### Projeto desenvolvido em junho de 2022, por Maria Eduarda Lopes.
 
+### Documentação da API:
+https://documenter.getpostman.com/view/20352466/UzBvHPL2
+<br>
+
 ## Sobre o projeto: 
 Desenvolvido e inspirado em uma rede social, na qual os usuários podem dividir informações sobre receitas. Possui todas as funcionalidades mais comuns que vemos diariamente, tais como:
 

@@ -23,6 +23,7 @@ export default async function followUser(req: Request, res: Response): Promise<v
         const followed = await new UserDataBase().getUserById(userToFollowId)
         // acessando no banco de dados a função de pegar usuário por ID. 
         // dessa forma, acesso o ID do usuário que seguirá(por token), e o ID do usuário que será seguido(será passado por body).
+        // verificando se existe os ids no banco de dados. 
 
         if (!follower || !followed) {
             throw new Error('User not found!')
