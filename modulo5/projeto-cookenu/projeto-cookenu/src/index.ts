@@ -2,7 +2,7 @@ import app from "./app"
 import createUser from "./endpoints/SignUp"
 import login from "./endpoints/Login"
 import getOwnProfile from "./endpoints/GetUserProfile"
-import getUserProfile from "./endpoints/GetUserProfile"
+import getAnotherUserProfile from "./endpoints/GetAnotherUserById"
 import registerRecipe from "./endpoints/RegisterRecipe"
 import getRecipe from "./endpoints/GetRecipeById"
 import followUser from "./endpoints/FollowUser"
@@ -20,7 +20,7 @@ app.post("/login", login)
 // // Pegar próprio perfil.
 app.get("/user/profile", getOwnProfile)
 // // Pegar perfil de algum usuário por ID no path params e token no Authorization.
-app.get("/user/:id", getUserProfile)
+app.get("/user/:id", getAnotherUserProfile)
 // Deletar usuário.
 app.delete("/deleteuser/:id", deleteUser)
 

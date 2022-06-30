@@ -3,7 +3,7 @@ import { UserDataBase } from "../data/UserDataBase";
 import Authenticator from "../services/Authenticator";
 
 
-export default async function getUserProfile(req: Request, res: Response): Promise<void> {
+export default async function getAnotherUserProfile(req: Request, res: Response): Promise<void> {
     try {
         const idParams = req.params.id
         const token = new Authenticator().getData(req.headers.authorization as string);
