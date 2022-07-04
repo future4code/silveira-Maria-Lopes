@@ -1,0 +1,31 @@
+POST http://localhost:3003/signup
+Content-Type: application/json
+
+{
+    "email": "eduarda@hotmail.com",
+    "name": "Eduarda",
+    "password": "eduarda123",
+    "role": "ADMIN"
+}
+
+###
+
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+    "email": "eduarda@hotmail.com",
+    "password": "eduarda123"
+}
+
+###
+
+GET http://localhost:3003/all
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5NTE5Y2Y4LTFmYzYtNGMxYi04MzRiLTk0MjIzZDQ5ZjI1YiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1Njk2MTc3MSwiZXhwIjoxNjU2OTY0NzcxfQ.wWUAOmIWgQ4rzsQ3WOXMp1Y2OhFlh0c6gdzzvvnZsFU
+
+### 
+
+DELETE http://localhost:3003/deleteuser/4f304401-bc9f-483e-85ed-59f0035f077a
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjYzQyMmE1LWU0OWQtNDBmOC05ZThlLTQ3OWQ3ZDUzOGVjZiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1Njk2MjM0MiwiZXhwIjoxNjU2OTY1MzQyfQ.3Uzzz4eoX9ePDPI5AOK2XeKjTxVRpAHQ2xKaX2WxVs4
