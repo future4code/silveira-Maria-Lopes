@@ -1,4 +1,4 @@
-import { FriendshipConnectionDataBase } from "../services/data/FriendshipConnectionDataBase";
+import { FriendshipConnectionDataBase } from "../data/FriendshipConnectionDataBase";
 import { friends } from "../types/types";
 
 

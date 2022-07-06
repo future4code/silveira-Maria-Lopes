@@ -31,6 +31,14 @@ export class PostDataBase extends BaseDatabase {
         return result[0]
     }
 
+    public async Pagination(offset: number) {
+        let size = 2
 
-
+        const result = await BaseDatabase.connection()
+            .select("*")
+            .from(PostDataBase.TABLE_NAME)
+            .limit(size)
+            .offset(offset)
+        return result
+    }
 }

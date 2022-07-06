@@ -3,7 +3,7 @@ import { authenticationData } from "../types/types";
 import dotenv from 'dotenv'
 
 dotenv.config()
-const expiresIn = "50min"
+const expiresIn = "5h"
 
 export default class Authenticator {
     generateToken = (payload: authenticationData) => {

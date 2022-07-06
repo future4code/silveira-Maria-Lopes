@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { CommentBusiness } from "../../business/CommentsBusiness";
-import Authenticator from "../authenticator";
+import { CommentBusiness } from "../business/CommentsBusiness";
+import Authenticator from "../services/authenticator";
 
 
 export class CommentController {

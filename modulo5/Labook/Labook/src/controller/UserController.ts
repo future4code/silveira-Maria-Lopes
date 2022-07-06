@@ -1,6 +1,6 @@
-import { UserBusiness } from '../../business/UserBusiness';
+import { UserBusiness } from '../business/UserBusiness';
 import { Request, Response } from 'express'
-import { InputUser } from "../../types/types";
+import { InputUser } from "../types/types";
 
 
 

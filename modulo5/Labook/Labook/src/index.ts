@@ -1,9 +1,9 @@
-import app from "./services/controller/app";
-import { CommentController } from "./services/controller/CommentsController";
-import { FriendshipController } from "./services/controller/FriendshipController";
-import { LikeController } from "./services/controller/LikeController";
-import { PostController } from "./services/controller/PostController";
-import { UserController } from "./services/controller/UserController";
+import app from "./controller/app";
+import { CommentController } from "./controller/CommentsController";
+import { FriendshipController } from "./controller/FriendshipController";
+import { LikeController } from "./controller/LikeController";
+import { PostController } from "./controller/PostController";
+import { UserController } from "./controller/UserController";
 
 const newUserController = new UserController()
 const newPostController = new PostController()
@@ -24,7 +24,7 @@ app.get("/getpost/:id", newPostController.getPost)
 // Fazendo amizade.
 app.post("/friendship", newFriendshipController.createFriendship)
 // Desfazendo amizade.
-app.post("/unfriend", newFriendshipController.unfriend)
+app.delete("/unfriend", newFriendshipController.unfriend)
 
 // Ver feed.
 app.get("/feed", newPostController.getFeed)
@@ -34,7 +34,7 @@ app.get("/feedtype", newPostController.getFeedByType)
 // Curtir post.
 app.post("/like", newLikeController.likePost)
 // Descurtir post.
-app.post("/deslike", newLikeController.unlikePost)
+app.delete("/deslike", newLikeController.unlikePost)
 // Comentar post.
 app.post("/comments", newCommentsController.commentPost)
 // Paginação.

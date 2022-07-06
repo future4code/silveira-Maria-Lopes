@@ -1,7 +1,7 @@
 import { generateId } from "../services/idGenerator";
 import { InputPost } from "../types/types";
-import { PostDataBase } from "../services/data/PostDataBase";
-import { UserDataBase } from "../services/data/UserDataBase";
+import { PostDataBase } from "../data/PostDataBase";
+import { UserDataBase } from "../data/UserDataBase";
 
 
 export class PostBusiness {
@@ -31,10 +31,20 @@ export class PostBusiness {
         const feed = await new UserDataBase().getFeed(id)
 
         const filterFeed = feed.filter((post) => {
-           return post.type === type
+            return post.type === type
         })
         return filterFeed
-      
     }
 
+    async pagination(page: number) {
+        let size = 2
+        let offset = size * (page - 1)
+
+        if (page < 1 || isNaN(page)) {
+            page = 1
+        }
+
+        const pages = await new PostDataBase().Pagination(offset)
+        return pages
+    }
 }

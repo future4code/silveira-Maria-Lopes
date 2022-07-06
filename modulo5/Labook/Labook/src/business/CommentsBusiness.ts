@@ -1,5 +1,5 @@
 import { generateId } from "../services/idGenerator";
-import { CommentsDataBase } from "../services/data/CommentsDataBase";
+import { CommentsDataBase } from "../data/CommentsDataBase";
 
 export class CommentBusiness {
 

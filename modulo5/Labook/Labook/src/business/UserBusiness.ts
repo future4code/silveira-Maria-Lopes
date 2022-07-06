@@ -1,4 +1,4 @@
-import { UserDataBase } from "../services/data/UserDataBase";
+import { UserDataBase } from "../data/UserDataBase";
 import Authenticator from "../services/authenticator";
 import { HashManager } from "../services/hashManager";
 import { generateId } from "../services/idGenerator";

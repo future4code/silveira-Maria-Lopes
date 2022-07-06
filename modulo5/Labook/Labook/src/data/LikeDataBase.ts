@@ -5,7 +5,7 @@ export class LikeDataBase extends BaseDatabase {
 
     async verifyLike(user_id: string, post_id: string) {
         const result = await LikeDataBase.connection.raw(`
-        SELECT COUNT(*) as count 
+        SELECT *
         FROM labook_like
         WHERE user_id = "${user_id}" AND post_id = "${post_id}"
         `)

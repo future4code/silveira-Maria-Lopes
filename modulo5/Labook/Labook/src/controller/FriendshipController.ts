@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import { PostBusiness } from '../../business/PostBusiness';
+import { PostBusiness } from '../business/PostBusiness';
 import { FriendshipConnectionDataBase } from '../data/FriendshipConnectionDataBase';
 import { PostDataBase } from '../data/PostDataBase';
 import { UserDataBase } from '../data/UserDataBase';
-import Authenticator from '../authenticator';
+import Authenticator from '../services/authenticator';
 
 
 

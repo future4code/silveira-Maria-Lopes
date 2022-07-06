@@ -1,4 +1,4 @@
-import { LikeDataBase } from "../services/data/LikeDataBase";
+import { LikeDataBase } from "../data/LikeDataBase";
 
 
 

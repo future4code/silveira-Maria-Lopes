@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
-import { PostBusiness } from '../../business/PostBusiness';
+import { PostBusiness } from '../business/PostBusiness';
 import { PostDataBase } from '../data/PostDataBase';
 import { UserDataBase } from '../data/UserDataBase';
-import Authenticator from '../authenticator';
+import Authenticator from '../services/authenticator';
 
 
 
@@ -67,13 +67,13 @@ export class PostController {
     async getFeed(req: Request, res: Response) {
         try {
             const token = new Authenticator().getData(req.headers.authorization as string);
-      
+
             const user = await new UserDataBase().getUserById(token.id)
 
             if (!user) {
                 throw new Error("Make sure you are logged in before search feed!")
             }
-        
+
             const feed = await new UserDataBase().getFeed(user.id)
             res.status(200).send({
                 posts: feed
@@ -87,7 +87,7 @@ export class PostController {
         try {
             const token = req.headers.authorization as string
             const type = req.query.type as string
-          
+
             const data = new Authenticator().getData(token)
 
             const feed = await new PostBusiness().getFeedByType(type, data.id)
@@ -103,25 +103,19 @@ export class PostController {
 
     async pagination(req: Request, res: Response) {
         try {
+            const token = new Authenticator().getData(req.headers.authorization as string);
+            // token para logar.
             let page = Number(req.query.page)
-            let size = 5
-            let offset = size * (page - 1)
-
-            if (page < 1 || isNaN(page)) {
-                page = 1
+            // passando por query o número da página que quero exibir.
+            if (!token) {
+                throw new Error()
             }
-            // verificação para garantir que a minha página padrão seja 1, caso o usuário
-            // digitar um valor inválido, ou menor que 1.
-
-            // const result = await new PostDataBase().
-            //     .limit(size)
-            //     .offset(offset)
-
-            // res.status(200).send({ result })
+            // não é possivel buscar sem estar logado.
+            const result = await new PostBusiness().pagination(page)
+            // nova instância de postbusiness pra acessar o método pagination.
+            res.status(200).send({ result })
         } catch (error: any) {
             res.status(400).send({ error: error.message });
         }
     }
-
-
 }
