@@ -66,9 +66,14 @@ export class PostController {
 
     async getFeed(req: Request, res: Response) {
         try {
-            const token = new Authenticator().getData(req.headers.authorization as string);
+            const token = req.headers.authorization as string
+        
+            if (!token) {
+                throw new Error("Make sure you are logged in before search feed!")
+            }
 
-            const user = await new UserDataBase().getUserById(token.id)
+            const data = new Authenticator().getData(token);
+            const user = await new UserDataBase().getUserById(data.id)
 
             if (!user) {
                 throw new Error("Make sure you are logged in before search feed!")
@@ -88,6 +93,10 @@ export class PostController {
             const token = req.headers.authorization as string
             const type = req.query.type as string
 
+            if (!token) {
+                throw new Error("Make sure you are logged in before search feed!")
+            }
+
             const data = new Authenticator().getData(token)
 
             const feed = await new PostBusiness().getFeedByType(type, data.id)
@@ -103,13 +112,21 @@ export class PostController {
 
     async pagination(req: Request, res: Response) {
         try {
-            const token = new Authenticator().getData(req.headers.authorization as string);
+            const token = req.headers.authorization as string
             // token para logar.
+            if (!token) {
+                throw new Error("Make sure you are logged in before search feed!")
+            }
+
             let page = Number(req.query.page)
             // passando por query o número da página que quero exibir.
-            if (!token) {
-                throw new Error()
+            const data = new Authenticator().getData(token);
+            const user = await new UserDataBase().getUserById(data.id)
+
+            if (!user) {
+                throw new Error("Make sure you are logged in before search feed!")
             }
+
             // não é possivel buscar sem estar logado.
             const result = await new PostBusiness().pagination(page)
             // nova instância de postbusiness pra acessar o método pagination.
