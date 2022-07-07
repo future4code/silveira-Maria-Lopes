@@ -4,6 +4,10 @@ import { friends } from "../types/types";
 
 
 export class FriendshipBusiness {
+    
+    async verifyFriendship(follower_id: string, followed_id: string) {
+        return await new FriendshipConnectionDataBase().verifyFriendship(follower_id, followed_id)
+    }
 
     async createFriendship(friends: friends) {
         try {

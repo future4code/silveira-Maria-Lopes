@@ -22,7 +22,6 @@ export class LikeController {
             const user_id = new Authenticator().getData(token).id
             // acessando o getData(para verificar o token).
             const verifyLike = await new LikeBusiness().verifyLike(user_id, postId)
-            console.log(verifyLike)
             // verificando o like.
             if (verifyLike.length > 0) {
                 throw new Error("You can't like this post again!")

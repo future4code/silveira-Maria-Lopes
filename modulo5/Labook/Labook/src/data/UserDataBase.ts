@@ -32,7 +32,6 @@ export class UserDataBase extends BaseDatabase {
             .select("*")
             .from(UserDataBase.TABLE_NAME)
             .where({ id })
-            console.log(result[0])
         return result[0]
     }
 

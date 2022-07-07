@@ -7,7 +7,7 @@
 ### Projeto desenvolvido em julho de 2022, por Maria Eduarda Lopes.
 
 ### Documentação da API:
-
+https://documenter.getpostman.com/view/20352466/UzJLNwN8
 <br>
 
 ## Sobre o projeto: 

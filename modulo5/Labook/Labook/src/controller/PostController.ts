@@ -46,16 +46,17 @@ export class PostController {
             // criando uma nova instância de Authenticator para acessar o método getData que está dentro dele.
 
             const user = await new UserDataBase().getUserById(token.id)
-
+            // pegando o usuário por id.
             if (!user) {
                 throw new Error("Make sure you are logged in before search posts!")
             }
-
+            // é necessário estar logado para buscar posts.
             if (!postId) {
                 throw new Error("Please, enter the id of the post you want to search!")
             }
-
+            // é necessário passar o ID de um post por params para fazer a busca.
             const post = await new PostDataBase().getPostById(postId)
+            // criando uma nova instância de PostDataBase e acessando o método getPostById.
             res.status(201).send({
                 post
             })
@@ -67,19 +68,21 @@ export class PostController {
     async getFeed(req: Request, res: Response) {
         try {
             const token = req.headers.authorization as string
-        
+            // token para logar.
             if (!token) {
                 throw new Error("Make sure you are logged in before search feed!")
             }
-
+            // é necessário estar logado para acessar o feed de posts.
             const data = new Authenticator().getData(token);
+            // conferindo o token.
             const user = await new UserDataBase().getUserById(data.id)
-
+            // criando uma instância de UserDataBase e acessando o método getUserById.
             if (!user) {
                 throw new Error("Make sure you are logged in before search feed!")
             }
-
+            // é necessário estar logado para acessar o feed de posts.
             const feed = await new UserDataBase().getFeed(user.id)
+            // criando uma instância de UserDataBase e acessando o método getFeed(que será o feed de posts de posts criados pelos usuários que ele segue).
             res.status(200).send({
                 posts: feed
             })
@@ -91,16 +94,17 @@ export class PostController {
     async getFeedByType(req: Request, res: Response) {
         try {
             const token = req.headers.authorization as string
+            // token para logar.
             const type = req.query.type as string
-
+            // passando o tipo de post que quero filtrar/receber no meu feed.
             if (!token) {
                 throw new Error("Make sure you are logged in before search feed!")
             }
-
+            // é necessário passar o token para acessar o feed.
             const data = new Authenticator().getData(token)
-
+            // conferindo o token.
             const feed = await new PostBusiness().getFeedByType(type, data.id)
-
+            // criando uma nova instância de PostBusiness e acessando o método getFeedByType.
             res.status(200).send({
                 feed
             })
