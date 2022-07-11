@@ -1,6 +1,8 @@
 import knex from 'knex'
 import { config } from 'dotenv'
 import { User } from "./types/types"
+import app from './app'
+import { Request, Response } from 'express'
 
 config()
 
@@ -68,8 +70,8 @@ interface Casino {
 
 // saídas
 interface ResultItem {
-    allowed: any[];
-    unallowed: any[]
+    allowed: string[];
+    unallowed: string[]
 }
 
 interface Result {
@@ -101,28 +103,20 @@ export function verifyAge(casino: Casino, users: User2[]): Result {
 
     return {
         brazilians: {
-            allowed: allowed.filter((user) => {
-                user.nacionality === NACIONALITY.BRAZILIAN
-            }).map((user) => {
-                user.name
-            }),
-            unallowed: unallowed.filter((user) => {
-                user.nacionality === NACIONALITY.BRAZILIAN
-            }).map((user) => {
-                user.name
-            })
+            allowed: allowed
+                .filter((user) => user.nacionality === NACIONALITY.BRAZILIAN)
+                .map((u) => u.name),
+            unallowed: unallowed
+                .filter((user) => user.nacionality === NACIONALITY.BRAZILIAN)
+                .map((u) => u.name),
         },
         americans: {
-            allowed: allowed.filter((user) => {
-                user.nacionality === NACIONALITY.AMERICAN
-            }).map((user) => {
-                user.name
-            }),
-            unallowed: unallowed.filter((user) => {
-                user.nacionality === NACIONALITY.AMERICAN
-            }).map((user) => {
-                user.name
-            })
-        }
+            allowed: allowed
+                .filter((user) => user.nacionality === NACIONALITY.AMERICAN)
+                .map((u) => u.name),
+            unallowed: unallowed
+                .filter((user) => user.nacionality === NACIONALITY.AMERICAN)
+                .map((u) => u.name),
+        },
     }
 }
