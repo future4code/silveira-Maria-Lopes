@@ -14,16 +14,35 @@ export const ScreenContainer = styled.div`
   align-items: center;
   margin-top: 55px;
   width: 100vw;
+  height: 100%;
+  background-color: green;
 `;
 
 export const InputsContainer = styled.div`
 display: flex;
-flex-direction: column;
-max-width: 450px;
+max-width: 250px;
 align-items: center;
 margin-bottom: 20px;
 width: 80vw;
+height: 60vh;
 `;
+
+export const Inputs = styled.input`
+/* box-sizing: border-box 2px solid black; */
+border-radius: 20px;
+display: flex;
+align-items: center;
+align-self: center;
+justify-content: center;
+line-height: 2.5;
+width: 240px;
+`
+
+export const SignUpButton = styled.button`
+border-radius: 20px;
+display: flex;
+justify-self: center;
+`
 
 export default function SignUpPage() {
     const navigate = useNavigate();
@@ -65,7 +84,7 @@ export default function SignUpPage() {
 
             <InputsContainer>
                 <form onSubmit={onSubmitSignup}>
-                    <input
+                    <Inputs
                         placeholder="Name"
                         name="name"
                         value={form.name}
@@ -73,7 +92,7 @@ export default function SignUpPage() {
                         required
                     />
 
-                    <input
+                    <Inputs
                         placeholder="Email"
                         name="email"
                         value={form.email}
@@ -81,7 +100,7 @@ export default function SignUpPage() {
                         required
                     />
 
-                    <input
+                    <Inputs
                         placeholder="Password"
                         name="password"
                         value={form.password}
@@ -90,7 +109,7 @@ export default function SignUpPage() {
                         minLength="8"
                     />
 
-                    <input
+                    <Inputs
                         placeholder="Confirm password"
                         name="password"
                         value={confirmPassword}
@@ -99,7 +118,7 @@ export default function SignUpPage() {
                         minLength="8"
                     />
 
-                    <button type='submit'>Cadastrar</button>
+                    <SignUpButton type='submit'>Cadastrar</SignUpButton>
 
                 </form>
             </InputsContainer>
