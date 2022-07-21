@@ -24,19 +24,44 @@ display: flex;
 justify-content: center;
 align-items: center;
 align-self: center;
-
 `
 
-export default function cardPizzas(props) {
+const IMG = styled.img`
+width: 273px;
+height: 150px;
+`
+
+const H3Button = styled.h2`
+display: flex;
+justify-content: center;
+align-items: center;
+align-self: center;
+cursor: pointer;
+`
+const H3Price = styled.h3`
+font-size: 20px;
+text-align: center;
+`
+
+const Input = styled.input`
+width: 20px;
+`
+export default function PizzaCard(props) {
+
+  const onChangeInput = (event) => {
+    props.SetQuantity(event.target.value)
+  }
 
   return (
 
     <DivCards>
-      <H3>Pizzas Cards</H3>
-      <P><strong>Name:</strong> {props.name}</P>
-      <P><strong>Price:</strong> {props.price}</P>
-      <img src={props.photo} alt={props.name} />
-      <Button>Realizar o pedido</Button>
+      <H3>{props.Pizza.name}</H3>
+      <IMG src={props.Pizza.photo} alt={props.Pizza.name} />
+      <H3Price><strong>Preço:</strong> {props.Pizza.price}</H3Price>
+      <Button onClick={() => props.makeOrder(props.Pizza.id)}>Realizar o pedido</Button>
+      <button onClick={() => props.ButtonAdd()}>Adicionar</button>
+      <Input value={props.Qtd} onChange={onChangeInput} />
+      <button>Remover</button>
     </DivCards>
 
   )

@@ -3,7 +3,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../services/url";
-import { DivCards, H3, Button } from '../components/pizzaCard'
+import PizzaCard from '../components/PizzaCard'
+import useForm from "../hooks/useForm";
 
 export const DivMain = styled.div`
 display: flex;
@@ -37,9 +38,26 @@ text-align: center;
 export default function MenuPage() {
     const [pizzas, setPizzas] = useState([]);
     const [order, setOrder] = useState([]);
+    const [idPizza, setIdPizza] = useState("")
+    const [qtd, setQtd] = useState(0);
+    // para adicionar a quantidade de pizzas que deseja pedir
 
-    // const navigate = useNavigate();
+    function AddButton() {
+        setQtd(qtd + 1)
+    }
+
+    function RemoveButton() {
+
+    }
+
+
     const token = window.localStorage.getItem("AuthToken");
+
+    const navigate = useNavigate();
+    const logout = () => {
+        localStorage.removeItem("AuthToken");
+        navigate('/')
+    }
 
     const headers = {
         headers: {
@@ -51,7 +69,6 @@ export default function MenuPage() {
         axios
             .get(`${BASE_URL}getallpizzas`, headers)
             .then((res) => {
-                console.log(res.data.pizzas)
                 setPizzas(res.data.pizzas)
             })
             .catch((err) => {
@@ -59,12 +76,18 @@ export default function MenuPage() {
             })
     }
 
-    const makeOrder = () => {
+    const makeOrder = (id) => {
+        const body = {
+            quantity: qtd,
+            user_id: token,
+            pizza_id: id
+        }
+console.log(body)
         axios
-            .post(`${BASE_URL}order`, headers)
+            .post(`${BASE_URL}order`, body, headers)
             .then((res) => {
                 console.log(res.data)
-                // setOrder(res.data)
+                setOrder(res.data)
                 alert("Pedido realizado com sucesso!")
             })
             .catch((err) => {
@@ -79,12 +102,14 @@ export default function MenuPage() {
 
     const mapPizzas = pizzas && pizzas.map((pizza, index) => {
         return (
-            <DivCards key={index}>
-                <H3>{pizza.name}</H3>
-                <IMG src={pizza.photo} alt={pizza.name} />
-                <H3Price>Preço: {pizza.price},00</H3Price>
-                <Button onClick={makeOrder}><H3Button>Realizar pedido</H3Button></Button>
-            </DivCards>
+            <PizzaCard key={index}
+                makeOrder={makeOrder}
+                Pizza={pizza}
+                ButtonAdd={AddButton}
+                SetQuantity={setQtd}
+                Qtd={qtd}
+                SetIdPizza={setIdPizza}
+            />
         )
     })
 
@@ -92,7 +117,9 @@ export default function MenuPage() {
 
     return (
         <DivMain>
+            <button onClick={logout}>Logout</button>
             {mapPizzas}
+
         </DivMain>
     )
 }
