@@ -4,7 +4,6 @@ import axios from 'axios';
 import { BASE_URL } from "../services/url";
 import { useNavigate } from "react-router-dom";
 import { goToMenuPage } from "../router/coordinator";
-import { goToHomePage } from "../router/coordinator";
 import styled from 'styled-components'
 
 
@@ -12,10 +11,14 @@ export const ScreenContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-top: 55px;
-  width: 100vw;
+  width: 50vw;
   height: 100%;
-  background-color: green;
+  margin-left: 480px;
+  background-color:#d9dddc;
+  border-radius: 10px;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 `;
 
 export const InputsContainer = styled.div`
@@ -28,20 +31,24 @@ height: 60vh;
 `;
 
 export const Inputs = styled.input`
-/* box-sizing: border-box 2px solid black; */
-border-radius: 20px;
+border: 2px solid black; 
+border-radius:5px;
 display: flex;
 align-items: center;
 align-self: center;
 justify-content: center;
 line-height: 2.5;
 width: 240px;
+margin-top: 6px;
 `
 
 export const SignUpButton = styled.button`
-border-radius: 20px;
+border-radius: 10px;
 display: flex;
 justify-self: center;
+justify-content: center;
+margin: 0 auto;
+margin-top: 5px;
 `
 
 export default function SignUpPage() {

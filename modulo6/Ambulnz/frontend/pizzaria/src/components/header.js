@@ -11,16 +11,33 @@ height: 10vh;
 background-color: 	#1C1C1C;
 display: flex;
 align-items: center;
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 `
 
 const Button = styled.div`
 display: flex;
-margin-left: 980px;
+margin-left: 150vh;
 justify-content: space-between;
 /* align-items: flex-end; */
 /* border-radius: 20px; */
 gap: 0px 10px;
+
+button {
+    background-color: 	#1C1C1C;
+    color: white;
+    font-size: 15px;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+button:hover {
+       font-size: 20px;
+    }
 `
+
+
 
 
 export default function Header() {

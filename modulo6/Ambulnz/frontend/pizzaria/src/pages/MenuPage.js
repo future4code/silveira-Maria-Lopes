@@ -82,7 +82,7 @@ export default function MenuPage() {
             user_id: token,
             pizza_id: id
         }
-console.log(body)
+
         axios
             .post(`${BASE_URL}order`, body, headers)
             .then((res) => {
