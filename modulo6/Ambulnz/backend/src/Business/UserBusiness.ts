@@ -28,7 +28,7 @@ export class UserBusiness {
             // salvando a senha no banco de dados já criptografada.
 
             const newUserDataBase = new UserDataBase()
-            await newUserDataBase.createUser(id, user.email, user.name, hashPassword);
+            await newUserDataBase.createUser(id, user.name, user.email, hashPassword);
             // inserindo o novo usuário no banco de dados.
             const token = new Authenticator().generateToken({
                 id: id
@@ -49,8 +49,12 @@ export class UserBusiness {
                 password: user.password
             };
 
+            if (!userData) {
+                throw new Error("User not found!")
+            }
+
             const loginUser = await new UserDataBase().login(userData.email);
-            console.log(loginUser)
+
             const hashManager: HashManager = new HashManager()
 
             const compareResult = hashManager.compareHash(

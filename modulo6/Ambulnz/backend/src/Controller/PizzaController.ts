@@ -12,11 +12,12 @@ export class PizzaController {
 
     async createPizzaRequisicao(req: Request, res: Response): Promise<void> {
         try {
-            const { name, price, ingredients } = req.body
+            const { name, price, photo, ingredients } = req.body
 
             const newPizza: inputPizza = {
                 name,
                 price,
+                photo,
                 ingredients
             }
 
@@ -30,26 +31,13 @@ export class PizzaController {
 
     async getAllPizzasReq(req: Request, res: Response) {
         try {
-            const token = req.headers.authorization as string
-            // token para logar.
-            if (!token) {
-                throw new Error("Make sure you are logged in before search feed!")
-            }
-            // é necessário estar logado para acessar o feed de posts.
-            const data = new Authenticator().getData(token);
-            // conferindo o token.
-            const user = await new UserDataBase().getUserById(data.id)
-            // criando uma instância de UserDataBase e acessando o método getUserById.
-            if (!user) {
-                throw new Error("Make sure you are logged in before search feed!")
-            }
-
             const pizzas = await new PizzaDataBase().getAllPizzas()
             res.status(200).send({
                 pizzas: pizzas
             })
 
         } catch (error: any) {
+            console.log(error)
             res.status(400).send({ error: error.message });
         }
     }

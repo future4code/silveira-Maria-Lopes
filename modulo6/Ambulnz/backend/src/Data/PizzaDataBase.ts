@@ -16,11 +16,12 @@ export class PizzaDataBase extends BaseDatabase {
             //     return id
             // }
 
-            await BaseDatabase.connection('pizza')
+            await BaseDatabase.connection('pizzas')
                 .insert({
                     id: pizza.getId(),
                     name: pizza.getName(),
-                    price: pizza.getPrice()
+                    price: pizza.getPrice(),
+                    photo: pizza.getPhoto()
                 })
 
             for (let ingredient of ingredients) {
@@ -32,7 +33,7 @@ export class PizzaDataBase extends BaseDatabase {
                         name: ingredient.name
                     })
 
-                await PizzaDataBase.connection('pizza_connection_ingredients')
+                await PizzaDataBase.connection('pizza_connection_ingredient')
                     .insert({
                         ingredients_id: id,
                         pizza_id: pizza.getId()
@@ -48,7 +49,7 @@ export class PizzaDataBase extends BaseDatabase {
     public async getAllPizzas(): Promise<any> {
         const result = await BaseDatabase.connection()
             .select("*")
-            .from('pizza')
+            .from('pizzas')
         return result
     }
 

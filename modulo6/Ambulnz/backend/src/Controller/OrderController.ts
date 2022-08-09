@@ -1,9 +1,11 @@
+import { OrderBusiness } from './../Business/OrderBusiness';
 import { UserDataBase } from "../Data/UserDataBase";
 import { Order } from "../../Types/OrderTypes"
 import { pizzaIngredientsConnectionDataBase } from "../Data/OrderDataBase"
 import { Request, Response } from "express"
 import Authenticator from "../Services/Authenticator";
 import { generateId } from "../Services/IdGenerator";
+import { PizzaBusiness } from "../Business/PizzaBusiness";
 
 
 
@@ -12,24 +14,16 @@ export class OrderController {
 
     async orderReq(req: Request, res: Response): Promise<void> {
         try {
-            const { quantity, user_id, pizza_id } = req.body
+            const { quantity, pizza_id } = req.body
 
-            const token = new Authenticator().getData(req.headers.authorization as string);
-            const data = await new UserDataBase().getUserById(token.id)
-            // para registrar o pedido, eu preciso passar o id do usuário que está logado.
+            const token = req.headers.authorization as string
 
-            if (!data) {
-                throw new Error("Make sure you are logged in before post something!")
-            }
+            // // const newOrder: Order = {
+            //     id: generateId(),
+            //     quantity
+            // }
 
-            const newOrder: Order = {
-                id: generateId(),
-                quantity,
-                user_id,
-                pizza_id
-            }
-
-            await new pizzaIngredientsConnectionDataBase().order(newOrder.id, newOrder.quantity, newOrder.user_id, newOrder.pizza_id)
+            await new OrderBusiness().makeOrder(quantity, token, pizza_id)
 
             res.status(201).send("Order placed successfully!")
         } catch (error: any) {

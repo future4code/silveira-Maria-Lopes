@@ -5,22 +5,32 @@ import { generateId } from '../Services/IdGenerator';
 import { inputPizza } from './../../Types/PizzaTypes';
 // import { Order } from '../Model/Order';
 import { Order } from '../../Types/OrderTypes';
+import { UserDataBase } from '../Data/UserDataBase';
+import Authenticator from '../Services/Authenticator';
 
 
 
 export class OrderBusiness {
 
-    async makeOrder(order: Order) {
+    async makeOrder(quantity: number, token: string, pizza_id: string) {
         try {
-            const { quantity, user_id, pizza_id } = order
-
-            if (!quantity || !user_id || !pizza_id) {
+           
+            if (!quantity) {
                 throw new Error("Please, fill all the fiels!")
+            }
+
+            const tokenData = new Authenticator().getData(token)
+
+            const data = await new UserDataBase().getUserById(tokenData.id)
+            // para registrar o pedido, eu preciso passar o id do usuário que está logado.
+
+            if (!data) {
+                throw new Error("Make sure you are logged in before order something!")
             }
 
             const id = generateId()
 
-            const newPostBase = await new pizzaIngredientsConnectionDataBase().order(id, quantity, user_id, pizza_id)
+            const newPostBase = await new pizzaIngredientsConnectionDataBase().order(id, quantity, tokenData.id, pizza_id )
             return newPostBase
 
         } catch (error: any) {

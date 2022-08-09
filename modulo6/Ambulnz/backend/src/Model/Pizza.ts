@@ -13,9 +13,10 @@ export class Pizza extends Pizzaria {
         id: string,
         name: string,
         price: number,
+        photo: string,
         ingredients: Ingredients[]
     ) {
-        super(id, name, price)
+        super(id, name, price, photo)
         this.ingredients = ingredients
     }
     public getIngredients(): Ingredients[] {

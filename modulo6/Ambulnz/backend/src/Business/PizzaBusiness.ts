@@ -9,7 +9,7 @@ export class PizzaBusiness {
 
     async createPizza(pizza: inputPizza) {
         try {
-            const { name, price, ingredients } = pizza
+            const { name, price, photo, ingredients } = pizza
 
             if (!name || !price) {
                 throw new Error("Please, fill all the fiels!")
@@ -21,6 +21,7 @@ export class PizzaBusiness {
                 id,
                 name,
                 price,
+                photo,
                 ingredients
             )
 

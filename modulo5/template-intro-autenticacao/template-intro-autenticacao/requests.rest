@@ -1,0 +1,23 @@
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+   "email": "ana@hotmail.com",
+   "password": "ana123"
+}
+
+###
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+   "email": "murilo@hotmail.com",
+   "password": "murilo123"
+}
+
+###
+
+GET http://localhost:3003/user/profile
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU4ZmRkZjMwLWNkMjktNDY2Yi1hNzhiLTRlYmM3YmE3MGZhOSIsImlhdCI6MTY1NjM1NjI0OCwiZXhwIjoxNjU2MzU2ODQ4fQ.YaoILgnLsACNN-n_48PrPwkRalqe57kcQsCEc6raUv4
